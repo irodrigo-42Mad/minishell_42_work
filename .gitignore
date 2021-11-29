@@ -1,0 +1,7 @@
+*.o
+*.a
+*.pdf
+a.out
+*DS_Store
+author
+minishell
