@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by eimaz-va          #+#    #+#             */
-/*   Updated: 2021/11/23 15:18:34 by irodrigo         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:04:31 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,57 @@
 # define ANSI_CYAN    "\x1b[36m"
 # define ANSI_RESET   "\x1b[0m"
 
+// system constants
+# define FD_IN			0
+# define FD_OUT			1
+# define FD_ERR			2
+
+// general state
+# define FAIL			0
+# define SUCCESS		1
+
+// signal status macros
+# define READING		0
+# define H_DOC_CMD		1
+# define EXECUTING		2
+
 /*
 ** Primary stucture
 */
 typedef struct s_ms
 {
+	pid_t	sh_pid;
+	char	*prompt;
 	char	*str;
 	char	*cmd;
 	char	*lastcmd;
 	char	*flag;
+	int		state;
 }				t_ms;
+
+// aux printing functions
+void	ft_put_banner(void);
 
 // quotes parsing
 // ft_comma.c
 int		ft_quotes_threat(char **str);
-char	*dquotes(char *str, int *q_err);
-char	*squotes(char *str, int *q_err);
+char	*dquotes(char *str, int *sh_err);
+char	*squotes(char *str, int *sh_err);
 
-// aux printing functions
-void	ft_put_banner(void);
+// redirections threatment
+// ft_initial redirections.c
+int		ft_redir_pipes(int *sh_err, char **str);
+char	*ft_redir_right(int *sh_err, char *str);
+char	*ft_redir_left(int *sh_err, char *str);
+
+// signal functions
+// files
+//		ft_sigint_ctrl.c
+//		ft_sigint_acts.c
+void	ft_set_signal(t_ms *t_shl);
+void	ft_sigint_ctrlc(int signal);
+void	ft_sigint_ctrld(int signal);
+void	ft_sigint_ctrlc_child(int signal);
 
 // printing functions
 // file ft_msg_prn.c
@@ -73,7 +105,8 @@ int		ft_msg_val(char *str, int err_val);
 // printing error functions
 // file ft_error.c
 int		ft_error(char *str, int err_n);
-void	ft_quote_err(int *q_err);
+void	ft_quote_err(int *sh_err);
+void	ft_all_char_err(int *sh_err, char *str, int type);
 
 // shell
 void	initialize(t_ms *s);

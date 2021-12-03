@@ -6,25 +6,21 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:43:22 by eimaz-va          #+#    #+#             */
-/*   Updated: 2021/11/24 12:14:39 by irodrigo         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:05:12 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_prompt(void)
+static void	hola(void)
 {
-	char	*str;
-
-	str = ft_strdup("minishell-0.0$ --> ");
-	return (str);
+	system("leaks minishell");
 }
 
 void	initialize(t_ms *s)
 {
 	ft_bzero(s, sizeof(t_ms));
-	//s->str = NULL; ?
-	//s->cmd = NULL; ?
+	s->prompt = ft_strdup("minishell-0.0$ --> ");
 }
 
 void	get_cmd(t_ms *s)
@@ -35,7 +31,6 @@ void	get_cmd(t_ms *s)
 
 	i = 0;
 	len = 0;
-
 
 	while (s->str[len] != '\0' && !ft_isspace(s->str[len]))
 		len++;
@@ -57,9 +52,13 @@ void	get_cmd(t_ms *s)
 
 void	cmd_exit(t_ms *s)
 {
+	ft_bzero(s->prompt, ft_strlen(s->prompt));
+	clear_history();
 	(void)s;
-	//system("leaks minishell");
-	//printf("cmd:%s\n", s->cmd);
+
+	printf("cmd:%s\n", s->cmd);
+	printf("cmd:%s\n", s->str);
+	atexit(hola);
 	exit(0);
 }
 
@@ -195,29 +194,24 @@ void	ft_put_banner (void)
 	printf("%s%s%s\n", CYAN, MSG009, RESET);
 }
 
-void	call_error(void)
-{
-	ft_putstr_fd("Scripting commands and functions are not implemented\n", 2);
-	exit(42);
-}
-
 int	main(int argc, char **argv)
 {
 	t_ms	s;
-	//char	c;
 	char	*str;
 
 	str = ft_strdup(argv[0]);
 	if (argc != 1)
-		exit(ft_msg_val("Scripting commands and functions are not implemented\n", 42));  
+		exit(ft_msg_val(Q_ERR_03, 42));
 	initialize(&s);
 	ft_put_banner();
 	while (TRUE)
 	{
-		s.str = readline(ft_prompt());
+		ft_set_signal(&s);
+		s.str = readline(s.prompt);
 		if (s.str != '\0')
 			add_history (s.str);
 		ft_quotes_threat(&s.str);
+		ft_redir_pipes(0, &s.str);
 			
 		//TODO parsear el elemento y tokenizarlo
 
@@ -229,7 +223,8 @@ int	main(int argc, char **argv)
 		get_cmd(&s);
 		if (!(ft_strncmp(s.cmd, "exit", ft_strlen(s.cmd))))
 			cmd_exit(&s);
-
+		free (s.cmd);
+		free (s.str);
 	}
 	/*while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q');
 

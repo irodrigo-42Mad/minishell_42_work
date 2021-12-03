@@ -22,7 +22,7 @@ int	ft_fist_parse(t_ms *s)
 	s->cmd = ft_strdup(s->str);
 	s->lastcmd = s->cmd;
 	if (ft_quotes_threat(&s->lastcmd))
-	// estoy en pruebas
+		printf ("estoy en pruebas\n");
 	return (0);
 }
 
