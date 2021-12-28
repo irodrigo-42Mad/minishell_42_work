@@ -16,11 +16,11 @@ SRC = *.c
 
 LIBFT_PATH =  libft
 
-GNL_PATH = gnl/get_next_line.c
+#GNL_PATH = gnl/get_next_line.c
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -lreadline
+CFLAGS = -Wall -Werror -Wextra -lreadline -L/usr/local/Cellar/readline/8.1/lib/ -I/usr/local/Cellar/readline/8.1/include/
 
 RM = rm -f
 
@@ -32,7 +32,8 @@ all: $(NAME)
 
 $(NAME): $(SRC)
 	@$(MAKE) -C $(LIBFT_PATH)
-	@$(CC) $(CFLAGS) $(LIBFT_PATH)/libft.a $(GNL_PATH) $(SRC) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LIBFT_PATH)/libft.a $(SRC) -o $(NAME)
+#$(GNL_PATH)
 	@echo ========= DONE-MAKE-MANOLOSHELL =========
 
 clean:

@@ -5,22 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 18:43:22 by eimaz-va          #+#    #+#             */
-/*   Updated: 2021/12/03 11:05:12 by irodrigo         ###   ########.fr       */
+/*   Created: 2021/05/07 18:43:22 by mgrau             #+#    #+#             */
+/*   Updated: 2021/12/03 13:19:34 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	hola(void)
-{
-	system("leaks minishell");
-}
+//static void	hola(void)
+// {
+// 	system("leaks minishell");
+// }
 
 void	initialize(t_ms *s)
 {
 	ft_bzero(s, sizeof(t_ms));
-	s->prompt = ft_strdup("minishell-0.0$ --> ");
+	s->prompt = ft_strdup("");
 }
 
 void	get_cmd(t_ms *s)
@@ -58,15 +58,15 @@ void	cmd_exit(t_ms *s)
 
 	printf("cmd:%s\n", s->cmd);
 	printf("cmd:%s\n", s->str);
-	atexit(hola);
+	//atexit(hola);
 	exit(0);
 }
 
 void	cmd_echo(t_ms *s)
 {
-	int len_flag;
-	int ini_pos;
-	int i;
+	int	len_flag;
+	int	ini_pos;
+	int	i;
 	//int j;
 	char *rest;
 	char *aux;
@@ -169,8 +169,9 @@ void	cmd_pwd(t_ms *s)
 
 void	cmd_clear(void)
 {
-	const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
-  	write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 11);
+	const char	*CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
+
+	write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 11);
 	//ft_put_banner();
 	// funcion a revisar para limpiar la pantalla
 	//system("clear");
@@ -183,14 +184,14 @@ void	cmd_notfound(t_ms *s)
 
 void	ft_put_banner (void)
 {
-	printf("%s%s%s\n", CYAN, MSG001, RESET);
-	printf("%s%s%s\n", CYAN, MSG002, RESET);
-	printf("%s%s%s\n", CYAN, MSG003, RESET);
-	printf("%s%s%s\n", CYAN, MSG004, RESET);
-	printf("%s%s%s\n", CYAN, MSG005, RESET);
-	printf("%s%s%s\n", CYAN, MSG006, RESET);
-	printf("%s%s%s\n", CYAN, MSG007, RESET);
-	printf("%s%s%s\n", CYAN, MSG008, RESET);
+	printf("%s%s%s%s\n", CYAN, MSG001_1, MSG001_2, RESET);
+	printf("%s%s%s%s\n", CYAN, MSG002_1, MSG002_2, RESET);
+	printf("%s%s%s%s\n", CYAN, MSG003_1, MSG003_2, RESET);
+	printf("%s%s%s%s\n", CYAN, MSG004_1, MSG004_2, RESET);
+	printf("%s%s%s%s\n", CYAN, MSG005_1, MSG005_2, RESET);
+	printf("%s%s%s%s\n", CYAN, MSG006_1, MSG006_2, RESET);
+	printf("%s%s%s%s\n", CYAN, MSG007_1, MSG007_2, RESET);
+	printf("%s%s%s%s\n", CYAN, MSG008_1, MSG008_2, RESET);
 	printf("%s%s%s\n", CYAN, MSG009, RESET);
 }
 
@@ -207,20 +208,25 @@ int	main(int argc, char **argv)
 	while (TRUE)
 	{
 		ft_set_signal(&s);
-		s.str = readline(s.prompt);
-		if (s.str != '\0')
+		s.str = readline(ft_set_prompt(&s));
+		if (s.str != NULL)
 			add_history (s.str);
+
+
 		ft_quotes_threat(&s.str);
 		ft_redir_pipes(0, &s.str);
-			
+		s.cmd = ft_strdup(s.str);
+	system ("leaks minishell");
+	printf("Hola\n");
 		//TODO parsear el elemento y tokenizarlo
 
-	
 
 
 
 
-		get_cmd(&s);
+
+		//get_cmd(&s);  // esta función tiene leaks
+
 		if (!(ft_strncmp(s.cmd, "exit", ft_strlen(s.cmd))))
 			cmd_exit(&s);
 		free (s.cmd);
@@ -232,7 +238,7 @@ int	main(int argc, char **argv)
 	write(1, "minishell-0.0$ --> ", 19);
 	while (1)
 	{
-		
+
 		get_next_line(0, &s.str);
 		get_cmd(&s);
 		if (!s.str || !s.cmd)

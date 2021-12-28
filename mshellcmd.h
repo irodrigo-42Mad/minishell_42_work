@@ -13,7 +13,9 @@
 #ifndef MSHELLCMD_H
 # define MSHELLCMD_H
 
-
-
+/*
+** para poner los comandos de el minishell si
+** lo vemos necesario
+*/
 
 #endif

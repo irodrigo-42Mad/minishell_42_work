@@ -8,6 +8,12 @@ void	ft_msg(char *str, int output)
 	ft_putstr_fd(str, output);
 }
 
+void	ft_msg_ret(char *str, int output)
+{
+	ft_putstr_fd(str, output);
+	ft_putstr_fd("\n", output);
+}
+
 int	ft_msg_val(char *str, int err_val)
 {
 	write (2, str, ft_strlen(str));
