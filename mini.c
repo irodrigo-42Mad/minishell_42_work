@@ -17,12 +17,6 @@
 // 	system("leaks minishell");
 // }
 
-void	initialize(t_ms *s)
-{
-	ft_bzero(s, sizeof(t_ms));
-	s->prompt = ft_strdup("");
-}
-
 void	get_cmd(t_ms *s)
 {
 	int		i;
@@ -56,8 +50,8 @@ void	cmd_exit(t_ms *s)
 	clear_history();
 	(void)s;
 
-	printf("cmd:%s\n", s->cmd);
-	printf("cmd:%s\n", s->str);
+	// printf("cmd:%s\n", s->cmd);
+	// printf("cmd:%s\n", s->str);
 	//atexit(hola);
 	exit(0);
 }
@@ -195,43 +189,64 @@ void	ft_put_banner (void)
 	printf("%s%s%s\n", CYAN, MSG009, RESET);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
-	t_ms	s;
-	char	*str;
-
-	str = ft_strdup(argv[0]);
+	(void)argv;
 	if (argc != 1)
 		exit(ft_msg_val(Q_ERR_03, 42));
-	initialize(&s);
+	g_ms = malloc(sizeof(t_ms));
+	ft_initialize(argc, env);
 	ft_put_banner();
 	while (TRUE)
 	{
-		ft_set_signal(&s);
-		s.str = readline(ft_set_prompt(&s));
-		if (s.str != NULL)
-			add_history (s.str);
+		ft_set_signal();
+		// hay que revisar esto nuevamente por que creo que solo se utiliza uno
+		g_ms->str = readline(ft_set_prompt(g_ms));
+		if (g_ms->str != NULL)
+	 		add_history (g_ms->str);
+		if (!ft_parser(g_ms))
+		// {
+		// 	ft_prepare_command(g_ms);
+		// }
+	// hasta aqui revisado
+		g_ms->cmd = ft_strdup(g_ms->str);
+		if (!(ft_strncmp(g_ms->cmd, "exit", ft_strlen(g_ms->cmd))))
+			cmd_exit(g_ms);
+		//free (g_ms->cmd);
+		//free (g_ms->str);
 
-
-		ft_quotes_threat(&s.str);
-		ft_redir_pipes(0, &s.str);
-		s.cmd = ft_strdup(s.str);
-	system ("leaks minishell");
-	printf("Hola\n");
-		//TODO parsear el elemento y tokenizarlo
-
-
-
-
-
-
-		//get_cmd(&s);  // esta función tiene leaks
-
-		if (!(ft_strncmp(s.cmd, "exit", ft_strlen(s.cmd))))
-			cmd_exit(&s);
-		free (s.cmd);
-		free (s.str);
 	}
+
+	// 	//ft_parser(&s);
+	// //	ft_strlcpy (s.str,"hola\0",5);
+	// //	ft_strlcpy (s.cmd,"hola\0",5);
+	// 	//ft_prepare_command(&s);
+	//
+	// 	if (g_ms.str != NULL)
+	// 		add_history (g_ms.str);
+	// 	if (!ft_parser(&g_ms))
+	// 	{
+	// 		ft_prepare_command(&g_ms);
+	// 	}
+	// //	ft_quotes_threat(&s.str);
+	// //	ft_redir_pipes(0, &s.str);
+	// 	//s.cmd = ft_strdup(s.str);
+	// system ("leaks minishell");
+	// printf("Hola\n");
+	// 	//TODO parsear el elemento y tokenizarlo
+
+
+
+
+
+
+	// 	//get_cmd(&s);  // esta función tiene leaks
+
+	// 	if (!(ft_strncmp(g_ms.cmd, "exit", ft_strlen(g_ms.cmd))))
+	// 		cmd_exit(&g_ms);
+	// 	free (g_ms.cmd);
+	// 	free (g_ms.str);
+	//}
 	/*while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q');
 
 

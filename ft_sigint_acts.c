@@ -30,10 +30,8 @@ void	ft_sigint_ctrld(int signal)
 void	ft_sigint_ctrlc_child(int signal)
 {
 	(void)signal;
-	kill(mini->sh_pid, SIGINT);
+	kill(g_ms->sh_pid, SIGINT);
 	ft_msg("Quit: 3\n", 1);
-	mini->flag = FAIL;
-
-	//g_shell->assign_error = FAIL;
-	//update_q_mark_variable(131);
+	g_ms->flag = FAIL;
+	ft_updt_err(131);
 }

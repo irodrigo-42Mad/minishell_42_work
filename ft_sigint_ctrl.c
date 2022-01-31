@@ -12,18 +12,18 @@
 
 #include "minishell.h"
 
-void	ft_set_signal(t_ms *t_shl)
+void	ft_set_signal(void)
 {
 	signal(SIGTERM, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_DFL);
-	if (t_shl->state == READING)
+	if (g_ms->state == READING)
 		signal(SIGINT, ft_sigint_ctrlc);
 	//else if (t_shl->state == H_DOC_CMD)
 	//	wait_for_hdoc_state();
 	else
 	{
-		if (t_shl->sh_pid != 0)
+		if (g_ms->sh_pid != 0)
 		{
 			signal(SIGINT, ft_sigint_ctrld);
 			signal(SIGQUIT, ft_sigint_ctrlc_child);

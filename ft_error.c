@@ -27,20 +27,15 @@ void	ft_all_char_err(int *sh_err, char *str, int type)
 	if (type == 1)
 	{
 		*sh_err = 258;
-		// revisar para pasar una copia con la direccion de la struct de shell
-		//ft_updt_err(258);
+		ft_updt_err(*sh_err);
 	}
 	else if (type == 2)
 		*sh_err = 13;
 }
 
-// necesario que a la hora de hacer el update de todo
-// se reciba el shell como parte de la propia instruccion
-// en otro caso, no tenemos forma de saber que elementos tenemos
-// en nuestro entorno.
-void	ft_updt_err(int err_n, t_ms *my_shell)
+void	ft_updt_err(int err_n)
 {
-	my_shell->err_n = err_n;
+	g_ms->err_n = err_n;
 	//add_to_local_env(ft_strdup("?"), ft_itoa(new_value));
 }
 
@@ -50,5 +45,5 @@ void	ft_prn_view(int sh_err, char *str)
 
 	ft_msg_ret(str, 1);
 	a = sh_err;
-	//ft_updt_err(sh_err);
+	ft_updt_err(sh_err);
 }
