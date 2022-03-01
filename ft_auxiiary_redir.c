@@ -1,33 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_msg_prn.c                                       :+:      :+:    :+:   */
+/*   ft_auxiiary_redir.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 13:43:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/04 13:43:17 by irodrigo         ###   ########.fr       */
+/*   Created: 2022/02/26 18:51:45 by irodrigo          #+#    #+#             */
+/*   Updated: 2022/02/26 18:52:26 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-	// TODO revisar a ver si en alguna ocasion necesitamos
-	// devolver el valor de la longitud de la cadena y otros
-	// elementos se puede usar ft_putstr_fd
-void	ft_msg(char *str, int output)
-{
-	ft_putstr_fd(str, output);
-}
-
-void	ft_msg_ret(char *str, int output)
-{
-	ft_putstr_fd(str, output);
-	ft_putstr_fd("\n", output);
-}
-
-int	ft_msg_val(char *str, int err_val)
-{
-	write (2, str, ft_strlen(str));
-	return (err_val);
-}

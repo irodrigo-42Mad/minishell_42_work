@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:23:06 by irodrigo          #+#    #+#             */
-/*   Updated: 2021/11/25 10:22:11 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/02/14 10:54:43 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*squotes(char *str, int *q_err)
 		*str++ = ' ';
 	if (!*str)
 	{
-		ft_quote_err(q_err);
+		ft_quote_err(q_err + 1);
 		return (NULL);
 	}
 	else
@@ -54,14 +54,12 @@ char	*squotes(char *str, int *q_err)
 
 // TODO revisar count
 
-int	ft_quotes_threat(char **str)
+int	ft_quotes_threat(int *err, char **str)
 {
 	char	*aux;
 	int		count;
-	int		q_err;
 
 	count = 0;
-	q_err = 0;
 	aux = *str;
 	while (*aux)
 	{
@@ -69,9 +67,9 @@ int	ft_quotes_threat(char **str)
 		{
 			count++;
 			if (*aux == '\"')
-				aux = dquotes(aux, &q_err);
+				aux = dquotes(aux, err);
 			else
-				aux = squotes(aux, &q_err);
+				aux = squotes(aux, err);
 			if (!aux)
 				return (1);
 		}

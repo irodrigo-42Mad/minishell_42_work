@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:52:59 by irodrigo          #+#    #+#             */
-/*   Updated: 2021/12/03 11:22:37 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/02/14 11:05:23 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_notvalid(int *sh_err, char **str)
 	}
 	while (*dummy)
 	{
-		if (*dummy == ')' || *dummy == ')' || *dummy == ';'
+		if (*dummy == '(' || *dummy == ')' || *dummy == ';'
 			|| *dummy == '*' || (*dummy == '\\') || *dummy == '&')
 		{
 			ft_all_char_err(sh_err, dummy, 2);
@@ -84,6 +84,9 @@ static char	*ft_pipe_elm(int *sh_err, char *str)
 	}
 }
 
+/*
+** tenemos en cuenta la existencia de las redirecciones en el código
+*/
 int	ft_redir_pipes(int *sh_err, char **str)
 {
 	char	*mystr;
@@ -91,7 +94,6 @@ int	ft_redir_pipes(int *sh_err, char **str)
 	mystr = *str;
 	if (ft_notvalid(sh_err, str))
 		return (1);
-	// si tenemos en cuenta la existencia de las redirecciones.....
 	while (*mystr)
 	{
 		if (*mystr == '>' || *mystr == '<' || *mystr == '|')

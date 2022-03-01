@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_initialize.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 12:53:50 by irodrigo          #+#    #+#             */
+/*   Updated: 2022/02/04 13:48:30 by irodrigo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_initialize(int m_argc, char**m_env)
@@ -40,7 +52,7 @@ char	**ft_set_shell_env(int ch, char **env)
 			out[i] = ft_strdup(env[i]);
 		i++;
 	}
-	out[i] = NULL;
+	out[i] = NULL; // ojo con esto
 	if (ch == SUCCESS)
 	{
 //		add_shell_level(&out);
