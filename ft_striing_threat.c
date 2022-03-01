@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:02:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/26 20:21:40 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/01 12:54:59 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	edit_string(char **str, int *i, int envar)
 		**str = '*';
 		while (*(++(*str)) != '\"')
 		{
-			if (**str == '$' && envar == OK)
+			if (**str == '$' && envar == SUCCESS)
 			{
 				if (ft_isvalid_env_start(*(*str + 1), Q_MARK_OK))
 				{
@@ -89,7 +89,7 @@ int	string_length_bash(char *str, int envar)
 		str++;
 	while (*str != ' ' && *str != '<' && *str != '>' && *str)
 	{
-		if (*str == '$' && envar == OK)
+		if (*str == '$' && envar == SUCCESS)
 		{
 			if (ft_isvalid_env_start(*(str + 1), Q_MARK_OK))
 				*str++ = '\\';

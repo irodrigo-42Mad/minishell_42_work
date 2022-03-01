@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:22:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/26 20:50:11 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:07:42 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_obtain_file(t_lst *lst, char **str_line)
 	char	*file;
 	int		len;
 
-	len = string_length_bash(*str_line, OK);
+	len = string_length_bash(*str_line, SUCCESS);
 	add_envar_len(&len, *str_line, ARGUMENT);
 	file = malloc(sizeof(char) * (len + 1));
 	aux = file;
@@ -79,9 +79,9 @@ void	ft_redirections(t_ms *s)
 }
 
 
-void	write_str_w_envar(char **line, char **filename, int *len, t_nod *node)
+void	write_str_w_envar(char **line, char **filename, int *len, t_lst *node)
 {
-	while (*len > 0 && node->launch == OK)
+	while (*len > 0 && node->exe_state == SUCCESS)
 	{
 		if (**line == '\\' || **line == '&')
 			expand_var_name(line, filename, len, node);
@@ -96,6 +96,6 @@ void	write_str_w_envar(char **line, char **filename, int *len, t_nod *node)
 	}
 	while (**line == '*')
 		*((*line)++) = ' ';
-	if (node->launch == OK)
+	if (node->exe_state == SUCCESS)
 		**filename = '\0';
 }

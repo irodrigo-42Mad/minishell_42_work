@@ -30,7 +30,7 @@ void	add_value_env(char *name, char *value)									//adds a value to our local 
 	env_n = g_ms->sh_envar;
 	while (env_n)
 	{
-		if (!ft_strncmp(env_n->v_name, name, ft_maxlen(env_n->v_name, name))) 	//if name exists but no value is assigned
+		if (!ft_strncmp(env_n->v_name, name, ft_getmax_ln(env_n->v_name, name))) //if name exists but no value is assigned
 		{
 				free(name);														//we free our name str we are done using it
 				free(env_n->v_val);												//we free our v_val storage as we are now assignin it the new value

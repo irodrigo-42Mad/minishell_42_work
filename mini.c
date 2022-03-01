@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:43:22 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/01 11:59:32 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:47:32 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,10 @@ int	main(int argc, char **argv, char **env)
 			add_history(g_ms->str);
 		if (!ft_parser(g_ms))
 		{
+			// heredoc
 			ft_prepare_command(g_ms);
 			ft_redirections(g_ms);
+			// other redirs
 			start_executer();
 		}
 		// hasta aqui revisado

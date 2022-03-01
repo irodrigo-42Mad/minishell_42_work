@@ -14,7 +14,7 @@ void		call_execve(t_lst *node);
 ///			builtin_utils.c
 int			is_builtin(char *arg);
 void		exec_builtin(char **arg, int type);
-int			precise_cmp(char *s1, char *s2, int size);
+int			precise_cmp(char *s1, char *s2, size_t size);
 
 ///			exec_utils.c
 void		open_heredoc(t_lst *node);
@@ -32,7 +32,7 @@ void		handle_defs(char **cmd);
 int			is_def(char *str);
 char		*def_name(char *str);
 void		add_def(char *name, char *value);
-char		**clear_cmd(char **cmd);
+void		clear_cmd(char **cmd);
 
 ///			env_addition.c
 char		*prev_env_value(char *name);
@@ -46,4 +46,37 @@ void		handle_pipes(t_lst *node, int new_pip[2], int old_pip[2]);
 int			*copy_pipe(int pipe_in[2]);
 void		execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2]);
 void		wait_childs(void);
+
+// pathfinder
+char		*get_pathname(char *arg);
+char 		*get_pathlocation(char **envp);
+int 		create_probable_str(char **dest, char *arg, char *src, int i);
+
+//			builtins declarations
+// cd
+void		ft_cd(char *str);
+char		*check_pwd(char *str, int opwd, int home);
+void		cd_error(char *path);
+void		cd_env(int i[2]);
+
+// echo
+void		ft_echo(char **arg);
+void		ft_putstr_fd_without_esc_bar(char *str, int fd);
+
+// env
+void		ft_env(void);
+
+// exit
+void		ft_exit(char **args, int call);
+int			check_if_digit(const char *str);
+
+// pwd
+void		ft_pwd(void);
+
+// export
+void		ft_export (void);
+
+// unset
+void		ft_unset (void);
+
 #endif

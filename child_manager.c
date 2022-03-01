@@ -78,7 +78,7 @@ int	*copy_pipe(int pipe_in[2])
 
 void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 {
-	handle_defs(node->str_cmd);									//just as in single proccess we handle definitions adding them to env list and erasing them from our cmd list
+	handle_defs(&node->str_cmd);									//just as in single proccess we handle definitions adding them to env list and erasing them from our cmd list
 	open_heredoc(node);										//if here doc stdin set to it
 	if (node->el_nbr != 1)									//if its NOT the first element
 		assing_fd(&node->file_in, old_fd_list[0], FD_IN); 	//if fd_in is 0, we assing the read end of our old list else it closes old_fd[0]
@@ -88,10 +88,10 @@ void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 		close(new_fd_list[1]);
 	if (node->str_cmd[0])										//standart executing process
 	{
-		if (is_builtin(node->str_cmd[0]))
+		if (is_builtin(&node->str_cmd[0]))
 		{
 			dup_to_stdin_stdout(node->file_in, node->file_out);
-			exec_builtin(node->str_cmd, 0); //0 means child
+			exec_builtin(&node->str_cmd, 0); //0 means child
 		}
 		else
 			call_execve(node);

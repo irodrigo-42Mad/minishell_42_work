@@ -1,5 +1,13 @@
+# include "minishell.h"
 
-int	is_builtin(char *arg) //we check if our arg is a builtin
+/*
+** Notes to int	is_builtin(char *arg)
+**
+** we check if our arg is a builtin
+**
+*/
+
+int	is_builtin(char *arg)
 {
 	if (precise_cmp(arg, "pwd", 3))
 		return (1);
@@ -19,7 +27,14 @@ int	is_builtin(char *arg) //we check if our arg is a builtin
 		return (0);
 }
 
-void	exec_builtin(char **arg, int type) //we execute our builtin and exit if child
+/*
+** Notes to void exec_builtin(char **arg, int type)
+**
+** we execute our builtin and exit if child
+**
+*/
+
+void	exec_builtin(char **arg, int type)
 {
 	if (precise_cmp(arg[0], "pwd", 3))
 		ft_pwd();
@@ -34,12 +49,12 @@ void	exec_builtin(char **arg, int type) //we execute our builtin and exit if chi
 	else if (precise_cmp(arg[0],"unset", 5))
 		ft_unset();
 	else if (precise_cmp(arg[0], "exit", 4))
-		ft_exit();
+		ft_exit(arg, type); 
 	if (type == 0) //0 means child
 		exit (0);
 }
 
-int precise_cmp(char *s1,char *s2, int size) // a strncmp that takes the lenght into account
+int precise_cmp(char *s1,char *s2, size_t size) // a strncmp that takes the lenght into account
 {
 	if (ft_strlen(s1) == size && ft_strlen(s2) == size && !ft_strncmp(s1, s2, size))
 		return (1);
