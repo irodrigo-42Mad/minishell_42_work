@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 12:57:43 by irodrigo          #+#    #+#             */
-/*   Updated: 2019/11/18 12:58:11 by irodrigo         ###   ########.fr       */
+/*   Created: 2019/12/05 19:43:26 by eimaz-va          #+#    #+#             */
+/*   Updated: 2019/12/09 19:31:42 by eimaz-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst)
-		while (lst->next)
+	{
+		while (lst->next != NULL)
 			lst = lst->next;
-	return (lst);
+		return (lst);
+	}
+	else
+		return (0);
 }

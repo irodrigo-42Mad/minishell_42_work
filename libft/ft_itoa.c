@@ -3,53 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 13:15:13 by irodrigo          #+#    #+#             */
-/*   Updated: 2021/03/25 13:00:47 by irodrigo         ###   ########.fr       */
+/*   Created: 2019/12/04 16:09:30 by eimaz-va          #+#    #+#             */
+/*   Updated: 2021/04/22 17:42:05 by eimaz-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_strnum_len(int n)
+static int	ft_count(int c)
 {
-	size_t		i;
+	int	len;
 
-	i = 1;
-	n /= 10;
-	while (n > 0)
+	len = 0;
+	while (c / 10)
 	{
-		i++;
-		n /= 10;
+		c /= 10;
+		len++;
 	}
-	return (i);
+	len++;
+	return (len);
+}
+
+int	ft_negative(int n, unsigned int tmp)
+{
+	if (n < 0)
+		tmp = -n;
+	else
+		tmp = n;
+	return (tmp);
+}
+
+int	ft_flag(int n, int flag)
+{
+	if (n < 0)
+		flag = 1;
+	else
+		flag = 0;
+	return (flag);
 }
 
 char	*ft_itoa(int n)
 {
-	char			*str;
-	size_t			str_len;
-	unsigned int	n_cpy;
+	char			*nueva;
+	unsigned int	tmp;
+	int				i;
+	int				flag;
 
-	str_len = ft_strnum_len(n);
-	n_cpy = n;
-	if (n < 0)
-	{
-		n_cpy = -n;
-		str_len++;
-	}
-	str = ft_calloc(str_len + 1, 1);
-	if (!str)
+	i = 0;
+	flag = 0;
+	tmp = 0;
+	flag = ft_flag(n, flag);
+	tmp = ft_negative(n, tmp);
+	i = ft_count(tmp);
+	nueva = malloc(sizeof(char) * i + 1 + flag);
+	if (!nueva)
 		return (NULL);
-	str[--str_len] = n_cpy % 10 + '0';
-	n_cpy /= 10;
-	while (n_cpy > 0)
+	nueva[i + flag] = '\0';
+	while (--i > 0)
 	{
-		str[--str_len] = n_cpy % 10 + '0';
-		n_cpy /= 10;
+		nueva[i + flag] = ((tmp % 10) + '0');
+		tmp = tmp / 10;
 	}
-	if (n < 0)
-		*(str + 0) = '-';
-	return (str);
+	nueva[i + flag] = ((tmp % 10) + '0');
+	if (flag == 1)
+		nueva[0] = '-';
+	return (nueva);
 }

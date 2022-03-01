@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrstr.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 13:44:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2019/11/12 13:09:06 by irodrigo         ###   ########.fr       */
+/*   Created: 2019/11/05 13:48:45 by eimaz-va          #+#    #+#             */
+/*   Updated: 2019/11/25 21:39:29 by eimaz-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *str, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*result;
+	char	*aux;
 
-	result = (char *)str + ft_strlen(str);
-	while (*result != c)
+	aux = NULL;
+	if (!s)
 	{
-		if (result == str)
-			return (NULL);
-		result--;
+		while (s)
+			s++;
+		s++;
 	}
-	return (result);
+	while (s)
+	{
+		if (*s == c)
+			aux = (char *)s;
+		if (!*s)
+			return (aux);
+		s++;
+	}
+	return (aux);
 }

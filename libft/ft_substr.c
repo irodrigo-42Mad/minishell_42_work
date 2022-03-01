@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 09:57:18 by irodrigo          #+#    #+#             */
-/*   Updated: 2021/03/23 14:44:10 by irodrigo         ###   ########.fr       */
+/*   Created: 2019/11/19 13:03:47 by eimaz-va          #+#    #+#             */
+/*   Updated: 2021/04/21 23:11:14 by eimaz-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	count;
-	size_t	size;
-	char	*tab;
+	char	*nueva;
+	size_t	i;
 
-	count = 0;
-	if (!s)
+	nueva = malloc(sizeof(char) * len + 1);
+	if (!nueva)
 		return (NULL);
-	if (ft_strlen(s) < start)
+	if (!s || (ft_strlen(s) < start))
 		return (ft_strdup(""));
-	size = ft_strlen(s + start);
-	if (size < len)
-		len = size;
-	tab = (char *)malloc((len + 1) * sizeof (char));
-	if (!tab)
-		return (NULL);
-	while (count < len)
+	i = 0;
+	if (ft_strlen(s) > start)
 	{
-		tab[count] = s[start + count];
-		count++;
+		while (i < len)
+		{
+			nueva[i] = s[start + i];
+			i++;
+		}
+		nueva[i] = '\0';
 	}
-	tab[count] = '\0';
-	return (tab);
+	return (nueva);
 }

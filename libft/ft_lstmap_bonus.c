@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 10:42:01 by irodrigo          #+#    #+#             */
-/*   Updated: 2019/11/20 11:50:48 by irodrigo         ###   ########.fr       */
+/*   Created: 2019/12/08 15:38:24 by eimaz-va          #+#    #+#             */
+/*   Updated: 2021/04/21 18:13:46 by eimaz-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list		*list;
-	t_list		*new;
+	t_list	*lista;
+	t_list	*cpy;
+	t_list	*nx;
 
-	if (!lst)
-		return (NULL);
-	list = NULL;
-	while (lst != NULL)
+	if (lst && f)
 	{
-		new = ft_lstnew(f(lst->content));
-		if (new == NULL)
+		nx = ft_lstnew(lst->content);
+		lista = nx;
+		lista->content = f(lista->content);
+		if (!lista->content)
+			del(lista->content);
+		while (lst->next != NULL)
 		{
-			ft_lstclear(&list, del);
-			return (NULL);
+			lst = lst->next;
+			cpy = ft_lstnew(lst->content);
+			cpy->content = f(cpy->content);
+			if (!cpy->content)
+				del(cpy->content);
+			nx->next = cpy;
+			nx = cpy;
 		}
-		ft_lstadd_back(&list, new);
-		lst = lst->next;
+		return (lista);
 	}
-	return (list);
+	return (0);
 }

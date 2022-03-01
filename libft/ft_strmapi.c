@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 10:55:46 by irodrigo          #+#    #+#             */
-/*   Updated: 2019/11/18 11:21:04 by irodrigo         ###   ########.fr       */
+/*   Created: 2019/12/02 12:58:26 by eimaz-va          #+#    #+#             */
+/*   Updated: 2021/04/21 23:14:42 by eimaz-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*new_str;
-	int		i;
+	char			*nueva;
+	unsigned int	i;
 
-	if (!s)
+	if (!s || !f)
 		return (NULL);
-	new_str = ft_calloc(ft_strlen(s) + 1, 1);
-	if (!new_str)
+	nueva = malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!nueva)
 		return (NULL);
-	i = -1;
-	while (*(s + ++i))
-		*(new_str + i) = f(i, *(s + i));
-	*(new_str + i) = '\0';
-	return (new_str);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		nueva[i] = f(i, s[i]);
+		i++;
+	}
+	nueva[i] = '\0';
+	return (nueva);
 }

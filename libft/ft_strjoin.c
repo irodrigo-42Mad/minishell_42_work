@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 10:01:54 by irodrigo          #+#    #+#             */
-/*   Updated: 2019/11/19 14:25:33 by irodrigo         ###   ########.fr       */
+/*   Created: 2019/11/19 17:33:18 by eimaz-va          #+#    #+#             */
+/*   Updated: 2021/04/22 17:00:26 by eimaz-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*new_str;
-	size_t	i;
-	size_t	j;
-	size_t	s1_len;
-	size_t	s2_len;
+	char	*nueva;
+	int		len;
+	int		i;
+	int		j;
 
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	new_str = ft_calloc((s1_len + s2_len) + 1, 1);
-	if (!new_str)
-		return (NULL);
 	i = -1;
-	j = -1;
-	while (++i < s1_len)
-		*(new_str + i) = *(s1 + i);
-	while (++j < s2_len)
-		*(new_str + i++) = *(s2 + j);
-	return (new_str);
+	if (!s1)
+		return (NULL);
+	len = (ft_strlen(s1) + ft_strlen(s2));
+	nueva = malloc(sizeof(char) * (len + 1));
+	if (!nueva)
+		return (NULL);
+	while (s1[++i] != '\0')
+		nueva[i] = s1[i];
+	j = 0;
+	while (s2[j] != '\0')
+	{
+		nueva[i] = s2[j];
+		i++;
+		j++;
+	}
+	nueva[i] = '\0';
+	return (nueva);
 }

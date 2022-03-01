@@ -3,27 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 10:42:37 by irodrigo          #+#    #+#             */
-/*   Updated: 2019/11/20 11:09:07 by irodrigo         ###   ########.fr       */
+/*   Created: 2019/11/20 11:46:21 by irodrigo          #+#    #+#             */
+/*   Updated: 2022/02/11 11:49:42 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(const char *s, const char *set)
+static char	*ft_strncpy(char *dst, char *src, unsigned int n)
 {
-	char	*ret;
-	size_t	len;
+	unsigned int	i;
 
-	if (!s)
+	i = 0;
+	while (i < n && src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < n)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char		*ml;
+	size_t		len;
+	size_t		i;
+
+	if (!s1 || !set)
+		return (0);
+	i = 0;
+	while (s1[i] != '\0' && ft_strchr(set, s1[i]) != NULL)
+		i++;
+	len = ft_strlen(&s1[i]);
+	if (len)
+		while (s1[i + len - 1] && ft_strchr(set, s1[i + len - 1]) != NULL)
+			len--;
+	ml = (char *)malloc(sizeof(char) * len + 1);
+	if (!ml)
 		return (NULL);
-	while (*s && ft_strchr(set, *s))
-		s++;
-	len = ft_strlen(s);
-	while (len && ft_strchr(set, s[len]))
-		len--;
-	ret = ft_substr(s, 0, len + 1);
-	return (ret);
+	ml = ft_strncpy(ml, (char *)&s1[i], len);
+	ml[len] = '\0';
+	return (ml);
 }
