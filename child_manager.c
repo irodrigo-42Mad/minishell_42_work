@@ -108,8 +108,28 @@ void	wait_childs(void)
 	while (n_process > 0)
 	{
 		pid = wait(&stat);				//wait for each process
-//		if (pid == g_ms->sh_pid)
-//			get_q_mark(stat);			//not yet set
+		if (pid == g_ms->sh_pid)
+			get_q_mark(stat);			//not yet set
 		n_process--;
 	}
+}
+
+void	get_q_mark(int stat)
+{
+	if (g_ms->flg_err == SUCCESS)
+	{
+		if (WIFEXITED(stat))
+			update_q_mark_variable(WEXITSTATUS(stat));
+		else if (WIFSIGNALED(stat))
+			update_q_mark_variable(WTERMSIG(stat) + 128);
+		else if (WIFSTOPPED(stat))
+			update_q_mark_variable(WSTOPSIG(stat));
+	}
+	g_ms->flg_err = SUCCESS;
+}
+
+void	update_q_mark_variable(int new_value)
+{
+	//g_ms->q_mark_err = new_value; //no tenemos un equivalente ahora mismo
+	add_value_env(ft_strdup("?"), ft_itoa(new_value));
 }

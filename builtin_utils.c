@@ -39,9 +39,9 @@ void	exec_builtin(char **arg, int type)
 	if (precise_cmp(arg[0], "pwd", 3))
 		ft_pwd();
 	else if (precise_cmp(arg[0],"cd", 2))
-		ft_cd();
+		ft_cd(arg[1]);
 	else if (precise_cmp(arg[0], "echo", 4))
-		ft_echo();
+		ft_echo(arg);
 	else if (precise_cmp(arg[0], "env", 3))
 		ft_env();
 	else if (precise_cmp(arg[0], "export", 6))
