@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:20:03 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/26 19:34:48 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/06 14:01:21 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,3 +93,5 @@ void	ft_write_file_err(t_lst *lst, char *file)
 	if (lst->el_nbr == g_ms->prcs_n)
 		g_ms->flg_err = FAIL;
 }
+
+

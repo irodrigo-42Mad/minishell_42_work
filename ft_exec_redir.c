@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 11:46:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/26 19:45:07 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:32:27 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	ft_redir(char **str, t_lst *lst, int dir, int mode)
 	new_pos -= (lst->str_aux - lst->str_aux_save);
 	
 	// ahi que mirar como movemos la position
-	move_str_pointers(&lst->str_aux, str, new_pos);
+	ft_locate_strptr(new_pos, &lst->str_aux, str);
+	//move_str_pointers(new_pos, &lst->str_aux, str);
 }
 
 void	ft_control_mode(char *file, t_lst *lst, int mode)
@@ -53,9 +54,11 @@ void	ft_control_mode(char *file, t_lst *lst, int mode)
 
 void	ft_new_input (char *file, t_lst *lst)
 {
-	int	fd;
+	// temporal initialization
+	
+	int	fd = 0;
 
-	fd = check_for_hdoc_priority(lst->str_line);
+	//fd = check_for_hdoc_priority(lst->str_line);
 	if (fd == -1)
 	{
 		fd = open(file, O_RDONLY);

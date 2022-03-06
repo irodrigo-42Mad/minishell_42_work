@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 10:00:25 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/04 12:58:27 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/06 12:47:55 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_set_lenv(char *str, int line)
 	int	x;
 	int ini_len;
 
-	x = ft_str_bash_len(*str, SUCCESS);
+	x = ft_str_bash_len(str, SUCCESS);
 	ini_len = x;
 	if (line == FAIL)
 	{
@@ -39,21 +39,23 @@ int	ft_set_lenv(char *str, int line)
 	return (x);
 }
 
-char	*ft_set_new_len(char *str, int *i, int ln)
+char	*ft_set_new_len(char *str, int ln, int *pos)
 {
 	char	*v_name;
 	char	*v_value;
-	int		length_wo_expansion;
+	int		ln_no_expand;
 
 	v_name = ft_getname(str);
 	v_value = ft_getvalue (v_name, NOT_EXPRT);
-	length_wo_expansion = ft_strlen(v_name);
-	free(v_name);
+	ln_no_expand = ft_strlen(v_name);
 	if (!*v_value)
-		ln = ln - length_wo_expansion;
+		ln = ln - ln_no_expand;
 	else
-		ln = ln - length_wo_expansion + ft_strlen(v_value);
-	*i = *i - length_wo_expansion;
+		ln = ln - ln_no_expand + ft_strlen(v_value);
+	*pos = *pos - ln_no_expand;
+	str += ln_no_expand;
+	free(v_name);
 	free(v_value);
-	return (str + length_wo_expansion);
+	// esto hay que revisarlo posible leak si da, añadir la posición en el return
+	return (str);
 }
