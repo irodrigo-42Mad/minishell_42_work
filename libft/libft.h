@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 10:45:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/04 13:25:47 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:06:06 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ char				*ft_strchr(const char *str, int c);
 char				*ft_strrchr(const char *s, int c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
+char				*ft_strcat(char *dest, char *src);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char				*ft_strnstr(const char *haystack, const char *needle, \
 					size_t len);
+unsigned int		ft_strcharcpy(char *dest, char *src, char until, \
+					unsigned int pos);
 int					ft_atoi(const char *str);
 int					ft_isspace(int c);
 int					ft_isalltab(int c);
