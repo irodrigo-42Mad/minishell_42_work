@@ -19,7 +19,7 @@ void	ft_exit(char **args, int call)
 	is_num = check_if_digit(args[1]);
 	if (!is_num)
 	{
-		exit_error(args[1], 0);
+		ft_exit_error(args[1], 0);
 		exit(255);
 	}
 	else
@@ -27,7 +27,7 @@ void	ft_exit(char **args, int call)
 		if (!args[2])
 			exit(ft_atoi(args[1]));
 		else
-			exit_error(args[1], 1);
+			ft_exit_error(args[1], 1);
 	}
 }
 
@@ -44,4 +44,16 @@ int	check_if_digit(const char *str)
 		if (!ft_isdigit(str[i++]))
 			is_num = 0;
 	return (is_num && i > 0);
+}
+
+void ft_exit_error(char *str, int type)
+{
+	ft_msg(GN_MSG_03, 2);
+	if (type == 0)
+		ft_msg_complex(str, T_ERR_03, 2);
+	else
+	{
+		ft_msg(T_ERR_04, 2);
+		ft_updt_err(1);
+	}
 }

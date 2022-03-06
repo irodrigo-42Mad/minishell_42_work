@@ -26,10 +26,11 @@ void	ft_echo(char **arg)
 	{
 		ft_putstr_fd("\0", 1);
 		ft_putstr_fd("\n", 1);
+		ft_updt_err(0);
 		//update qmark?
 		return ;
 	}
-	while (arg[++i] && !ft_strncmp(arg[i], "-n", ft_maxlen(arg[i], "-n")))
+	while (arg[++i] && !ft_strncmp(arg[i], "-n", ft_getmax_ln(arg[i], "-n")))
 		newline = 0;
 	while (arg[i])
 	{
@@ -39,5 +40,6 @@ void	ft_echo(char **arg)
 	}
 	if (newline == 1)
 		ft_putstr_fd("\n", FD_OUT);
-	update_q_mark_variable(0);
+	ft_updt_err(0);
+	//update_q_mark_variable(0);
 }
