@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/01 13:59:41 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:30:16 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,30 @@
 # define UNIQUE			1
 # define MULTIPLE		2
 
+// instruction token type
+# define PARAM			2
+# define COMMAND		1
+
+// Hdoc_utils_macros
+# define INITIATE		0
+# define ENDING			1
+
 // redirection mode
 # define APPEND			1
 # define TRUNCATE		2
 
-# define Q_MARK_OK		1
+// error state
+# define STATE_Q_OK		1
+# define STATE_Q_FAIL	2
 
+// sport status val
+# define NOT_EXPRT		0
+# define EXPR_CALL		1
+
+# define UNDEF			0
+
+
+// pending to use this elements
 enum e_exp_opts{
 	NOTDEF		=	0,
 	DEFINED		=	1,
@@ -83,7 +101,7 @@ enum e_exp_opts{
 	EXP_ERR		=	3
 };
 
-t_ms	*g_ms;
+t_ms	*g_ms;  // sizeof g_ms has 8 bits at assigment
 
 //initialize structure functions
 // ft_initialize.c
@@ -93,6 +111,11 @@ void		ft_initialize(int m_argc, char**m_env);
 // set local variable values
 //ft_local_env.c
 t_sh_var	*ft_set_env_val(char *name, char *value);
+
+
+int 		ft_val_envname(int status, char initial);
+int			ft_valid_envcore(char a);
+
 
 // primary shell functions
 // ft_parser.c
@@ -157,6 +180,7 @@ void		ft_state_hdoc(void);
 void		ft_msg(char *str, int output);
 void		ft_msg_ret(char *str, int output);
 int			ft_msg_val(char *str, int err_val);
+void		ft_msg_complex (char *str, char *mgs, int output);
 
 // printing error functions
 // file ft_error.c
@@ -171,6 +195,19 @@ void		ft_write_file_err(t_lst *lst, char *file);
 // ft_local_env.c
 void		ft_add_local_env(char *car, char *err);
 t_sh_var	*ft_set_env_val(char *v_name, char *val);
+
+// ft_environ_str.c
+int			ft_set_lenv(char *str, int line);
+char		*ft_set_new_len(char *str, int ln, int *pos);
+
+// ft_search.c
+char		*ft_getname(char *str);
+char		*ft_getvalue(char *name, int call_stat);
+char    	*ft_localchk_env(char *name, int status);
+char		*ft_envchk(char *name);
+
+
+
 
 // shell
 void		get_cmd(t_ms *s);
@@ -190,5 +227,18 @@ void		ft_clean_all(t_ms **s);
 
 size_t		ft_strchlen(char *str, char car);
 char		*ft_strtok(char *str, char *delim);
+void 		ft_expand_vars(char *v_val, char **data, char **file, int *ln);
+void 		ft_vname_expand(t_lst *lst, char **file, char **data, int *len);
+void		ft_set_strandenv(char **file, char **data, t_lst *lst, int *len);
+int			ft_str_bash_len(char *str, int envar);
+void 		ft_exit_error(char *str, int type);
+void		ft_chk_lval(char *v_name, char **pr_val);
+int			ft_envfind(char *name);
+void		ft_alreadydefined(char *v_name, char *v_val);
+void		ft_envcreate(char *v_name, char *v_val);
+void		ft_recharge_env(char *v_name, char *v_val);
+void		ft_add_envglob(char *v_name, char *v_val, int status);
+void		ft_redir(char **str, t_lst *lst, int dir, int mode);
+void		ft_locate_strptr(int x, char **tmp, char **str);
 
 #endif
