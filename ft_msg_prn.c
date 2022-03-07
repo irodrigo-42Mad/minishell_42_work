@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:43:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/04 13:43:17 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/06 14:24:18 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,10 @@ int	ft_msg_val(char *str, int err_val)
 {
 	write (2, str, ft_strlen(str));
 	return (err_val);
+}
+
+void	ft_msg_complex (char *str, char *mgs, int output)
+{
+	write (output, str, ft_strlen(str));
+	ft_msg(mgs, 2);
 }

@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:24:10 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/06 14:25:13 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/07 10:56:55 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define T_ERR_02	"found forbiden char `"
 # define T_ERR_03	": numeric argument required\n"
 # define T_ERR_04	"too many arguments\n"
+# define T_ERR_05	"error in dup2"
 
 // other msg shell constants
 

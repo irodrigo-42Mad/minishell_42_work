@@ -6,41 +6,101 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:02:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/01 12:58:53 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:32:37 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_isvalid_env_start(char a, int consider_q_mark)
+int ft_val_envname(int status, char initial)
 {
-	int	ret;
-
-	ret = 0;
-	if (consider_q_mark == Q_MARK_OK)
-	{
-		if ((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z')
-			|| a == '_' || a == '?')
-			ret = 1;
+	if (status == STATE_Q_OK)
+	{	
+		if (ft_isalpha(initial) || initial == '_' || initial == '?')
+			return (1);
 	}
 	else
 	{
-		if ((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z')
-			|| a == '_')
-			ret = 1;
-	}
-	return (ret);
+		if (ft_isalpha(initial) || initial == '_' || initial == '?')
+			return (1);
+	}	
+	return (0);
 }
 
-int	ft_isvalid_env_core(char a)
+int	ft_valid_envcore(char a)
 {
-	int	ret;
-
-	ret = 0;
 	if (ft_isalnum(a) || a == '_')
-		ret = 1;
-	return (ret);
+		return (1);
+	return (0);
 }
+
+void ft_vname_expand(t_lst *lst, char **file, char **data, int *len)
+{
+	char *temp;
+	char *v_name;
+	char *v_val;
+
+	v_name = ft_getname(*data + 1);
+	v_val = ft_getvalue(v_name, NOT_EXPRT);
+	if (v_val != NULL && **data == '\\')
+	{
+		temp = ft_strnstr(v_val, " ", ft_getmax_ln(v_val, " "));
+		if (temp != NULL)
+			printf ("error variable existente"); //añadir variable y nodo  ambiguous_redirect_error(var_name, node);
+	}
+	if (lst->exe_state == SUCCESS)
+		ft_expand_vars(v_val, data, file, len);
+	free (v_name);
+	free (v_val);
+}
+
+void ft_expand_vars(char *v_val, char **data, char **file, int *ln)
+{
+	size_t x;
+
+	x = 0;
+	*(*(data)++) = ' ';
+	if (!ft_isdigit((*data)[x++]))
+	{
+		while (ft_isalnum((*data)[x]))
+		{
+			(*data)[x] = ' ';
+			x++;
+		}
+	}
+	**data = ' ';
+	*data = *data + x;
+	while (*v_val)
+	{
+		*((*file)++) = *v_val++;
+		*ln = *ln - 1;
+	}
+}
+
+void	ft_set_strandenv(char **file, char **data, t_lst *lst, int *len)
+{
+	while (lst->exe_state == SUCCESS && len > 0)
+	{
+		if (**data == '&' || **data == '\\')
+			ft_vname_expand(lst, file, data, len);
+		else if (**data != '\\' && **data != '*' && **data != '*' && **data)
+		{
+			*((*file)++) = **data;
+			*((*data)++) = ' ';
+			*len = *len - 1;
+		}
+		else
+			*((*data)++) = ' ';
+	}
+	while (**data == '*')
+		*((*data)++) = ' ';
+	if (lst->exe_state == SUCCESS)
+		**file = '\0';
+}
+
+
+
+
 
 void	edit_string(char **str, int *i, int envar)
 {
@@ -51,7 +111,7 @@ void	edit_string(char **str, int *i, int envar)
 		{
 			if (**str == '$' && envar == SUCCESS)
 			{
-				if (ft_isvalid_env_start(*(*str + 1), Q_MARK_OK))
+				if (ft_val_envname(*(*str + 1), STATE_Q_OK))
 				{
 					**str = '&';
 					(*i)--;
@@ -80,27 +140,27 @@ void	edit_string(char **str, int *i, int envar)
  * This function apart from computing this length it marks with a
  * '*' those chars that will not have to be written inside the
  * final string that has to be gathered. 2 in 1 :D*/
-int	string_length_bash(char *str, int envar)
+int	ft_str_bash_len(char *str, int envar)
 {
-	int	i;
+	int	x;
 
-	i = 0;
+	x = 0;
 	while (*str == ' ')
 		str++;
 	while (*str != ' ' && *str != '<' && *str != '>' && *str)
 	{
 		if (*str == '$' && envar == SUCCESS)
 		{
-			if (ft_isvalid_env_start(*(str + 1), Q_MARK_OK))
+			if (ft_val_envname(*(str + 1), STATE_Q_OK))
 				*str++ = '\\';
 		}
 		if (*str == '\"' || *str == '\'')
-			edit_string(&str, &i, envar);
+			edit_string(&str, &x, envar);
 		else
-			i++;
+			x++;
 		str++;
 	}
-	return (i);
+	return (x);
 }
 
 /* A pointer mover. We work with 2 strings, the one that has something inside
@@ -132,4 +192,16 @@ void	place_str_pointers(char **aux, char **str_blank, char **str_full, int i)
 			**str_blank = ' ';
 		*str_blank = *str_blank + 1;
 	}
+}
+
+void	ft_locate_strptr(int x, char **tmp, char **str)
+{
+	int	n_location;
+
+	n_location = x;
+	while (n_location-- > 0)
+		*str = *str + 1;
+	n_location = x;
+	while (n_location-- > 0)
+		*tmp = *tmp + 1;
 }

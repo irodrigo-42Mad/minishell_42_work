@@ -1,17 +1,25 @@
 #include "minishell.h"
 
+void    assing_fd(int *node_fd, int new_fd, int fd)
+{
+        if (*node_fd == fd)
+            *node_fd = new_fd;
+        else
+            close(new_fd);
+}
+
 void	dup_to_stdin_stdout(int fd_in, int fd_out)
 {
 	if (fd_in != 0)
 	{
 		if (dup2(fd_in, 0) == -1)
-			printf("error in dup2");//error_message();
+			ft_msg(T_ERR_05, 2);
 		close(fd_in);
 	}
 	if (fd_out != 1)
 	{
 		if (dup2(fd_out, 1) == -1)
-			printf("error in dup2");//error_message();
+			ft_msg(T_ERR_05, 2);
 		close(fd_out);
 	}
 }

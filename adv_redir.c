@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:22:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/01 13:07:42 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:10:50 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ char	*ft_obtain_file(t_lst *lst, char **str_line)
 	char	*file;
 	int		len;
 
-	len = string_length_bash(*str_line, SUCCESS);
-	add_envar_len(&len, *str_line, ARGUMENT);
+	//len = string_length_bash(*str_line, SUCCESS);
+	len = ft_set_lenv(*str_line, PARAM);
+	//add_envar_len(&len, *str_line, PARAM);
 	file = malloc(sizeof(char) * (len + 1));
 	aux = file;
-	write_str_w_envar(str_line, &aux, &len, lst);
+	ft_set_strandenv(&aux, str_line, lst, &len);
+	//write_str_w_envar(str_line, &aux, &len, lst);
 	return (file);
 }
-
-
 
 void	ft_redirections(t_ms *s)
 {
@@ -69,33 +69,11 @@ void	ft_redirections(t_ms *s)
 		if (elm->exe_state == SUCCESS)
 		{
 			ft_check_redir(elm);
-			ft_clean_hdoc_elm(elm);
+			//ft_clean_hdoc_elm(elm);
 			//redirection_checker(node);
 			//clean_hdoc_bar(node);
 		}
 		elm = elm->next;
 		//i++;
 	}
-}
-
-
-void	write_str_w_envar(char **line, char **filename, int *len, t_lst *node)
-{
-	while (*len > 0 && node->exe_state == SUCCESS)
-	{
-		if (**line == '\\' || **line == '&')
-			expand_var_name(line, filename, len, node);
-		else if (**line != '*' && **line != '\\' && **line != '&' && **line)
-		{
-			*((*filename)++) = **line;
-			*((*line)++) = ' ';
-			*len = *len - 1;
-		}
-		else
-			*((*line)++) = ' ';
-	}
-	while (**line == '*')
-		*((*line)++) = ' ';
-	if (node->exe_state == SUCCESS)
-		**filename = '\0';
 }
