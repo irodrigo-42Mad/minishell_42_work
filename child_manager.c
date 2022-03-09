@@ -87,7 +87,7 @@ void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 		assing_fd(&node->file_out, new_fd_list[1], FD_OUT); //if fd_in is 1, we assing the write end of our new_list else it closes new_fd[1]
 	else													//if last process we simply close the out fd of the new pipe
 		close(new_fd_list[1]);
-	if (node->str_cmd[0])										//standart executing process
+	if (node->str_cmd[0])									//standart executing process
 	{
 		if (is_builtin(&node->str_cmd[0]))
 		{
@@ -102,15 +102,15 @@ void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 void	wait_childs(void)
 {
 	int		n_process;
-	int		stat;
+	int		state;
 	pid_t	pid;
 
-	n_process = g_ms->prcs_n;
-	while (n_process > 0)
+	n_process = (g_ms->prcs_n + 1);
+	while (--n_process > 0)
 	{
-		pid = wait(&stat);				//wait for each process
-//		if (pid == g_ms->sh_pid)
-//			get_q_mark(stat);			//not yet set
-		n_process--;
+		pid = wait(&state);				//wait for each process
+		if (pid == g_ms->sh_pid)
+			ft_get_errstatus(state);	// working in it
+		//n_process--;
 	}
 }

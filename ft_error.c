@@ -6,20 +6,15 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:20:03 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/07 11:24:16 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/08 09:08:04 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-	// TODO Hacer que el elemento tome el error
-	// correspondiente dar un valor hay que llegar
-	// a acuerdo respecto a valores err
-
-	// TODO
-	// actualizar valor de la var de err al final
-	//
-	//update_q_mark_variable(42);
+// TODO Hacer que el elemento tome el error
+// correspondiente dar un valor hay que llegar
+// a acuerdo respecto a valores err
 void	ft_quote_err(int *sh_err)
 {
 	ft_msg(GN_MSG_02, 2);

@@ -13,7 +13,6 @@
 **    when herename is present,
 **    //we open and assing it as our file in (node->file_in)
 */
-
 void	open_heredoc(t_lst *node)
 {
 	char	*path;
@@ -33,7 +32,6 @@ void	open_heredoc(t_lst *node)
 ** notes for char	**str_ptr_dup(char **src)
 ** duplicating char** matrix
 */
-
 char	**str_ptr_dup(char **src)
 {
 	char	**dest;
@@ -57,7 +55,6 @@ char	**str_ptr_dup(char **src)
 ** notes for size_t	ft_matrixlen(char **matrix)
 **   for finding out the lenght of a char ** matrix
 */
-
 size_t	ft_matrixlen(char **matrix)
 {
 	size_t	len;

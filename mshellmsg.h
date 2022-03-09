@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:24:10 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/07 10:56:55 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/07 14:56:59 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define T_ERR_03	": numeric argument required\n"
 # define T_ERR_04	"too many arguments\n"
 # define T_ERR_05	"error in dup2"
+# define T_ERR_06	"error in execve"
 
 // other msg shell constants
 

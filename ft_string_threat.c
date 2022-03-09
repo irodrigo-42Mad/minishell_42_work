@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:02:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/06 17:32:37 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/09 12:41:27 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,28 +169,29 @@ int	ft_str_bash_len(char *str, int envar)
  * redirection, pipe or whatever is relevant or not when parsing.
  * Minishell  SHOULD NOT workr when given <<, >>, <, >, | inside commas. These
  *will always have to be gathered as arguments for a command. Just like bash.*/
-void	place_str_pointers(char **aux, char **str_blank, char **str_full, int i)
+void	ft_set_strpntr(char **tmp, char **empty, char **final, size_t pos)
 {
-	long long int	displacement;
+	size_t	new_pos;
+	size_t	n_pos2;
 
-	while (**aux == ' ')
-		(*aux)++;
-	displacement = *aux - *str_blank;
-	if (str_full)
+	while (**tmp == ' ')
+		(*tmp) += 1;
+	new_pos = (*tmp - *empty) + 1;
+	n_pos2 = new_pos;
+	if (final != NULL)
 	{
-		while (displacement-- > 0)
+		while (--new_pos > 0)
 		{
-			if ((int)displacement <= i)
-				**str_full = ' ';
-			*str_full = *str_full + 1;
+			if(new_pos <= pos)
+				**final = ' ';
+			*final += 1;
 		}
 	}
-	displacement = *aux - *str_blank;
-	while (displacement-- > 0)
+	while (--n_pos2 > 0)
 	{
-		if ((int)displacement <= i)
-			**str_blank = ' ';
-		*str_blank = *str_blank + 1;
+		if(new_pos <= pos)
+			**empty = ' ';
+		*empty += 1;
 	}
 }
 

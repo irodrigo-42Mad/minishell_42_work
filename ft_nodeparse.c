@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/24 13:20:42 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:21:19 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ t_lst	*ft_newinst(t_ms *s, int *i)
 	elm->aux_ln = ft_strchlen(tmp, '|');
 	elm->str_line = ft_substr(s->pars_cmd, j, elm->aux_ln);
 	elm->str_aux = ft_substr(tmp, j, elm->aux_ln);
-	if (tmp[elm->aux_ln + 1] != '\0')
-		*i = *i + (elm->aux_ln + 1);
+	if (tmp[elm->aux_ln] != '\0')
+		*i += (elm->aux_ln + 1);
 	else
-		*i = * i + elm->aux_ln;
+		*i += elm->aux_ln;
 	// // cambiar esta funcion para quedarnos con lo que nos interesa
 	// // o utilizar aqui la funcion strtok para dividir todos los elementos de lista.
 	// ft_setnewpos(s, elm->aux_ln);

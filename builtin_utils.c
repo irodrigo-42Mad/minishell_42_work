@@ -6,7 +6,6 @@
 ** we check if our arg is a builtin
 **
 */
-
 int	is_builtin(char *arg)
 {
 	if (precise_cmp(arg, "pwd", 3))

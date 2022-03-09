@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:47:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/13 10:58:00 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/08 09:23:04 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,18 @@ void	ft_add_local_env(char *car, char *err)
 		else
 			g_ms->sh_envar = nod;
 	}
+}
+
+void	ft_get_errstatus(int state)
+{
+	if (g_ms->flg_err == SUCCESS)
+	{
+		if (WIFSIGNALED(state))
+			ft_updt_err(WTERMSIG(state) + 128);
+		else if (WIFSTOPPED(state))
+			ft_updt_err(WSTOPSIG(state));
+		else if (WIFEXITED(state))
+			ft_updt_err(WEXITSTATUS(state));
+	}
+	g_ms->flg_err = SUCCESS;
 }
