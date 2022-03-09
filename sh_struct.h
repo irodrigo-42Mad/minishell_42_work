@@ -9,6 +9,7 @@ typedef struct s_lst{
 
 	size_t			aux_ln;
 	char			*herename;   // pending to activate heredoc structure
+	int				here_num;
 	char			*str_cmd;
 	char			*str_line;
 	char			*str_aux;

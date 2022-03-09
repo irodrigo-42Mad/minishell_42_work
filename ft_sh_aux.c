@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:41:41 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/12 10:42:28 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:13:22 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,23 @@ size_t	ft_getmax_ln(const char *str1, const char *str2)
 		return (len1);
 	else
 		return (len2);
+}
+
+void free_ptrs(char *one, char *two, char *three)
+{
+	if (one)
+	{
+		ft_bzero((void *)one, sizeof(one));
+		free(one);
+	}
+	if (two)
+	{
+		ft_bzero((void *)two, sizeof(two));
+		free(two);
+	}
+	if (three)
+	{
+		ft_bzero((void *)three, sizeof(three));
+		free(three);
+	}
 }

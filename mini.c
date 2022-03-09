@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:43:22 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/07 10:56:53 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/08 15:01:46 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,27 +114,38 @@ int	main(int argc, char **argv, char **env)
 	g_ms = malloc(sizeof(t_ms));
 	ft_initialize(argc, env);
 	ft_put_banner();
+	ft_set_signal();
 	while (TRUE)
 	{
-		ft_set_signal();
 		g_ms->str = readline(ft_set_prompt(g_ms));
-		if (g_ms->str != NULL)
-			add_history(g_ms->str);
-		if (!ft_parser(g_ms))
+		if (ft_strlen(g_ms->str))
 		{
-			ft_prepare_command(g_ms);
-			//ft_heredoc();
-			ft_redirections(g_ms);
-			// other redirs
-			start_executer();
+			add_history(g_ms->str);
+			if (!ft_parser(g_ms))
+			{
+				ft_prepare_command(g_ms);
+				ft_heredoc();
+				ft_redirections(g_ms);
+				// other redirs
+				start_executer();
+				ft_clean_instr(g_ms->instr);
+				
+				//clean list si no explota en este punto
+				//free (g_ms->str);
+			}
 		}
 		// hasta aqui revisado
-		g_ms->pars_cmd = ft_strdup(g_ms->str);
+		//g_ms->pars_cmd = ft_strdup(g_ms->str);
 
 		// la linea siguiente da un segfault pero no es valida para el proyecto final
-		if (!(ft_strncmp(g_ms->pars_cmd, "exit", ft_strlen(g_ms->pars_cmd))))
-			cmd_exit(g_ms);
-		//free (g_ms->cmd);
+		//if (!(ft_strncmp(g_ms->pars_cmd, "exit", ft_strlen(g_ms->pars_cmd))))
+		//	cmd_exit(g_ms);
+		
+		//free (g_ms->str);
+		// liberar la lista
+
+
+
 		//free (g_ms->str);
 	}
 

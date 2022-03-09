@@ -41,13 +41,11 @@ void	ft_envcreate(char *v_name, char *v_val)
 	nenv = malloc(sizeof(char *) * ((int)ft_matrixlen(g_ms->sh_env) + 2));
 	// revisar si son necesarios los brackets
 	while (g_ms->sh_env[++x])
-	{
 		nenv[x] = ft_strdup(g_ms->sh_env[x]);
-	}
 	tmp = ft_strjoin(v_name, "=");
 	nenv[x++] = ft_strjoin(tmp, v_val);
 	nenv[x] = NULL;
-	//free_three_ptrs(aux, name, value);
+	free_ptrs(v_name, v_val, tmp);
 	free_matrix(g_ms->sh_env);
 	g_ms->sh_env = nenv;
 }
@@ -73,6 +71,6 @@ void	ft_recharge_env(char *v_name, char *v_val)
 		tmp = ft_strjoin(v_name, "=");
 		free(g_ms->sh_env[env_entry]);
 		g_ms->sh_env[env_entry] = ft_strjoin(tmp, v_val);
-		//free_three_ptrs(aux, name, value);
+		free_ptrs(v_name, v_val, tmp);
 	}
  }

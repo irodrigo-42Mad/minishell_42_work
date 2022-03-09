@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/06 17:30:16 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/09 12:39:08 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@
 ** system paths
 */
 # define TMP_PATH		"/tmp/"
+
+// other constants
+# define NOT_EXIST		0
+# define EXIST			1
 
 // system constants
 # define FD_IN			0
@@ -195,6 +199,9 @@ void		ft_write_file_err(t_lst *lst, char *file);
 // ft_local_env.c
 void		ft_add_local_env(char *car, char *err);
 t_sh_var	*ft_set_env_val(char *v_name, char *val);
+void		ft_get_errstatus(int state);
+
+
 
 // ft_environ_str.c
 int			ft_set_lenv(char *str, int line);
@@ -240,5 +247,15 @@ void		ft_recharge_env(char *v_name, char *v_val);
 void		ft_add_envglob(char *v_name, char *v_val, int status);
 void		ft_redir(char **str, t_lst *lst, int dir, int mode);
 void		ft_locate_strptr(int x, char **tmp, char **str);
+void 		free_ptrs(char *one, char *two, char *three);
+char		*set_hdocfname(int exist);
+void		ft_heredoc(void);
+void 		ft_clean_instr(t_lst *instr);
+
+
+void		ft_set_hdoc(t_lst *lst);
+char   		*ft_eofcatch(int *hd_num, char **dat_line);
+void		ft_hdc_prepareln(t_lst *lst);
+void		ft_set_strpntr(char **tmp, char **empty, char **final, size_t pos);
 
 #endif

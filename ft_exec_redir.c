@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 11:46:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/06 17:32:27 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/08 09:45:36 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	ft_redir(char **str, t_lst *lst, int dir, int mode)
 	int		new_pos;
 	char	*file;
 
+	//ft_set_strbegin();
+	
 	//place_str_pointers(aux, &lst->line_aux, &lst->line, red);
+	
 	file = ft_obtain_file(lst, &lst->str_line);
 	if (lst->exe_state == SUCCESS)
 	{
