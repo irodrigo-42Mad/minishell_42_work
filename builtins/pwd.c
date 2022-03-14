@@ -3,24 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 11:25:42 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/07 11:27:37 by irodrigo         ###   ########.fr       */
+/*   Created: 2022/03/14 12:46:56 by mgrau             #+#    #+#             */
+/*   Updated: 2022/03/14 12:47:16 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
 
-/*
-** notes at this function
-**
-** getcwd() allocates the buffer dynamically using malloc(3) if buf is NULL.
-** In this case, the allocated buffer has the length size unless size is zero,
-** when buf is allocated as big as necessary. The caller should free(3) the =
-** returned buffer element.
-**
-*/
+#include "../minishell.h"
 
 void	ft_pwd(void)
 {

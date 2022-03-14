@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_defs.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/14 12:48:38 by mgrau             #+#    #+#             */
+/*   Updated: 2022/03/14 12:48:41 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include"minishell.h"
 
 void	handle_defs(char **cmd) 				// it goes through the list of lines cmd and clears the portions that are enviroment definitions adding the to envar list

@@ -1,12 +1,16 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/14 12:46:32 by mgrau             #+#    #+#             */
+/*   Updated: 2022/03/14 12:46:35 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-** notes to this procedure
-**
-** a value of 1 in call variable meaning that
-** father is called
-**
-*/
+#include "../minishell.h"
 
 void	ft_exit(char **args, int call)
 {
