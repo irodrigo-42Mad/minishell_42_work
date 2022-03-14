@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 12:48:46 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/14 12:48:48 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/03/14 14:55:32 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,17 @@ void	free_matrix(char **matrix)
 		free(matrix[i]);
 		free(matrix);
 	}
+}
+
+size_t	ft_maxlen(const char *s1, const char *s2)
+{
+	size_t	len1;
+	size_t	len2;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (len1 >= len2)
+		return (len1);
+	else
+		return (len2);
 }

@@ -6,18 +6,18 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 12:49:11 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/14 12:49:15 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/03/14 15:08:56 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    assing_fd(int *node_fd, int new_fd, int fd)
+void	assing_fd(int *node_fd, int new_fd, int fd)
 {
-        if (*node_fd == fd)
-            *node_fd = new_fd;
-        else
-            close(new_fd);
+	if (*node_fd == fd)
+		*node_fd = new_fd;
+	else
+		close(new_fd);
 }
 
 void	dup_to_stdin_stdout(int fd_in, int fd_out)

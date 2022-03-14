@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 12:49:04 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/14 12:49:07 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/03/14 14:52:13 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,21 @@ int			check_if_digit(const char *str);
 void		ft_pwd(void);
 
 // export
-void		ft_export (void);
+void		ft_export (char **argv);
+void		print_env(void);
+void		add_commas_to_env(void);
+void		env_entry(char *name, char *value, int i);
+void 		join_print(char *str1, char *str2);
+int			parse_arg(char *arg);
+int			check_export_arg(char *arg);
+int			find_env(char *name);
+void	export_error(char *name);
 
 // unset
-void		ft_unset (void);
-
+void		ft_unset (char **argv);
+int			check_unset_arg(char *arg);
+void		delete_node(char *name);
+void		unset_entry(int to_remove);
+void		remove_from_env(char *name);
+size_t		ft_maxlen(const char *s1, const char *s2);
 #endif

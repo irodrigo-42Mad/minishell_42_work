@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 12:48:38 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/14 12:48:41 by mgrau            ###   ########.fr       */
+/*   Created: 2022/03/14 14:40:09 by mgrau             #+#    #+#             */
+/*   Updated: 2022/03/14 14:41:51 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	is_def(char *str) //recorremos cadena y comprobamos que es una definicion bu
 {
 	if (!str)
 		return (0);
-// carce-bo uses a check here to see if the enviroment beggining is ok
-//	if (ft_isvalid_env_start(*str, Q_MARK_KO))
-//	{
-	while (ft_isalnum(*str) || *str == '_')
-		str++;
-	if (*str == '=')
-		return (1);
-//	}
+
+	if (ft_val_envname(*str, STATE_Q_FAIL))
+	{
+		while (ft_isalnum(*str) || *str == '_')
+			str++;
+		if (*str == '=')
+			return (1);
+	}
 	return (0);
 }
 
@@ -47,14 +47,13 @@ char	*def_name(char *str) // recorremos cadena y devolvemos porcion correspondie
 	int		len;
 	char	*name;
 
-	len = 1; //if using valid env start set to 0
-	//
-	//if (ft_isvalid_env_start(str[len++], Q_MARK_KO))
-	//{
-	//just as before it should be alredy checked
-	while (ft_isalnum(*str) || *str == '_')
-		len++;
-	//}
+	len = 0;
+	
+	if (ft_val_envname(str[len++], STATE_Q_FAIL))
+	{
+		while (ft_isalnum(*str) || *str == '_')
+			len++;
+	}
 	if (*str == '?')
 		return (ft_strdup("?"));
 	name = ft_substr(str, 0, len);

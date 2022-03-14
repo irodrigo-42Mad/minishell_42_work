@@ -6,36 +6,11 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 12:46:47 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/14 12:51:22 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/03/14 13:44:47 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	print_env(void)
-{
-	pid_t	pid;
-	int		i;
-
-	i = 0;
-	pid = fork();
-	if (pid == 0)
-	{
-		order_env();
-		add_commas_to_env();
-		while (g_ms->sh_env)
-		{
-			if (*g_ms->sh_env[i] != '*')
-				join_print("declare -x", g_ms->sh_env[i]);
-			else
-				join_print("declare -x", (++(g_ms->sh_env[i])));
-			i++;
-		}
-		exit(0);
-	}
-	else
-		waitpid(pid, NULL, 0);
-}
 
 static void	order_env(void)
 {
@@ -61,6 +36,31 @@ static void	order_env(void)
 		}
 		i++;
 	}
+}
+
+void	print_env(void)
+{
+	pid_t	pid;
+	int		i;
+
+	i = 0;
+	pid = fork();
+	if (pid == 0)
+	{
+		order_env();
+		add_commas_to_env();
+		while (g_ms->sh_env)
+		{
+			if (*g_ms->sh_env[i] != '*')
+				join_print("declare -x", g_ms->sh_env[i]);
+			else
+				join_print("declare -x", (++(g_ms->sh_env[i])));
+			i++;
+		}
+		exit(0);
+	}
+	else
+		waitpid(pid, NULL, 0);
 }
 
 void	add_commas_to_env(void)
@@ -107,17 +107,19 @@ void	env_entry(char *name, char *value, int i)
 		free(aux2);
 	}
 	else
+	{
 		g_ms->sh_env[i] = ft_strjoin("*", name);
 		free(name);
 		free(value);
+	}
 }
 
-void join_print(char *str1, char *str2)
+void	join_print(char *str1, char *str2)
 {
-	char *tmp;
+	char	*tmp;
 
-	tmp = ft_strjoin(str1,str2);
-	ft_putstr_fd(tmp,1);
-	ft_putchar_fd('\n',1);
+	tmp = ft_strjoin(str1, str2);
+	ft_putstr_fd(tmp, 1);
+	ft_putchar_fd('\n', 1);
 	free(tmp);
 }
