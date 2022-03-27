@@ -67,7 +67,7 @@ typedef struct s_ms
 	char		*lastcmd;
 	char		*flag;
 	char		**sh_env;
-
+	int			pip_count;
 	int			argc;
 	int			state;
 	int			err_n;

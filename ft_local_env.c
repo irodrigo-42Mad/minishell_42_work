@@ -6,19 +6,30 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:47:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/08 09:23:04 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/11 12:15:51 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_sh_var	*ft_set_env_val(char *v_name, char *val)
+t_sh_var	*ft_set_env_val(char *v_name, int val)
 {
 	t_sh_var	*nod;
 
 	nod = malloc(sizeof(t_sh_var));
-	nod->v_name = v_name;
-	nod->v_val = val;
+	nod->v_name = ft_strdup(v_name);
+	nod->v_val = ft_itoa(val);
+	nod->next = NULL;
+	return (nod);
+}
+
+t_sh_var	*ft_set_envch_val(char *v_name, char *val)
+{
+	t_sh_var	*nod;
+
+	nod = malloc(sizeof(t_sh_var));
+	nod->v_name = ft_strdup(v_name);
+	nod->v_val = ft_strdup(val);
 	nod->next = NULL;
 	return (nod);
 }
@@ -49,7 +60,7 @@ void	ft_add_local_env(char *car, char *err)
 	}
 	if (!nod)
 	{
-		nod = ft_set_env_val(car, err);
+		nod = ft_set_envch_val(car, err);
 		if (aux)
 			(*aux) = nod;
 		else

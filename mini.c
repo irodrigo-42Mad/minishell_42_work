@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:43:22 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/08 15:01:46 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/11 14:35:48 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,48 +106,73 @@ void	ft_put_banner(void)
 	printf("%s%s%s\n", CYAN, MSG009, RESET);
 }
 
+void ch_leaks(void)
+{
+	system("leaks minishell");
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	(void)argv;
+	(void)env;
+	char *aux = "ls -a |wc -l |grep 1 >dev_null" ;
+
+	//atexit(ch_leaks);
 	if (argc != 1)
 		exit(ft_msg_val(Q_ERR_04, 42));
 	g_ms = malloc(sizeof(t_ms));
+	if (!g_ms)
+	 	exit(ft_msg_val(M_ERR_01, 42));
 	ft_initialize(argc, env);
 	ft_put_banner();
 	ft_set_signal();
 	while (TRUE)
 	{
-		g_ms->str = readline(ft_set_prompt(g_ms));
-		if (ft_strlen(g_ms->str))
-		{
+		ft_set_prompt();
+		//g_ms->str = readline(g_ms->prompt);
+		g_ms->str = ft_strdup(aux);
+		// 	controlar los espacios y tabuladores ! hecho
+	 	if (ft_strlen(g_ms->str) > 0  &&
+		 	ft_check_spc(g_ms->str) != 1)
+	 	{
 			add_history(g_ms->str);
-			if (!ft_parser(g_ms))
-			{
+	 		if (!ft_parser()) // la segunda vez se pira
+			//if (!ft_parser(g_ms))
+	 		{
+				// hasta aqui todo ok
 				ft_prepare_command(g_ms);
-				ft_heredoc();
-				ft_redirections(g_ms);
-				// other redirs
-				start_executer();
-				ft_clean_instr(g_ms->instr);
-				
-				//clean list si no explota en este punto
-				//free (g_ms->str);
+	// 			//ft_heredoc();
+	// 			ft_redirections(g_ms);
+	// 			// other redirs
+	 			start_executer();
+	// 			ft_clean_instr(g_ms->instr);
 			}
-		}
-		// hasta aqui revisado
-		//g_ms->pars_cmd = ft_strdup(g_ms->str);
-
-		// la linea siguiente da un segfault pero no es valida para el proyecto final
-		//if (!(ft_strncmp(g_ms->pars_cmd, "exit", ft_strlen(g_ms->pars_cmd))))
-		//	cmd_exit(g_ms);
-		
-		//free (g_ms->str);
-		// liberar la lista
-
-
-
-		//free (g_ms->str);
+			ft_pre_clean(g_ms);
+	// 			//clean list si no explota en este punto
+	// 			//free (g_ms->str);
+	  	}
 	}
+
+	// 	// hasta aqui revisado
+	// 	//g_ms->pars_cmd = ft_strdup(g_ms->str);
+
+	// 	// la linea siguiente da un segfault pero no es valida para el proyecto final
+	// 	//if (!(ft_strncmp(g_ms->pars_cmd, "exit", ft_strlen(g_ms->pars_cmd))))
+	// 	//	cmd_exit(g_ms);
+
+	// 	//free (g_ms->str);
+	// 	// liberar la lista
+
+
+
+	// 	//free (g_ms->str);
+	// }
+	ft_pre_clean(g_ms);
+	free (g_ms);
+
+
+
+
 
 	// 	//ft_parser(&s);
 	// //	ft_strlcpy (s.str,"hola\0",5);
@@ -209,7 +234,7 @@ int	main(int argc, char **argv, char **env)
 ** 	int		i;
 ** 	char	*rest;
 ** 	char	*aux;
-** 
+**
 **	aux = NULL;
 **	i = 0;
 **	ini_pos = 0;

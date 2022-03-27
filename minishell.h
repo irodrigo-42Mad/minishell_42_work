@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/09 12:39:08 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/11 13:50:32 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,9 @@ void		ft_initialize(int m_argc, char**m_env);
 
 // set local variable values
 //ft_local_env.c
-t_sh_var	*ft_set_env_val(char *name, char *value);
-
+t_sh_var	*ft_set_env_val(char *name, int val);
+t_sh_var	*ft_set_envch_val(char *v_name, char *val);
+void		free_nodes (t_lst *elm);
 
 int 		ft_val_envname(int status, char initial);
 int			ft_valid_envcore(char a);
@@ -123,11 +124,14 @@ int			ft_valid_envcore(char a);
 
 // primary shell functions
 // ft_parser.c
-int			ft_parser(t_ms *s);
+int			ft_parser(void);
+//int			ft_parser(t_ms *s);
 
 // ft_nodeparse.c
 void		ft_prepare_command(t_ms *s);
-t_lst		*ft_newinst(t_ms *s, int *i);
+//t_lst		*ft_newinst(t_ms *s, int *i);
+t_lst   	*ft_newinst(char *cmd, int *i);
+void		ft_lstcmdadd_back(t_lst **lst, t_lst *new);
 
 // aux printing functions
 void		ft_put_banner(void);
@@ -142,8 +146,12 @@ void		ft_free_two(void *s1, void *s2);
 
 // prompt configuration
 // ft_prompt_ctrl.c
-const char	*ft_set_prompt(t_ms *s);
-char		*ft_create_prompt(t_ms *s);
+//const char	*ft_set_prompt (void);
+void ft_set_prompt(void);
+//const char	*ft_set_prompt(t_ms *s);
+//char		*ft_create_prompt(t_ms *s);
+void ft_create_prompt(void);
+//char		*ft_create_prompt(void);
 
 // quotes parsing
 // ft_comma.c
@@ -198,7 +206,7 @@ void		ft_write_file_err(t_lst *lst, char *file);
 // environment variable value set
 // ft_local_env.c
 void		ft_add_local_env(char *car, char *err);
-t_sh_var	*ft_set_env_val(char *v_name, char *val);
+//t_sh_var	*ft_set_env_val(char *v_name, char *val);
 void		ft_get_errstatus(int state);
 
 
@@ -257,5 +265,10 @@ void		ft_set_hdoc(t_lst *lst);
 char   		*ft_eofcatch(int *hd_num, char **dat_line);
 void		ft_hdc_prepareln(t_lst *lst);
 void		ft_set_strpntr(char **tmp, char **empty, char **final, size_t pos);
+void 		ft_pre_clean(t_ms *g_ms);
+void 		free_vars (t_sh_var *elm);
+
+int			ft_check_spc(char *str);
+int			ft_count_orders(void);
 
 #endif

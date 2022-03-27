@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:02:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/09 12:41:27 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:49:02 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void ft_expand_vars(char *v_val, char **data, char **file, int *ln)
 
 void	ft_set_strandenv(char **file, char **data, t_lst *lst, int *len)
 {
-	while (lst->exe_state == SUCCESS && len > 0)
+	while (lst->exe_state == SUCCESS && *len > 0)
 	{
 		if (**data == '&' || **data == '\\')
 			ft_vname_expand(lst, file, data, len);

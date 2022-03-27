@@ -43,3 +43,20 @@ void free_ptrs(char *one, char *two, char *three)
 		free(three);
 	}
 }
+
+int	ft_check_spc(char *str)
+{
+	int pos;
+	int len;
+
+	len = ft_strlen(str);
+	pos = 0;
+	while (ft_isspace(str[pos]) && str[pos] != '\0')
+		pos++;
+	if (pos >= len)
+		return (1);
+	else
+		return (0);
+
+
+}

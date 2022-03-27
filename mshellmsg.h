@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:24:10 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/07 14:56:59 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/11 10:06:03 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define Q_ERR_02	"unclosed squotes were found on command\n"
 # define Q_ERR_03	" command not found\n"
 # define Q_ERR_04	"Scripting commands and functions are not implemented\n"
+# define Q_ERR_05	"Or command not implemented or pipe number error\n"
+
+# define M_ERR_01	"Couldn't allocate memory for shell implementation\n"
 
 # define T_ERR_01	"syntax error near unexpected token `"
 # define T_ERR_02	"found forbiden char `"

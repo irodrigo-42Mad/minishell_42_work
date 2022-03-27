@@ -6,7 +6,7 @@
 /*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:20:03 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/08 09:08:04 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:34:57 by irodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	ft_updt_err(int err_n)
 
 void	ft_prn_view(int sh_err, char *str)
 {
-	int	a;
-
 	ft_msg_ret(str, 1);
-	a = sh_err;
 	ft_updt_err(sh_err);
 }
 
