@@ -11,6 +11,7 @@ typedef struct s_lst{
 	char			*herename;   // pending to activate heredoc structure
 	int				here_num;
 	char			*str_cmd;
+	char			**str_args;
 	char			*str_line;
 	char			*str_aux;
 	char			*str_save;

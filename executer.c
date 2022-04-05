@@ -23,10 +23,10 @@ void	launch_single_process(t_lst *node)
 		handle_defs(&node->str_line);
 		//handle_defs(&node->str_cmd); 		//handle defs checks if the arguments are definitions, adds them and removes them from our cmd list in this node
 		open_heredoc(node);
-		if (node->str_cmd[0])					//open heredoc checks if there is a heredoc name and opens it
+		if (node->str_cmd)					//open heredoc checks if there is a heredoc name and opens it
 		//if (node->str_cmd[0])				//if there is an argument
 		{
-			if (is_builtin(&node->str_cmd[0]))
+			if (is_builtin(&node->str_args))
 			//if (is_builtin(&node->str_cmd[0]))	//is it a built in?
 				launch_from_father(node);		//if it is will launch from father
 			else
