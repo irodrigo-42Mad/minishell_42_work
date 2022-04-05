@@ -14,13 +14,10 @@
 
 int	ft_parser(void)
 {
-	//char	*straux;
 	size_t	pos;
 
 	pos = 0;
 	while (g_ms->str[pos] != '\0')
-	//straux = s->str;
-	//while (*straux)
 	{
 		if (ft_isspace(g_ms->str[pos]))
 			g_ms->str[pos] = ' ';
@@ -32,11 +29,10 @@ int	ft_parser(void)
 		|| ft_redir_pipes(&g_ms->err_n, &g_ms->str))
 	{
 		free (g_ms->pars_cmd);
+		g_ms->pars_cmd = NULL;
 		free (g_ms->str);
+		g_ms->str = NULL;
 		return (1);
-	//	free(s->pars_cmd);
-	//	free(s->str);
-	//	return (1);
 	}
 	return (0);
 }

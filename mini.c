@@ -114,8 +114,9 @@ void ch_leaks(void)
 int	main(int argc, char **argv, char **env)
 {
 	(void)argv;
-	(void)env;
-	char *aux = "ls -a |wc -l |grep 1 >dev_null" ;
+	(void)argc;
+	(void)env; // hay que descomentar esto
+	char *aux = "ls -al >> amigo";
 
 	//atexit(ch_leaks);
 	if (argc != 1)
@@ -124,6 +125,7 @@ int	main(int argc, char **argv, char **env)
 	if (!g_ms)
 	 	exit(ft_msg_val(M_ERR_01, 42));
 	ft_initialize(argc, env);
+	// ME QUEDO CON LAS VARIABLES DE ENTORNO HASTA EL FINAL
 	ft_put_banner();
 	ft_set_signal();
 	while (TRUE)
@@ -136,20 +138,20 @@ int	main(int argc, char **argv, char **env)
 		 	ft_check_spc(g_ms->str) != 1)
 	 	{
 			add_history(g_ms->str);
-	 		if (!ft_parser()) // la segunda vez se pira
-			//if (!ft_parser(g_ms))
+	 		if (!ft_parser()) // revision final del proyecto
 	 		{
+				ft_prepare_command();
 				// hasta aqui todo ok
-				ft_prepare_command(g_ms);
+
 	// 			//ft_heredoc();
+				ft_redirections(); // revisando las redirecciones
+
 	// 			ft_redirections(g_ms);
 	// 			// other redirs
-	 			start_executer();
+	 			//start_executer();
 	// 			ft_clean_instr(g_ms->instr);
 			}
-			ft_pre_clean(g_ms);
-	// 			//clean list si no explota en este punto
-	// 			//free (g_ms->str);
+			ft_pre_clean();
 	  	}
 	}
 

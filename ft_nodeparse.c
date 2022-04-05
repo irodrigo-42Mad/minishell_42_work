@@ -44,6 +44,7 @@ t_lst	*ft_newinst(char *cmd, int *i)
 	t_lst	*elm;
 
 	elm = ft_calloc (1, sizeof(t_lst));
+	elm->el_nbr = (*i) + 1;
 	elm->file_in = FD_IN;
 	elm->file_out = FD_OUT;
 	elm->exe_state = SUCCESS;
@@ -129,9 +130,13 @@ t_lst	*ft_newinst(char *cmd, int *i)
 // 	return (process);
 // }
 
-void	ft_prepare_command(t_ms *s)
+
+
+// 1.- contar todos aquellos pipes que hay en el comando para separar
+// 2.- guardarlos en una variable local que se utiliza como elemento strtok
+// 3.- con ello crear la lista de comandos
+void	ft_prepare_command(void)
 {
-	t_lst	*p_inst;
 	t_lst	*aux;
 	char	**str;
 	int		i;
@@ -142,43 +147,27 @@ void	ft_prepare_command(t_ms *s)
 		str = ft_split(g_ms->str, '|');
 		while (str[i] != NULL)
 		{
-			//aux = ft_calloc(1, sizeof(t_lst));
-			aux = ft_newinst(str[i], &i);
-			aux->el_nbr = (i + 1);
+			aux = ft_newinst(str[i], &i);  // revisar los numeros de proceso en prueba
+			ft_setparamlst(aux);// por aqui andamos
 			ft_lstcmdadd_back(&g_ms->instr, aux);
 			g_ms->prcs_n++;
-			//p_inst->next = aux;
-			// crear la lista de comandos
 			i++;
 		}
-			// añadir aqui a la lista de comandos
 	}
 	else
-	{
 		return (ft_msg(Q_ERR_05, 2));
-	}
-
-	// cadenas independientes con ft_strdup
-	//1.- contar todos aquellos pipes que hay en el comando para separar
-	//2.- guardarlos en una variable local que se utiliza como elemento strtok
-	//3.- con ello crear la lista de comandos
-
-	//p_inst = ft_newinst(s, &i);
-	// tras crear el elemento, le asignamos el numero de proceso
-	//p_inst->el_nbr = ++s->prcs_n;
-	//s->prcs_n = p_inst->el_nbr;
-	//s->instr = p_inst;
-	// mover la posicion del elemento hasta la posicion devuelta
-	// muere en esta posicion al llegar al ultimo elemento de la cadena
-	//while (s->str[i])
-	// {
-	// 	aux = ft_newinst(s, &i);
-	// 	p_inst->next = aux;
-	// 	i++;
-	// }
-	free(s->to_clean);
-	//free(s->str);
 }
+
+void ft_set_paramlst(t_lst *aux)
+{
+	char **str
+
+	//1 indicar si tenemos redirecciones
+	//2 si no hay redirecciones separar args
+	//3 guardar nodo
+}
+
+
 
 /*
 ** Code in revision process

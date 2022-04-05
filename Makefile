@@ -28,7 +28,7 @@ OTHER = -Wall -Werror -Wextra
 
 CC = gcc
 
-CFLAGS = -g -lreadline  -fsanitize=address #$(OTHER)
+CFLAGS = -g -lreadline  -fsanitize=address $(OTHER)
 #CFLAGS = -Wall -Werror -Wextra -g -lreadline -L/Volumes/sgoinfre/students/irodrigo/homebrew/Cellar/readline/8.1.2/lib -I/Volumes/sgoinfre/students/irodrigo/homebrew/Cellar/readline/8.1.2/include #-fsanitize=address
 
 #-L/usr/local/Cellar/readline/8.1/lib/ -I/usr/local/Cellar/readline/8.1/include/

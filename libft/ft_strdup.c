@@ -29,12 +29,10 @@ static char	*ft_strcpy(char *dst, const char *src)
 char	*ft_strdup(const char *s1)
 {
 	char	*c;
-
+	// cambiar el malloc por un calloc
 	c = (char *)malloc(ft_strlen(s1) + 1);
 	if (!c)
-	{
 		return (0);
-	}
 	ft_strcpy(c, (char *)s1);
 	return (c);
 }

@@ -40,7 +40,7 @@ void	ft_replace_local_enval(t_sh_var *nod, char *v_name, char *val)
 	free(nod->v_val);
 	nod->v_val = val;
 }
-
+// falla al añadir un nodo la segunda ocasión
 void	ft_add_local_env(char *car, char *err)
 {
 	t_sh_var	*nod;
@@ -61,6 +61,7 @@ void	ft_add_local_env(char *car, char *err)
 	if (!nod)
 	{
 		nod = ft_set_envch_val(car, err);
+		//FALLA EN ESTE PUNTO
 		if (aux)
 			(*aux) = nod;
 		else

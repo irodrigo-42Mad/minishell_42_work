@@ -128,7 +128,8 @@ int			ft_parser(void);
 //int			ft_parser(t_ms *s);
 
 // ft_nodeparse.c
-void		ft_prepare_command(t_ms *s);
+void		ft_prepare_command(void);
+//void		ft_prepare_command(t_ms *s);
 //t_lst		*ft_newinst(t_ms *s, int *i);
 t_lst   	*ft_newinst(char *cmd, int *i);
 void		ft_lstcmdadd_back(t_lst **lst, t_lst *new);
@@ -146,12 +147,8 @@ void		ft_free_two(void *s1, void *s2);
 
 // prompt configuration
 // ft_prompt_ctrl.c
-//const char	*ft_set_prompt (void);
-void ft_set_prompt(void);
-//const char	*ft_set_prompt(t_ms *s);
-//char		*ft_create_prompt(t_ms *s);
-void ft_create_prompt(void);
-//char		*ft_create_prompt(void);
+void 		ft_set_prompt(void);
+void 		ft_create_prompt(void);
 
 // quotes parsing
 // ft_comma.c
@@ -166,7 +163,8 @@ int			ft_redir_pipes(int *sh_err, char **str);
 char		*ft_redir_right(int *sh_err, char *str);
 char		*ft_redir_left(int *sh_err, char *str);
 // adv_redir.c
-void		ft_redirections(t_ms *s);
+void		ft_redirections(void);
+//void		ft_redirections(t_ms *s);
 void		ft_check_redir(t_lst *lst);
 void		ft_redir(char **str, t_lst *lst, int dir, int mode);
 void		ft_clean_hdoc_elm (t_lst *lst);
@@ -258,14 +256,14 @@ void		ft_locate_strptr(int x, char **tmp, char **str);
 void 		free_ptrs(char *one, char *two, char *three);
 char		*set_hdocfname(int exist);
 void		ft_heredoc(void);
-void 		ft_clean_instr(t_lst *instr);
+void 		ft_clean_instr();
 
 
 void		ft_set_hdoc(t_lst *lst);
 char   		*ft_eofcatch(int *hd_num, char **dat_line);
 void		ft_hdc_prepareln(t_lst *lst);
 void		ft_set_strpntr(char **tmp, char **empty, char **final, size_t pos);
-void 		ft_pre_clean(t_ms *g_ms);
+void 		ft_pre_clean();
 void 		free_vars (t_sh_var *elm);
 
 int			ft_check_spc(char *str);
