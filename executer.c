@@ -20,13 +20,13 @@ void	launch_single_process(t_lst *node)
 {
 	if (node->exe_state == SUCCESS)
 	{
-		handle_defs(&node->str_line);
+		//handle_defs(&node->str_line);
 		//handle_defs(&node->str_cmd); 		//handle defs checks if the arguments are definitions, adds them and removes them from our cmd list in this node
 		open_heredoc(node);
 		if (node->str_cmd)					//open heredoc checks if there is a heredoc name and opens it
 		//if (node->str_cmd[0])				//if there is an argument
 		{
-			if (is_builtin(&node->str_args))
+			if (is_builtin(node->str_cmd))
 			//if (is_builtin(&node->str_cmd[0]))	//is it a built in?
 				launch_from_father(node);		//if it is will launch from father
 			else
@@ -44,7 +44,7 @@ void	launch_from_father(t_lst *node)
 	stdout_fd = dup(1); 								// since we are lauching from father we create a back up for the original stdin and stdout
 	dup_to_stdin_stdout(node->file_in, node->file_out); //we asing the new stdin stdout if any chages apply
 	//exec_builtin(&node->str_cmd, 1);
-	exec_builtin(&node->str_cmd, 1); 					//1 means father, we exec our built in
+	exec_builtin(node->str_args, 1); 					//1 means father, we exec our built in
 	dup_to_stdin_stdout(stdin_fd, stdout_fd); 			//we close and restore original stdin stdout if needed
 }
 
@@ -66,12 +66,23 @@ void	call_execve(t_lst *node)
 {
 	char	*path;
 	char	**env;
+//	int i = 0;
 
-//	ft_signal_main();										//signal
+//	ft_signal_main();	
+/*	node->str_args = malloc(sizeof(char *) * 4);
+	node->str_args[0] = malloc(sizeof(char) * 10);
+	node->str_args[0] = "ls";
+	node->str_args[1] = malloc(sizeof(char) * 10);
+	node->str_args[1] = "-la";
+	node->str_args[2] = malloc(sizeof(char) * 10);
+	node->str_args[2] = NULL;*/
 	dup_to_stdin_stdout(node->file_in, node->file_out);		//we set our stdin and stdout appropiately
-	path = get_pathname(node->str_cmd);						//get our cmd path for execution
+	path = get_pathname(node->str_args[0]);						//get our cmd path for execution
 	env = str_ptr_dup(g_ms->sh_env);						// clone our env list for the execution
-	if (execve(path, &node->str_cmd, env) == -1)
+/*	printf("path is : %s\n",path);									//signal
+	while(env[i])
+		printf("env is : %s\n",env[i++]);	*/
+	if (execve(path, node->str_args, env) == -1)
 		ft_msg(T_ERR_06, 2);
 }
 ///*************////
