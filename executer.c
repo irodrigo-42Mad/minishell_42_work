@@ -26,7 +26,7 @@ void	launch_single_process(t_lst *node)
 		if (node->str_cmd)					//open heredoc checks if there is a heredoc name and opens it
 		//if (node->str_cmd[0])				//if there is an argument
 		{
-			if (is_builtin(node->str_cmd))
+			if (is_builtin(node->str_args[0]))
 			//if (is_builtin(&node->str_cmd[0]))	//is it a built in?
 				launch_from_father(node);		//if it is will launch from father
 			else
@@ -68,7 +68,7 @@ void	call_execve(t_lst *node)
 	char	**env;
 //	int i = 0;
 
-//	ft_signal_main();	
+//	ft_signal_main();
 /*	node->str_args = malloc(sizeof(char *) * 4);
 	node->str_args[0] = malloc(sizeof(char) * 10);
 	node->str_args[0] = "ls";
