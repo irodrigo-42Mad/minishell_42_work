@@ -116,7 +116,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)argc;
 	(void)env; // hay que descomentar esto
-	char *aux = "ls -al >> amigo";
+	char *aux = "ls -a | wc -l";
 
 	//atexit(ch_leaks);
 	if (argc != 1)
@@ -148,8 +148,7 @@ int	main(int argc, char **argv, char **env)
 
 	// 			ft_redirections(g_ms);
 	// 			// other redirs
-	 			//start_executer();
-	// 			ft_clean_instr(g_ms->instr);
+	 			start_executer();
 			}
 			ft_pre_clean();
 	  	}
