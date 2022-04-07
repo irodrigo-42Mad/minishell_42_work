@@ -24,7 +24,7 @@
 
 void	launch_several_process(t_lst *node, int i)
 {
-	int		new_fd_list[2];
+	int		*new_fd_list = malloc(sizeof(int) * 2);
 	int		*old_fd_list;
 	t_lst *tmp;
 
