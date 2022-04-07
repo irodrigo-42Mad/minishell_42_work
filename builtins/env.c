@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 12:46:16 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/14 13:39:24 by mgrau            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../minishell.h"
 
 void	ft_env(void)
@@ -22,6 +10,7 @@ void	ft_env(void)
 	while (g_ms->sh_env[i])
 	{
 		name = ft_getname(g_ms->sh_env[i]);
+		//name = get_var_name(g_ms->sh_env[i]);
 		if (*(g_ms->sh_env[i] + ft_strlen(name) + 1) != '\\')
 			printf("%s\n", g_ms->sh_env[i]);
 		free(name);

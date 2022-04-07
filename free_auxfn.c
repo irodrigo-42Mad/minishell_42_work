@@ -57,14 +57,17 @@ void free_vars (t_sh_var *elm)
 void free_nodes (t_lst *elm)
 {
 	t_lst *aux;
+	t_lst *act;
 
 	if (!elm)
 		return ;
 	else
 	{
 		aux = elm;
-		while (aux)
+		act = aux;
+		while (act)
 		{
+			act = aux;
 			if(!aux->herename)
 				ft_bzero(aux->herename, ft_strlen(aux->herename));
 			if(!aux->str_cmd)
@@ -77,6 +80,7 @@ void free_nodes (t_lst *elm)
 				ft_bzero(aux->str_save, ft_strlen(aux->str_save));
 			if(!aux->str_aux_save)
 				ft_bzero(aux->str_aux_save, ft_strlen(aux->str_aux_save));
+
 			aux->next = NULL;
 			free(aux);
 			aux = NULL;

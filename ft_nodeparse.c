@@ -148,7 +148,7 @@ void	ft_prepare_command(void)
 		while (str[i] != NULL)
 		{
 			aux = ft_newinst(str[i], &i);  // revisar los numeros de proceso en prueba
-			ft_setparamlst(aux);// por aqui andamos
+			ft_set_paramlst(aux);// por aqui andamos
 			ft_lstcmdadd_back(&g_ms->instr, aux);
 			g_ms->prcs_n++;
 			i++;
@@ -160,7 +160,22 @@ void	ft_prepare_command(void)
 
 void ft_set_paramlst(t_lst *aux)
 {
-	char **str
+	//char **str;
+	size_t pos;
+	size_t len;
+
+	pos = 0;
+	len = ft_strlen (aux->str_cmd);
+	while (pos < len && aux->type != 1)
+	{
+		if (aux->str_cmd[pos] == '>' || aux->str_cmd[pos] == '<')
+			aux->type = 1;
+		pos++;
+	}
+
+	if (aux->type != 1)
+		aux->str_args = ft_split(aux->str_cmd, ' ');
+
 
 	//1 indicar si tenemos redirecciones
 	//2 si no hay redirecciones separar args

@@ -42,7 +42,7 @@ char	*squotes(char *str, int *q_err)
 	return (str);
 }
 
-/* 
+/*
  ** str is duplicate from imput formatted and separated with
  ** spaces redirect simbols and doble mayor are not modified
  ** not error generated with mayor or minor signs
@@ -69,7 +69,10 @@ int	ft_quotes_threat(int *err, char **str)
 			if (*aux == '\"')
 				aux = dquotes(aux, err);
 			else
+			{
+				(*err)++;
 				aux = squotes(aux, err);
+			}
 			if (!aux)
 				return (1);
 		}

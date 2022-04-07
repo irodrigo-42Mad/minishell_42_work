@@ -133,6 +133,7 @@ void		ft_prepare_command(void);
 //t_lst		*ft_newinst(t_ms *s, int *i);
 t_lst   	*ft_newinst(char *cmd, int *i);
 void		ft_lstcmdadd_back(t_lst **lst, t_lst *new);
+void		ft_set_paramlst(t_lst *aux);
 
 // aux printing functions
 void		ft_put_banner(void);

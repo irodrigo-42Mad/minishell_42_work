@@ -15,29 +15,59 @@
 void	ft_check_redir(t_lst *lst)
 {
 	char	*st_aux;
+	size_t	pos;
 
-	st_aux = lst->str_aux;
-	while (lst->exe_state == SUCCESS && *st_aux != '\0')
+	pos = 0;
+	//st_aux = lst->str_cmd;
+	while (lst->exe_state == SUCCESS && lst->str_cmd[pos] != '\0')
+	//while (lst->exe_state == SUCCESS && *st_aux != '\0')
 	{
-		if (*st_aux == '>' || *st_aux == '<')
+		if (lst->str_cmd[pos] == '>' || lst->str_cmd[pos] == '<')
+		//if (*st_aux == '>' || *st_aux == '<')
 		{
-			if (*(st_aux + 1) == '>')
+			if (lst->str_cmd[pos + 1] == '>')
+			//if (*(st_aux + 1) == '>')
 			{
-				st_aux += 2;
+				pos+= 2;
+				st_aux = ft_calloc((ft_strlen(lst->str_cmd) - pos) + 1,
+						 sizeof(char));
+				ft_strnlcpy(st_aux, lst->str_cmd, pos,
+					(ft_strlen(lst->str_cmd) - pos));
+				//st_aux += 2;
+				//ft_redir(,lst,FD_OUT, MULTIPLE);
 				ft_redir(&st_aux, lst, FD_OUT, MULTIPLE);
 			}
 			else
 			{
-				if (*st_aux++ == '>')
+			 	if (lst->str_cmd[pos + 1] == '>')
+				{
+					pos++;
+					st_aux = ft_calloc((ft_strlen(lst->str_cmd) - pos) + 1,
+						 sizeof(char));
 					ft_redir(&st_aux, lst, FD_OUT, UNIQUE);
+				}
 				else
-					ft_redir(&st_aux, lst, FD_IN, UNIQUE);
+				{
+					size_t mlen;
+					mlen = (ft_strlen(lst->str_cmd) - pos) + 1;
+					st_aux = ft_calloc((ft_strlen(lst->str_cmd) - pos) + 1,
+						 sizeof(char));
+					ft_strnlcpy(st_aux, lst->str_cmd, pos,
+						(ft_strlen(lst->str_cmd) - pos));
+					ft_redir(&st_aux, lst, FD_OUT, UNIQUE);
+				}
+			// 	if (*st_aux++ == '>')
+			// 		ft_redir(&st_aux, lst, FD_OUT, UNIQUE);
+			// 	else
+			// 		ft_redir(&st_aux, lst, FD_IN, UNIQUE);
 			}
 		}
 		else
-			st_aux++;
+			pos++;
+			//st_aux++;
 	}
 }
+// revisar que tenemos que hacer con las redirecciones.
 
 char	*ft_obtain_file(t_lst *lst, char **str_line)
 {
@@ -55,15 +85,18 @@ char	*ft_obtain_file(t_lst *lst, char **str_line)
 	return (file);
 }
 
-void	ft_redirections(t_ms *s)
+void	ft_redirections(void)
+//void	ft_redirections(t_ms *s)
 {
 	int		i;
 	int		tot_proc;
 	t_lst	*elm;
 
 	i = 0;
-	tot_proc = s->prcs_n;
-	elm = s->instr;
+	tot_proc = g_ms->prcs_n;
+	//tot_proc = s->prcs_n;
+	elm = g_ms->instr;
+	//elm = s->instr;
 	while (i++ < tot_proc)
 	{
 		if (elm->exe_state == SUCCESS)
@@ -74,6 +107,7 @@ void	ft_redirections(t_ms *s)
 			//clean_hdoc_bar(node);
 		}
 		elm = elm->next;
-		//i++;
+		// instr anterior (esto puede generar leaks de memoria)
+		i++;
 	}
 }

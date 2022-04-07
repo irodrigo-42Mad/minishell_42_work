@@ -21,9 +21,9 @@ void	ft_redir(char **str, t_lst *lst, int dir, int mode)
 	char	*file;
 
 	//ft_set_strbegin();
-	
+
 	//place_str_pointers(aux, &lst->line_aux, &lst->line, red);
-	
+	lst->str_line = ft_strdup(lst->str_cmd);
 	file = ft_obtain_file(lst, &lst->str_line);
 	if (lst->exe_state == SUCCESS)
 	{
@@ -37,7 +37,7 @@ void	ft_redir(char **str, t_lst *lst, int dir, int mode)
 	free(file);
 	new_pos = lst->str_line - lst->str_save;
 	new_pos -= (lst->str_aux - lst->str_aux_save);
-	
+
 	// ahi que mirar como movemos la position
 	ft_locate_strptr(new_pos, &lst->str_aux, str);
 	//move_str_pointers(new_pos, &lst->str_aux, str);
@@ -58,7 +58,7 @@ void	ft_control_mode(char *file, t_lst *lst, int mode)
 void	ft_new_input (char *file, t_lst *lst)
 {
 	// temporal initialization
-	
+
 	int	fd = 0;
 
 	//fd = check_for_hdoc_priority(lst->str_line);
@@ -72,7 +72,7 @@ void	ft_new_input (char *file, t_lst *lst)
 	else
 	{
 		// tenemos que ver el tema de heredoc
-		
+
 		//if (node->hdoc_name)
 		//	unlink_one_heredoc(&(node->hdoc_name));
 		if (lst->file_in != 0)

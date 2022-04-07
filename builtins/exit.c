@@ -1,16 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 12:46:32 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/14 13:40:53 by mgrau            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../minishell.h"
+
+/*
+** notes to this procedure
+**
+** a value of 1 in call variable meaning that
+** father is called
+**
+*/
 
 void	ft_exit(char **args, int call)
 {
@@ -50,7 +46,7 @@ int	check_if_digit(const char *str)
 	return (is_num && i > 0);
 }
 
-void	ft_exit_error(char *str, int type)
+void ft_exit_error(char *str, int type)
 {
 	ft_msg(GN_MSG_03, 2);
 	if (type == 0)

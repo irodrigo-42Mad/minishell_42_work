@@ -3,6 +3,7 @@
 */
 typedef struct s_lst{
 	int				el_nbr;
+	int				type;
 	int				file_in;
 	int				file_out;
 	int				exe_state;
