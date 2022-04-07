@@ -26,7 +26,9 @@ void	launch_several_process(t_lst *node, int i)
 {
 	int		new_fd_list[2];
 	int		*old_fd_list;
+	t_lst *tmp;
 
+	tmp = node;
 	old_fd_list = NULL;
 	while (i > 0)
 	{
@@ -49,6 +51,7 @@ void	launch_several_process(t_lst *node, int i)
 		node = node->next;									//rinse and repeat
 		i--;
 	}
+	node = tmp;
 	wait_childs();											//wait for execution to finish
 }
 
@@ -78,7 +81,7 @@ int	*copy_pipe(int pipe_in[2])
 
 void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 {
-	handle_defs(&node->str_cmd);							//just as in single proccess we handle definitions adding them to env list and erasing them from our cmd list
+	//handle_defs(node->str_args);							//just as in single proccess we handle definitions adding them to env list and erasing them from our cmd list
 	open_heredoc(node);										//if here doc stdin set to it
 	// this code fails assign_fd is faulty
 	if (node->el_nbr != 1)									//if its NOT the first element
@@ -87,12 +90,12 @@ void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 		assing_fd(&node->file_out, new_fd_list[1], FD_OUT); //if fd_in is 1, we assing the write end of our new_list else it closes new_fd[1]
 	else													//if last process we simply close the out fd of the new pipe
 		close(new_fd_list[1]);
-	if (node->str_cmd[0])									//standart executing process
+	if (node->str_args[0])									//standart executing process
 	{
-		if (is_builtin(&node->str_cmd[0]))
+		if (is_builtin(node->str_args[0]))
 		{
 			dup_to_stdin_stdout(node->file_in, node->file_out);
-			exec_builtin(&node->str_cmd, 0); //0 means child
+			exec_builtin(node->str_args, 0); //0 means child
 		}
 		else
 			call_execve(node);
