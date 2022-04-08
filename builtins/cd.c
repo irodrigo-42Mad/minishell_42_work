@@ -9,7 +9,10 @@ void	ft_cd(char *str)
 	if ((i[0] = ft_envfind("PWD")) == -1)
 		ft_add_envglob(ft_strdup("PWD"), getcwd(NULL, 0), 1);
 	i[1] = ft_envfind("OLDPWD");
-	s = check_pwd(str, i[1], ft_envfind("HOME"));
+	if (str != NULL)
+		s = check_pwd(str, i[1], ft_envfind("HOME"));
+	else
+		s = ft_strdup((g_ms->sh_env[ft_envfind("HOME")] + 5));
 	if (chdir(s) == -1)
 		cd_error(s);
 	else
