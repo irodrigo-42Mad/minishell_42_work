@@ -71,6 +71,7 @@ void copy_pipe(int *pipe_in,int *pipe_out)
 	pipe_out[1] = pipe_in[1];
 }
 
+
 void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 {
 	//handle_defs(node->str_args);							//just as in single proccess we handle definitions adding them to env list and erasing them from our cmd list
