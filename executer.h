@@ -43,7 +43,7 @@ void		overwrite_env_value(char *name, char *value);
 ///			child_management.c
 void		launch_several_process(t_lst *node, int i);
 void		handle_pipes(t_lst *node, int new_pip[2], int old_pip[2]);
-int			*copy_pipe(int pipe_in[2]);
+void copy_pipe(int *pipe_in,int *pipe_out);
 void		execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2]);
 void		wait_childs(void);
 
@@ -71,12 +71,31 @@ void		ft_exit(char **args, int call);
 int			check_if_digit(const char *str);
 
 // pwd
+// exit
+void		ft_exit(char **args, int call);
+int			check_if_digit(const char *str);
+
+// pwd
 void		ft_pwd(void);
 
 // export
-void		ft_export (void);
+void	ft_export(char **argv);
+void	export_error(char *name);
+int		parse_arg(char *arg);
+int		check_export_arg(char *arg);
+int		find_env(char *name);
 
 // unset
-void		ft_unset (void);
+void	ft_unset(char **argv);
+int		check_unset_arg(char *arg);
+void	remove_from_env(char *name);
+void	unset_entry(int to_remove);
+void	delete_node(char *name);
+//static void	order_env(void);
+void	print_env(void);
+void	env_entry(char *name, char *value, int i);
+void	join_print(char *str1, char *str2);
+size_t	ft_maxlen(const char *s1, const char *s2);
+void	add_commas_to_env(void);
 
 #endif

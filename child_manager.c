@@ -24,19 +24,20 @@
 
 void	launch_several_process(t_lst *node, int i)
 {
-	int		*new_fd_list = malloc(sizeof(int) * 2);
-	int		*old_fd_list;
+	int		new_fd_list[2];
+	int		old_fd_list [2];
 	t_lst *tmp;
 
 	tmp = node;
-	old_fd_list = NULL;
 	while (i > 0)
 	{
-		pipe(new_fd_list);
+		if(i != 1) //when its not the last process
+			pipe(new_fd_list);
 		g_ms->sh_pid = fork();
 		if (g_ms->sh_pid == 0)
 		{
-			close(new_fd_list[0]);
+			if(i != 1) 
+				close(new_fd_list[0]);
 			if (node->exe_state == SUCCESS)
 				execute_child(node, new_fd_list, old_fd_list);
 			else
@@ -58,25 +59,16 @@ void	launch_several_process(t_lst *node, int i)
 void	handle_pipes(t_lst *node, int new_pip[2], int old_pip[2]) // change old_pipe to fd list
 {
 	close(new_pip[1]);					//we close new pipe[1]
-	if (node->el_nbr != 1)				//if NOT the first close old_pipe[0]
-	{
-		close((old_pip)[0]);
-		free(old_pip);
-	}
 	if (node->el_nbr == g_ms->prcs_n)	//if last close new_pip[0] all new pipe is closed
 		close(new_pip[0]);
 	else
-		old_pip = copy_pipe(new_pip);	//copy our pipe, note that even if we copy new_pipe[1] is always closed at this point. therefore old pipe[1] is always closed
+		copy_pipe(new_pip, old_pip);	//copy our pipe, note that even if we copy new_pipe[1] is always closed at this point. therefore old pipe[1] is always closed
 }
 
-int	*copy_pipe(int pipe_in[2])
+void copy_pipe(int *pipe_in,int *pipe_out)
 {
-	int	*pipe_out;
-
-	pipe_out = malloc(sizeof(int) * 2);
 	pipe_out[0] = pipe_in[0];
 	pipe_out[1] = pipe_in[1];
-	return (pipe_out);
 }
 
 void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
