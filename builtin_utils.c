@@ -43,10 +43,10 @@ void	exec_builtin(char **arg, int type)
 		ft_echo(arg);
 	else if (precise_cmp(arg[0], "env", 3))
 		ft_env();
-	//else if (precise_cmp(arg[0], "export", 6))
-	//	ft_export();
-	//else if (precise_cmp(arg[0],"unset", 5))
-	//	ft_unset();
+	else if (precise_cmp(arg[0], "export", 6))
+		ft_export(arg);
+	else if (precise_cmp(arg[0],"unset", 5))
+		ft_unset(arg);
 	else if (precise_cmp(arg[0], "exit", 4))
 		ft_exit(arg, type); 
 	if (type == 0) //0 means child

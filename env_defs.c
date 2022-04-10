@@ -40,10 +40,10 @@ char	*def_name(char *str) // recorremos cadena y devolvemos porcion correspondie
 	//if (ft_isvalid_env_start(str[len++], Q_MARK_KO))
 	//{
 	//just as before it should be alredy checked
-	while (ft_isalnum(*str) || *str == '_')
+	while (ft_isalnum(str[len]) || str[len] == '_')
 		len++;
 	//}
-	if (*str == '?')
+	if (*(str + len) == '?')
 		return (ft_strdup("?"));
 	name = ft_substr(str, 0, len);
 	return (name);

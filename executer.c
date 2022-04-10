@@ -66,23 +66,15 @@ void	call_execve(t_lst *node)
 {
 	char	*path;
 	char	**env;
-//	int i = 0;
-
-//	ft_signal_main();
-/*	node->str_args = malloc(sizeof(char *) * 4);
-	node->str_args[0] = malloc(sizeof(char) * 10);
-	node->str_args[0] = "ls";
-	node->str_args[1] = malloc(sizeof(char) * 10);
-	node->str_args[1] = "-la";
-	node->str_args[2] = malloc(sizeof(char) * 10);
-	node->str_args[2] = NULL;*/
 	dup_to_stdin_stdout(node->file_in, node->file_out);		//we set our stdin and stdout appropiately
 	path = get_pathname(node->str_args[0]);						//get our cmd path for execution
 	env = str_ptr_dup(g_ms->sh_env);						// clone our env list for the execution
-/*	printf("path is : %s\n",path);									//signal
-	while(env[i])
-		printf("env is : %s\n",env[i++]);	*/
 	if (execve(path, node->str_args, env) == -1)
-		ft_msg(T_ERR_06, 2);
+	{
+		ft_msg(node->str_args[0], 2);
+		ft_msg(Q_ERR_03, 2);
+		ft_msg("hemos de gestionar los frees al cerrar este fork", 2);	
+		exit(0);
+	}
 }
 ///*************////

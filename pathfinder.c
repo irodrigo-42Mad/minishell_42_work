@@ -24,7 +24,6 @@ char	*get_pathname(char *arg)
 		if (i >= strlen(paths) - 5)
 		{
 			free(dest);
-			printf("error in pathfinder");//error_message();
 			return(NULL);
 		}
 		free(dest);

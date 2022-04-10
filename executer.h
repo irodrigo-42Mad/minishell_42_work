@@ -91,11 +91,14 @@ int		check_unset_arg(char *arg);
 void	remove_from_env(char *name);
 void	unset_entry(int to_remove);
 void	delete_node(char *name);
-//static void	order_env(void);
+void	order_env(char **env);
 void	print_env(void);
-void	env_entry(char *name, char *value, int i);
+void	env_entry(char **env, char *name, char *value, int i);
 void	join_print(char *str1, char *str2);
 size_t	ft_maxlen(const char *s1, const char *s2);
-void	add_commas_to_env(void);
+void	add_commas_to_env(char **env);
+void env_free(char **env);
+char **copy_env(void);
+
 
 #endif

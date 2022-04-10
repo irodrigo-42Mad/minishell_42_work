@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:25:42 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/07 11:27:37 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:37:44 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,17 @@ void	ft_pwd(void)
 	ft_putstr_fd("\n", 1);
 	free(pwd);
 	ft_updt_err(0);
+}
+
+size_t	ft_maxlen(const char *s1, const char *s2)
+{
+	size_t	len1;
+	size_t	len2;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (len1 >= len2)
+		return (len1);
+	else
+		return (len2);
 }
