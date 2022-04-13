@@ -52,17 +52,21 @@ void	launch_several_process(t_lst *node, int i)
 		node = node->next;									//rinse and repeat
 		i--;
 	}
+	//probablemente close fds deberia ir aqui
 	node = tmp;
 	wait_childs();											//wait for execution to finish
 }
 
 void	handle_pipes(t_lst *node, int new_pip[2], int old_pip[2]) // change old_pipe to fd list
 {
-	close(new_pip[1]);					//we close new pipe[1]
-	if (node->el_nbr == g_ms->prcs_n)	//if last close new_pip[0] all new pipe is closed
-		close(new_pip[0]);
-	else
-		copy_pipe(new_pip, old_pip);	//copy our pipe, note that even if we copy new_pipe[1] is always closed at this point. therefore old pipe[1] is always closed
+//	close(new_pip[1]);					//we close new pipe[1]
+	if (node->el_nbr != 1)
+		close(old_pip[0]);
+	if (node->el_nbr != g_ms->prcs_n)
+	{	//if last close new_pip[0] all new pipe is closed
+		close(new_pip[1]);
+		copy_pipe(new_pip, old_pip);
+	}	//copy our pipe, note that even if we copy new_pipe[1] is always closed at this point. therefore old pipe[1] is always closed
 }
 
 void copy_pipe(int *pipe_in,int *pipe_out)
@@ -81,8 +85,8 @@ void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 		assing_fd(&node->file_in, old_fd_list[0], FD_IN); 	//if fd_in is 0, we assing the read end of our old list else it closes old_fd[0]
 	if (node->el_nbr != g_ms->prcs_n)						//if eits NOT the last
 		assing_fd(&node->file_out, new_fd_list[1], FD_OUT); //if fd_in is 1, we assing the write end of our new_list else it closes new_fd[1]
-	else													//if last process we simply close the out fd of the new pipe
-		close(new_fd_list[1]);
+//	else													//if last process we simply close the out fd of the new pipe
+//		close(new_fd_list[1]);
 	if (node->str_args[0])									//standart executing process
 	{
 		if (is_builtin(node->str_args[0]))

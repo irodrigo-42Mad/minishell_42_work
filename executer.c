@@ -73,7 +73,9 @@ void	call_execve(t_lst *node)
 	{
 		ft_msg(node->str_args[0], 2);
 		ft_msg(Q_ERR_03, 2);
-		ft_msg("hemos de gestionar los frees al cerrar este fork", 2);	
+		ft_msg("hemos de gestionar los frees al cerrar este fork", 2);
+		close_all_fds(node);
+		ft_pre_clean();	
 		exit(0);
 	}
 }
