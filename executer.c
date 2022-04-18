@@ -56,7 +56,8 @@ void	launch_from_fork(t_lst *node)
 	else								//if we are in father
 	{
 //		ft_signal_main();				//signal
-		close_all_fds(node);			//we close our fds
+		close_all_fds(node);
+		node->node_pid = g_ms->sh_pid;			//we close our fds
 		wait_childs();					//we wait for the child to finish execution
 		g_ms->state = READING;			//set state as reading again
 	}
@@ -66,17 +67,43 @@ void	call_execve(t_lst *node)
 {
 	char	*path;
 	char	**env;
+	int err;
 	dup_to_stdin_stdout(node->file_in, node->file_out);		//we set our stdin and stdout appropiately
 	path = get_pathname(node->str_args[0]);						//get our cmd path for execution
 	env = str_ptr_dup(g_ms->sh_env);						// clone our env list for the execution
 	if (execve(path, node->str_args, env) == -1)
 	{
+		err = errno;
+//		printf("WE HAVE GONE INTO PRE ERROR \n");
+//		printf("errno is %i\n", errno);
 		ft_msg(node->str_args[0], 2);
 		ft_msg(Q_ERR_03, 2);
-		ft_msg("hemos de gestionar los frees al cerrar este fork", 2);
 		close_all_fds(node);
-		ft_pre_clean();	
-		exit(0);
+		ft_execve_free();
+		exit(err);
 	}
+}
+
+void ft_execve_free(void)
+{
+	t_lst *tmp;
+
+	tmp = g_ms->instr;
+	while (g_ms->instr != NULL)
+	{
+		tmp = g_ms->instr->next;
+		free(g_ms->instr->str_cmd);
+		free(g_ms->instr->str_line);
+		free(g_ms->instr->str_aux);
+		free(g_ms->instr->str_save);
+		free(g_ms->instr->str_aux_save);
+		free_matrix(g_ms->instr->str_args);
+   		free (g_ms->instr);
+		g_ms->instr = tmp;
+	}
+	free (tmp);
+	free(g_ms->prompt);
+	free (g_ms->str);
+	tmp = NULL;
 }
 ///*************////

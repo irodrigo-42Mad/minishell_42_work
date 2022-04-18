@@ -7,6 +7,7 @@ typedef struct s_lst{
 	int				file_in;
 	int				file_out;
 	int				exe_state;
+	pid_t			node_pid;
 
 	size_t			aux_ln;
 	char			*herename;   // pending to activate heredoc structure

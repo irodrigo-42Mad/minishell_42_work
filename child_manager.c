@@ -49,6 +49,7 @@ void	launch_several_process(t_lst *node, int i)
 			handle_pipes(node,new_fd_list, old_fd_list);	//closes the necessary pipe fds
 			close_all_fds(node);							//closes our fd in and out and reassing them to 0 and 1 if needed
 		}
+		node->node_pid = g_ms->sh_pid;
 		node = node->next;									//rinse and repeat
 		i--;
 	}
@@ -101,16 +102,19 @@ void	execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2])
 
 void	wait_childs(void)
 {
-	int		n_process;
 	int		state;
-	pid_t	pid;
+	t_lst *tmp;
+	tmp = g_ms->instr;
 
-	n_process = (g_ms->prcs_n + 1);
-	while (--n_process > 0)
+	while (tmp)
 	{
-		pid = wait(&state);				//wait for each process
-		if (pid == g_ms->sh_pid)
+		state = 0; 
+		waitpid(tmp->node_pid, &state, 0);				//wait for each process
+//		printf("exit state is: %i\n",state);
+//		printf("exit wexitstate is: %i\n",WEXITSTATUS(state));
+		if (tmp->next == NULL)
 			ft_get_errstatus(state);	// working in it
-		//n_process--;
+		tmp = tmp->next;
 	}
+//	printf("this is $?: %i\n", g_ms->err_n);
 }

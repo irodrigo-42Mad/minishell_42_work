@@ -97,8 +97,9 @@ void	env_entry(char **env, char *name, char *value, int i);
 void	join_print(char *str1, char *str2);
 size_t	ft_maxlen(const char *s1, const char *s2);
 void	add_commas_to_env(char **env);
-void env_free(char **env);
-char **copy_env(void);
+void	env_free(char **env);
+char 	**copy_env(void);
+void	ft_execve_free(void);
 
 
 #endif
