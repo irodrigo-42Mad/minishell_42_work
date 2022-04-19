@@ -40,7 +40,10 @@ char	*check_pwd(char *str, int opwd, int home)
 		s = ft_strdup(g_ms->sh_env[opwd] + 7);
 	}
 	else
-		s = ft_strdup(str);
+	{
+			free(s);
+			s = ft_strdup(str);
+	}
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n", 1);
 	ft_updt_err(0);
