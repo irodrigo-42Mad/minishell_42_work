@@ -115,8 +115,8 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argv;
 	(void)argc;
-	(void)env; // hay que descomentar esto
-	char *aux = "ls -a | wc -l";
+	(void)env;
+	char *aux = "cd \'lib\'ft << probando";
 
 	//atexit(ch_leaks);
 	if (argc != 1)
@@ -131,20 +131,21 @@ int	main(int argc, char **argv, char **env)
 	while (TRUE)
 	{
 		ft_set_prompt();
+		g_ms->flg_err = SUCCESS;  // necesary to initialize error
 		//g_ms->str = readline(g_ms->prompt);
 		g_ms->str = ft_strdup(aux);
-		// 	controlar los espacios y tabuladores ! hecho
 	 	if (ft_strlen(g_ms->str) > 0  &&
 		 	ft_check_spc(g_ms->str) != 1)
 	 	{
 			add_history(g_ms->str);
-	 		if (!ft_parser()) // revision final del proyecto
+	 		if (!ft_parser())
 	 		{
 				ft_prepare_command();
 				// hasta aqui todo ok
-
-	// 			//ft_heredoc();
+				ft_heredoc();
+				// falta un procedimiento de heredoc
 				ft_redirections(); // revisando las redirecciones
+				//ft_restore_str_command();
 
 	// 			ft_redirections(g_ms);
 	// 			// other redirs

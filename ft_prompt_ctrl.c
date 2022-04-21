@@ -53,13 +53,13 @@ void	ft_create_prompt (void)
 	size_t	len;
 
 	if (g_ms->err_n == 0)
-	{
-		write(2, "\n", 1);
+	//{
+		//write(2, "\n", 1);
 		len = ft_strlen(ANSI_GREEN);
-	}
+	//}
 	else
 		len = ft_strlen(ANSI_RED);
-	write(2, "\n", 1);
+	//write(2, "\n", 1);
 	aux = getcwd(NULL, 0);
 	len += (ft_strlen(aux) + ft_strlen(ANSI_CYAN) + 5);
 	len += ft_strlen(ANSI_RESET);

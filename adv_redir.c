@@ -12,6 +12,11 @@
 
 #include "minishell.h"
 
+//tenemos que trabajar sobre las redirecciones a ver cual es el problema
+
+//tenemos que trabajar en la forma en la que tomamos los elementos entre "" para funcionar
+
+
 void	ft_check_redir(t_lst *lst)
 {
 	char	*st_aux;
@@ -86,7 +91,6 @@ char	*ft_obtain_file(t_lst *lst, char **str_line)
 }
 
 void	ft_redirections(void)
-//void	ft_redirections(t_ms *s)
 {
 	int		i;
 	int		tot_proc;
@@ -94,20 +98,21 @@ void	ft_redirections(void)
 
 	i = 0;
 	tot_proc = g_ms->prcs_n;
-	//tot_proc = s->prcs_n;
 	elm = g_ms->instr;
 	//elm = s->instr;
 	while (i++ < tot_proc)
 	{
 		if (elm->exe_state == SUCCESS)
 		{
-			ft_check_redir(elm);
+			if(elm->type == 1)
+			{
+				ft_check_redir(elm);
 			//ft_clean_hdoc_elm(elm);
 			//redirection_checker(node);
 			//clean_hdoc_bar(node);
+			}
 		}
 		elm = elm->next;
 		// instr anterior (esto puede generar leaks de memoria)
-		i++;
 	}
 }

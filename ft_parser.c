@@ -25,8 +25,8 @@ int	ft_parser(void)
 	}
 	g_ms->pars_cmd = ft_strdup(g_ms->str);
 	g_ms->to_clean = g_ms->pars_cmd;
-	if (ft_quotes_threat(&g_ms->err_n, &g_ms->str)
-		|| ft_redir_pipes(&g_ms->err_n, &g_ms->str))
+	if (ft_quotes_threat(&g_ms->err_n, &g_ms->pars_cmd)
+		|| ft_redir_pipes(&g_ms->err_n, &g_ms->pars_cmd))
 	{
 		free (g_ms->pars_cmd);
 		g_ms->pars_cmd = NULL;

@@ -23,6 +23,8 @@ void	ft_heredoc(void)
  	while (x-- > 0)
  	{
  		ft_set_hdoc(lst);
+		//revisando la funcionalidad de set_hdoc
+		ft_rebuild_str(lst);
 // 		rebuild_aux_strings(node);
  		lst = lst->next;
 		//i--;

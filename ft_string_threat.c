@@ -15,7 +15,7 @@
 int ft_val_envname(int status, char initial)
 {
 	if (status == STATE_Q_OK)
-	{	
+	{
 		if (ft_isalpha(initial) || initial == '_' || initial == '?')
 			return (1);
 	}
@@ -23,7 +23,7 @@ int ft_val_envname(int status, char initial)
 	{
 		if (ft_isalpha(initial) || initial == '_' || initial == '?')
 			return (1);
-	}	
+	}
 	return (0);
 }
 
@@ -98,10 +98,6 @@ void	ft_set_strandenv(char **file, char **data, t_lst *lst, int *len)
 		**file = '\0';
 }
 
-
-
-
-
 void	edit_string(char **str, int *i, int envar)
 {
 	if (**str == '\"')
@@ -169,6 +165,7 @@ int	ft_str_bash_len(char *str, int envar)
  * redirection, pipe or whatever is relevant or not when parsing.
  * Minishell  SHOULD NOT workr when given <<, >>, <, >, | inside commas. These
  *will always have to be gathered as arguments for a command. Just like bash.*/
+
 void	ft_set_strpntr(char **tmp, char **empty, char **final, size_t pos)
 {
 	size_t	new_pos;
@@ -176,7 +173,7 @@ void	ft_set_strpntr(char **tmp, char **empty, char **final, size_t pos)
 
 	while (**tmp == ' ')
 		(*tmp) += 1;
-	new_pos = (*tmp - *empty) + 1;
+	new_pos = ft_strlen(*empty) - ft_strlen(*tmp) + 1;
 	n_pos2 = new_pos;
 	if (final != NULL)
 	{

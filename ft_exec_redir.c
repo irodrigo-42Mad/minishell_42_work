@@ -23,6 +23,8 @@ void	ft_redir(char **str, t_lst *lst, int dir, int mode)
 	//ft_set_strbegin();
 
 	//place_str_pointers(aux, &lst->line_aux, &lst->line, red);
+	file = *str;
+
 	lst->str_line = ft_strdup(lst->str_cmd);
 	file = ft_obtain_file(lst, &lst->str_line);
 	if (lst->exe_state == SUCCESS)
@@ -62,7 +64,7 @@ void	ft_new_input (char *file, t_lst *lst)
 	int	fd = 0;
 
 	//fd = check_for_hdoc_priority(lst->str_line);
-	if (fd == -1)
+ 	if (fd == -1)
 	{
 		fd = open(file, O_RDONLY);
 		if (fd == -1)
@@ -73,7 +75,8 @@ void	ft_new_input (char *file, t_lst *lst)
 	{
 		// tenemos que ver el tema de heredoc
 
-		//if (node->hdoc_name)
+		if (lst->herename)
+			printf("hola\n");
 		//	unlink_one_heredoc(&(node->hdoc_name));
 		if (lst->file_in != 0)
 			close(lst->file_in);

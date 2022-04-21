@@ -270,4 +270,9 @@ void 		free_vars (t_sh_var *elm);
 int			ft_check_spc(char *str);
 int			ft_count_orders(void);
 
+void		ft_quote_cmd(char *str);
+void		ft_restore_str_command(void);
+void		ft_rebuild_str(t_lst *lst);
+
+void 		ft_setlst_type(t_lst *aux);
 #endif

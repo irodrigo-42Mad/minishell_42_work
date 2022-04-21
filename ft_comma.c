@@ -14,7 +14,11 @@
 
 char	*dquotes(char *str, int *q_err)
 {
+	//char	*aux;
+	int		len;
+
 	str++;
+	len = ft_strlen(str);
 	while (*str != '\"' && *str)
 		*str++ = ' ';
 	if (!*str)
