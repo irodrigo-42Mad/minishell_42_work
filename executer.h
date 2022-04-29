@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executer.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/29 11:44:26 by mgrau             #+#    #+#             */
+/*   Updated: 2022/04/29 11:45:40 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXECUTER_H
 # define EXECUTER_H
 
@@ -43,14 +55,14 @@ void		overwrite_env_value(char *name, char *value);
 ///			child_management.c
 void		launch_several_process(t_lst *node, int i);
 void		handle_pipes(t_lst *node, int new_pip[2], int old_pip[2]);
-void copy_pipe(int *pipe_in,int *pipe_out);
+void		copy_pipe(int *pipe_in, int *pipe_out);
 void		execute_child(t_lst *node, int new_fd_list[2], int old_fd_list[2]);
 void		wait_childs(void);
 
 // pathfinder
 char		*get_pathname(char *arg);
-char 		*get_pathlocation(char **envp);
-int 		create_probable_str(char **dest, char *arg, char *src, int i);
+char		*get_pathlocation(char **envp);
+int			create_probable_str(char **dest, char *arg, char *src, int i);
 
 //			builtins declarations
 // cd
@@ -79,27 +91,26 @@ int			check_if_digit(const char *str);
 void		ft_pwd(void);
 
 // export
-void	ft_export(char **argv);
-void	export_error(char *name);
-int		parse_arg(char *arg);
-int		check_export_arg(char *arg);
-int		find_env(char *name);
+void		ft_export(char **argv);
+void		export_error(char *name);
+int			parse_arg(char *arg);
+int			check_export_arg(char *arg);
+int			find_env(char *name);
 
 // unset
-void	ft_unset(char **argv);
-int		check_unset_arg(char *arg);
-void	remove_from_env(char *name);
-void	unset_entry(int to_remove);
-void	delete_node(char *name);
-void	order_env(char **env);
-void	print_env(void);
-void	env_entry(char **env, char *name, char *value, int i);
-void	join_print(char *str1, char *str2);
-size_t	ft_maxlen(const char *s1, const char *s2);
-void	add_commas_to_env(char **env);
-void	env_free(char **env);
-char 	**copy_env(void);
-void	ft_execve_free(void);
-
+void		ft_unset(char **argv);
+int			check_unset_arg(char *arg);
+void		remove_from_env(char *name);
+void		unset_entry(int to_remove);
+void		delete_node(char *name);
+void		order_env(char **env);
+void		print_env(void);
+void		env_entry(char **env, char *name, char *value, int i);
+void		join_print(char *str1, char *str2);
+size_t		ft_maxlen(const char *s1, const char *s2);
+void		add_commas_to_env(char **env);
+void		env_free(char **env);
+char		**copy_env(void);
+void		ft_execve_free(void);
 
 #endif

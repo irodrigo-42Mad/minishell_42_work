@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 12:46:40 by mgrau             #+#    #+#             */
-/*   Updated: 2022/04/10 07:28:58 by hatman           ###   ########.fr       */
+/*   Created: 2022/04/29 11:53:22 by mgrau             #+#    #+#             */
+/*   Updated: 2022/04/29 11:54:18 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void	ft_export(char **argv)
 		else if (arg_type == REDEFINED)
 			overwrite_env_value(name, value);
 		else if (arg_type == NOTDEF)
-			//ft_add_envglob(name, ft_strdup("\\"), NOTDEF);
 			free(name);
 		else
 			export_error(name);
-		i++;	
+		i++;
 	}
 }
 
@@ -74,7 +73,7 @@ int	parse_arg(char *arg)
 
 int	check_export_arg(char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_val_envname(STATE_Q_FAIL, arg[i]))

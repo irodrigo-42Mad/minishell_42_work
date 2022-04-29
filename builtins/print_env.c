@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 12:46:47 by mgrau             #+#    #+#             */
-/*   Updated: 2022/04/09 12:52:20 by hatman           ###   ########.fr       */
+/*   Created: 2022/04/29 11:54:29 by mgrau             #+#    #+#             */
+/*   Updated: 2022/04/29 11:57:52 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	order_env(char **env)
 
 void	print_env(void)
 {
-	char **env;
+	char	**env;
 	int		i;
 
 	i = 0;
@@ -59,19 +59,22 @@ void	print_env(void)
 	free(env[i]);
 	free(env);
 }
-void env_free(char **env)
+
+void	env_free(char **env)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (env[i])
 		free(env[i++]);
 	free(env[i]);
 	free(env);
 }
-char **copy_env()
+
+char	**copy_env(void)
 {
-	int i;
-	char **ret;
+	int		i;
+	char	**ret;
 
 	i = 0;
 	while (g_ms->sh_env[i])
@@ -84,7 +87,7 @@ char **copy_env()
 		i++;
 	}
 	ret[i] = NULL;
-	return(ret);
+	return (ret);
 }
 
 void	add_commas_to_env(char **env)
@@ -107,45 +110,4 @@ void	add_commas_to_env(char **env)
 		free(aux_value);
 		i++;
 	}
-}
-
-/* ((When called from export with no arguments, ))*/
-/* sets name=value to name="value".
- * With the exception that if export has
- * exported some variable that has not been defined, it only pops out
- * when you call export without arguments, with no value or equal 
- * sign. [export a] makes env not show a, but export without arguments
- * will show at the end "declare -x a". I mark these special entries
- * with a \* at the start, so they can be identified and printed or
- * not when necessary.*/
-void	env_entry(char **env,char *name, char *value, int i)
-{
-	char	*aux1;
-	char	*aux2;
-
-	free(env[i]);
-	if (*value != '\\')
-	{
-		aux1 = ft_strjoin(name, "=\"");
-		aux2 = ft_strjoin(aux1, value);
-		env[i] = ft_strjoin(aux2, "\"");
-		free(aux1);
-		free(aux2);
-	}
-	else
-	{
-		env[i] = ft_strjoin("*", name);
-		free(name);
-		free(value);
-	}
-}
-
-void	join_print(char *str1, char *str2)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(str1, str2);
-	ft_putstr_fd(tmp, 1);
-	ft_putchar_fd('\n', 1);
-	free(tmp);
 }

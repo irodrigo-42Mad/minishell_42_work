@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/29 11:47:45 by mgrau             #+#    #+#             */
+/*   Updated: 2022/04/29 11:51:18 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	ft_cd(char *str)
@@ -6,7 +18,8 @@ void	ft_cd(char *str)
 	int		i[2];
 
 	ft_updt_err(0);
-	if ((i[0] = ft_envfind("PWD")) == -1)
+	i[0] = ft_envfind("PWD");
+	if (i[0] == -1)
 		ft_add_envglob(ft_strdup("PWD"), getcwd(NULL, 0), 1);
 	i[1] = ft_envfind("OLDPWD");
 	if (ft_envfind("HOME") != -1)
@@ -33,7 +46,10 @@ char	*check_pwd(char *str, int opwd, int home)
 	char	*s;
 
 	s = NULL;
-	s = str ? ft_strdup(str) : ft_strdup(g_ms->sh_env[home] + 5);
+	if (str)
+		s = ft_strdup(str);
+	else
+		s = ft_strdup(g_ms->sh_env[home] + 5);
 	if (!ft_strncmp(str, "-", ft_getmax_ln(str, "-")))
 	{
 		free(s);
@@ -41,8 +57,8 @@ char	*check_pwd(char *str, int opwd, int home)
 	}
 	else
 	{
-			free(s);
-			s = ft_strdup(str);
+		free(s);
+		s = ft_strdup(str);
 	}
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n", 1);
@@ -80,7 +96,6 @@ int	ft_envfind(char *name)
 void	cd_env(int i[2])
 {
 	char	*new_oldpwd;
-	//char	*pwd;
 	char	*tmp;
 
 	new_oldpwd = ft_strdup(g_ms->sh_env[i[0]] + 4);

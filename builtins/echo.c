@@ -1,10 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/29 11:51:58 by mgrau             #+#    #+#             */
+/*   Updated: 2022/04/29 11:52:00 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-/* The value for a variable only visible thourgh export with no
- * arguments (declare -x name_of_variable) is a '\\'. Luckily,
- * no extern '\\' can be found in this shell except for the ones
- * I manually put, so I can just skip them when printing a string
- * and everyones happy. You didnt see anthing. */
 void	ft_putstr_fd_without_esc_bar(char *str, int fd)
 {
 	while (*str)

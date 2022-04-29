@@ -1,18 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/29 09:59:14 by mgrau             #+#    #+#             */
+/*   Updated: 2022/04/29 09:59:26 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-//hdoc_name not yet set
-
 /*
-** notes to open_heredoc
-**
-** //if we have a heredoc we open it and asing our file in to it
-** Function Variables:
-**
-**    herename location where our heredoc name is stored
-**
-**    when herename is present,
-**    //we open and assing it as our file in (node->file_in)
+** open_heredoc **
+	if we have a heredoc we open it and asing our file in to it
+Function Variables:
+	herename location where our heredoc name is stored
+	when herename is present,
+	we open and assing it as our file in (node->file_in)
 */
+
 void	open_heredoc(t_lst *node)
 {
 	char	*path;
@@ -28,10 +36,6 @@ void	open_heredoc(t_lst *node)
 	}
 }
 
-/*
-** notes for char	**str_ptr_dup(char **src)
-** duplicating char** matrix
-*/
 char	**str_ptr_dup(char **src)
 {
 	char	**dest;
@@ -52,9 +56,10 @@ char	**str_ptr_dup(char **src)
 }
 
 /*
-** notes for size_t	ft_matrixlen(char **matrix)
-**   for finding out the lenght of a char ** matrix
+** ft_matrixlen **
+finds out the lenght of a char ** matrix
 */
+
 size_t	ft_matrixlen(char **matrix)
 {
 	size_t	len;
@@ -67,4 +72,25 @@ size_t	ft_matrixlen(char **matrix)
 	return (len);
 }
 
+void	ft_execve_free(void)
+{
+	t_lst	*tmp;
 
+	tmp = g_ms->instr;
+	while (g_ms->instr != NULL)
+	{
+		tmp = g_ms->instr->next;
+		free(g_ms->instr->str_cmd);
+		free(g_ms->instr->str_line);
+		free(g_ms->instr->str_aux);
+		free(g_ms->instr->str_save);
+		free(g_ms->instr->str_aux_save);
+		free_matrix(g_ms->instr->str_args);
+		free (g_ms->instr);
+		g_ms->instr = tmp;
+	}
+	free (tmp);
+	free(g_ms->prompt);
+	free (g_ms->str);
+	tmp = NULL;
+}
