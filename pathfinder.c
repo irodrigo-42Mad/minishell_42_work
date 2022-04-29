@@ -1,55 +1,61 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pathfinder.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/29 12:14:41 by mgrau             #+#    #+#             */
+/*   Updated: 2022/04/29 12:16:42 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-**
-** Notes to get_pathname
-**
-** checks if argument is valid and if it is returns the valid path for execution
-**
-*/
+#include "minishell.h"
 
 char	*get_pathname(char *arg)
 {
-	unsigned int	i = 5;
+	unsigned int	i;
 	char			*dest;
 	char			*paths;
 
-	if (access(arg, X_OK) != -1)							 //if it executes we return it
-		return(ft_strdup(arg));
+	i = 5;
+	if (access(arg, X_OK) != -1)
+		return (ft_strdup(arg));
 	dest = NULL;
-	paths = get_pathlocation(g_ms->sh_env);				 //we copy or possible paths
+	paths = get_pathlocation(g_ms->sh_env);
 	i = create_probable_str(&dest, arg, paths, i);
-	while ((access(dest, X_OK)) == -1)	 				 //we check each possible path if we manage to execute we return that path
+	while ((access(dest, X_OK)) == -1)
 	{
 		if (i >= strlen(paths) - 5)
 		{
 			free(dest);
-			return(NULL);
+			return (NULL);
 		}
 		free(dest);
-		i = create_probable_str(&dest, arg, paths, i);		//creates a possible path str
+		i = create_probable_str(&dest, arg, paths, i);
 	}
-	return(dest);
+	return (dest);
 }
 
-char *get_pathlocation(char **envp)
+char	*get_pathlocation(char **envp)
 {
-	int i;
+	int	i;
+
 	i = 0;
-	while((ft_strncmp("PATH=", envp[i], 5))) // we got the start location of the portion we want
+	while ((ft_strncmp("PATH=", envp[i], 5)))
 		i++;
-	return(envp[i]);
+	return (envp[i]);
 }
 
-int create_probable_str(char **dest, char *arg, char *src, int i)
+int	create_probable_str(char **dest, char *arg, char *src, int i)
 {
-	//funcion a revisar nuevamente cuando tengamos más adelantado trabajo
 	if (dest != NULL)
 	{
-		*dest = malloc(sizeof(char) * ft_strlen((src + i)) + ft_strlen(arg) + 2);
+		*dest = malloc(sizeof(char) * \
+		ft_strlen((src + i)) + ft_strlen(arg) + 2);
 		i = ft_strcharcpy(*dest, (src + i), ':', 0) + i;
 		ft_strcat(*dest, "/");
 		ft_strcat(*dest, arg);
 	}
-	return(i);
+	return (i);
 }
