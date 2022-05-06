@@ -1,18 +1,67 @@
 #include "minishell.h"
 
+void		ft_clear_str(char *str, t_lst *lst)
+{
+	int	ln;
+	int	pos;
+	int	flg;
+
+	ln = (int)(ft_strlen(lst->str_save) - ft_strlen(str));
+	pos = -1;
+	flg = 0;
+	while (++pos < ln)
+	{
+		if (flg == 0 && lst->str_save[pos] == '<')
+			if (lst->str_save[pos + 1] == '<')
+				flg = 1;
+		if (flg == 1)
+			lst->str_save[pos] = ' ';
+	}
+	lst->str_save[pos] = '\\';
+}
+
+void	ft_mute_aux(char *str, char *str2)
+{
+	size_t	pos;
+	size_t	ln;
+	int		flg;
+
+	flg = 0;
+	pos = 0;
+	ln = ft_strlen(str);
+	while (ln-- > 0 && str[pos] != '\0')
+	{
+		if ((str[pos] == '\"') && flg == 0)
+		{
+			flg = 1;
+			pos++;
+		}
+		if ((str[pos] == '\'') && flg == 0)
+		{
+			flg = 2;
+			pos++;
+		}
+		if (flg > 0)
+		{
+			str[pos] = str2[pos];
+			if (str[pos] == '\"' && flg == 1)
+				flg = 0;
+			if (str[pos] == '\'' && flg == 2)
+				flg = 0;
+		}
+		pos++;
+	}
+}
 
 void ft_rebuild_str(t_lst *lst)
 {
-	printf ("aux: %s\n", lst->str_aux);
-	printf ("line: %s\n", lst->str_line);
-	printf ("cmd: %s\n", lst->str_cmd);
-	printf ("aux save: %s\n", lst->str_aux_save);
-	printf ("save: %s\n", lst->str_save);
-	ft_bzero (lst->str_aux_save, ft_strlen(lst->str_aux_save));
-	free(lst->str_aux_save);
-
+	ft_bzero(lst->str_aux, ft_strlen(lst->str_aux));
+	ft_bzero(lst->str_line, ft_strlen(lst->str_line));
+	lst->str_line = ft_strdup(lst->str_save);
+	lst->str_aux = ft_strdup(lst->str_save);
+	ft_mute_aux(lst->str_aux, lst->str_cmd);
+	lst->str_aux_save = ft_strdup(lst->str_aux);
 }
-
 
 void	ft_restore_str_command(void)
 {

@@ -224,6 +224,8 @@ void ft_set_paramlst(t_lst *aux)
 		aux->str_args = ft_split(aux->str_cmd, ' ');
 	if (aux->type == 2)
 		ft_quote_cmd(aux->str_cmd);
+	// pa quitar despues
+	aux->str_args = ft_split(aux->str_cmd, ' ');
 
 	//1 indicar si tenemos redirecciones
 	//2 si no hay redirecciones separar args

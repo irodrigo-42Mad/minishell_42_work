@@ -114,9 +114,8 @@ void ch_leaks(void)
 int	main(int argc, char **argv, char **env)
 {
 	(void)argv;
-	(void)argc;
 	(void)env;
-	char *aux = "cd \'lib\'ft << probando";
+	//char *aux = "<< a << \"b\" | echo \"hola\" | wc -l";
 
 	//atexit(ch_leaks);
 	if (argc != 1)
@@ -127,13 +126,13 @@ int	main(int argc, char **argv, char **env)
 	ft_initialize(argc, env);
 	// ME QUEDO CON LAS VARIABLES DE ENTORNO HASTA EL FINAL
 	ft_put_banner();
-	ft_set_signal();
 	while (TRUE)
 	{
+		ft_set_signal(); // iniciamos la señal en cada comando ahora funciona
 		ft_set_prompt();
 		g_ms->flg_err = SUCCESS;  // necesary to initialize error
-		//g_ms->str = readline(g_ms->prompt);
-		g_ms->str = ft_strdup(aux);
+		g_ms->str = readline(g_ms->prompt);
+		//g_ms->str = ft_strdup(aux);
 	 	if (ft_strlen(g_ms->str) > 0  &&
 		 	ft_check_spc(g_ms->str) != 1)
 	 	{
@@ -141,34 +140,15 @@ int	main(int argc, char **argv, char **env)
 	 		if (!ft_parser())
 	 		{
 				ft_prepare_command();
-				// hasta aqui todo ok
-				ft_heredoc();
-				// falta un procedimiento de heredoc
+				ft_heredoc(); // heredoc me deja el primer nombre
+				// montar cada comando y separar argumentos
 				ft_redirections(); // revisando las redirecciones
 				//ft_restore_str_command();
-
-	// 			ft_redirections(g_ms);
-	// 			// other redirs
 	 			start_executer();
 			}
 			ft_pre_clean();
 	  	}
 	}
-
-	// 	// hasta aqui revisado
-	// 	//g_ms->pars_cmd = ft_strdup(g_ms->str);
-
-	// 	// la linea siguiente da un segfault pero no es valida para el proyecto final
-	// 	//if (!(ft_strncmp(g_ms->pars_cmd, "exit", ft_strlen(g_ms->pars_cmd))))
-	// 	//	cmd_exit(g_ms);
-
-	// 	//free (g_ms->str);
-	// 	// liberar la lista
-
-
-
-	// 	//free (g_ms->str);
-	// }
 	ft_pre_clean(g_ms);
 	free (g_ms);
 

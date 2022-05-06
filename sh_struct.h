@@ -10,7 +10,8 @@ typedef struct s_lst{
 	pid_t			node_pid;
 
 	size_t			aux_ln;
-	char			*herename;   // pending to activate heredoc structure
+	char			*herename;	// pending to activate heredoc structure
+	int				herequotes;	// set 0 !quotes, 1 squotes  2 dquotess
 	int				here_num;
 	char			*str_cmd;
 	char			**str_args;

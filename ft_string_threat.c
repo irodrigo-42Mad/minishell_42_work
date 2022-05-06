@@ -186,7 +186,7 @@ void	ft_set_strpntr(char **tmp, char **empty, char **final, size_t pos)
 	}
 	while (--n_pos2 > 0)
 	{
-		if(new_pos <= pos)
+		if(n_pos2 <= pos)
 			**empty = ' ';
 		*empty += 1;
 	}
