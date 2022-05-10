@@ -5,11 +5,15 @@ void		ft_clear_str(char *str, t_lst *lst)
 	int	ln;
 	int	pos;
 	int	flg;
+	/** comentario a eliminar más adelante **/
+	// cuando la cadena del heredoc lleva "" no calcula
+	// correctamente la última posicion, falla este procedimiento
+	// al limpiar las cadenas del elemento  SOLUCIONADO
 
 	ln = (int)(ft_strlen(lst->str_save) - ft_strlen(str));
 	pos = -1;
 	flg = 0;
-	while (++pos < ln)
+	while (++pos <= ln)
 	{
 		if (flg == 0 && lst->str_save[pos] == '<')
 			if (lst->str_save[pos + 1] == '<')
@@ -18,6 +22,11 @@ void		ft_clear_str(char *str, t_lst *lst)
 			lst->str_save[pos] = ' ';
 	}
 	lst->str_save[pos] = '\\';
+	/** comentario a eliminar más adelante **/
+	// necesario para eliminar las últimas comillas
+	// en el caso de que las tenga el nombre
+	if (lst->str_save[pos + 1] == '\"')
+		lst->str_save[pos + 1] = ' ';
 }
 
 void	ft_mute_aux(char *str, char *str2)
@@ -56,21 +65,25 @@ void	ft_mute_aux(char *str, char *str2)
 void ft_rebuild_str(t_lst *lst)
 {
 	ft_bzero(lst->str_aux, ft_strlen(lst->str_aux));
-	ft_bzero(lst->str_line, ft_strlen(lst->str_line));
-	lst->str_line = ft_strdup(lst->str_save);
+	// de momento no hace falta este fragmento de código,
+	// se puede eliminar sin problema
+
+	//ft_bzero(lst->str_line, ft_strlen(lst->str_line));
+	//lst->str_line = ft_strdup(lst->str_save);
 	lst->str_aux = ft_strdup(lst->str_save);
 	ft_mute_aux(lst->str_aux, lst->str_cmd);
 	lst->str_aux_save = ft_strdup(lst->str_aux);
 }
 
+
+// este procedimiento montará los comandos para ejecutar
+
 void	ft_restore_str_command(void)
 {
 	t_lst *aux;
-
 	int i_pr;
 
 	aux = g_ms->instr;
-
 	while (aux)
 	{
 		i_pr = 0;
@@ -79,9 +92,7 @@ void	ft_restore_str_command(void)
 		{
 			if (aux->str_cmd[i_pr] == '\'' || aux->str_cmd[i_pr] == '\"')
 			{
-
 				printf("el comando %d tiene comillas\n", aux->el_nbr);
-
 			}
 			i_pr++;
 		}
