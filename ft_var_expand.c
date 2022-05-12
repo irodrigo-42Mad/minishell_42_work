@@ -6,7 +6,7 @@
 /*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/12 18:36:35 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/12 20:37:38 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char *var_detected(char* arg, char *dup, int *pos, int *i)
 
 	y = 0;
 	length = ft_strlen(arg);
+//	printf("length is :%i\n", length);
 	while (g_ms->sh_env[y])
 	{
 		envl = ft_strlen(def_name(g_ms->sh_env[y]));
@@ -83,7 +84,7 @@ char *var_detected(char* arg, char *dup, int *pos, int *i)
 		g_ms->sh_env[y], \
 		envl) == 0)
 		{
-			length = length + envl;
+			length = length + ft_strlen(g_ms->sh_env[y]) - (envl + 1);
 			tmp = malloc(sizeof(char) * (length + 1));
 			tmp = aux_cpy(tmp, dup, *pos);
 			dup = ft_strcat(tmp, ft_strdup(g_ms->sh_env[y] + envl + 1));
@@ -96,17 +97,21 @@ char *var_detected(char* arg, char *dup, int *pos, int *i)
 	return(dup);
 }
 
+//no funciona bien he de revisarlo
 char *q_mark_det(char* arg, char *dup, int *pos, int *i)
 {
 	int length;
 	char *tmp;
 	char *err_n;
 
+	if (!(g_ms->err_n))
+	 	g_ms->err_n = 0;
 	err_n = ft_itoa(g_ms->err_n);
 	length = ft_strlen(err_n);
-	tmp = malloc(sizeof(char) * (ft_strlen(arg) - 2 + length));
+	tmp = malloc(sizeof(char) * (ft_strlen(arg) - 1 + length));
 	tmp = aux_cpy(tmp, dup, *pos);
 	dup = ft_strcat(tmp, err_n);
+	dup[(ft_strlen(arg) - 3 + length)] = '\0';
 	(*pos) = ft_strlen(dup);
 	(*i) = (*i) + length;
 	return(dup);
