@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/11 13:50:32 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/12 18:47:45 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,4 +275,12 @@ void		ft_restore_str_command(void);
 void		ft_rebuild_str(t_lst *lst);
 
 void 		ft_setlst_type(t_lst *aux);
+
+//ft_var_expand.c
+char		*expand_vars(char *arg);
+void		detect_comma(char c, char comma_type, int *scomma);
+char		*aux_cpy(char *tmp, char *dup, int pos);
+char		*var_detected(char* arg, char *dup, int *pos, int *i);
+char		*q_mark_det(char* arg, char *dup, int *pos, int *i);
+char		* dolla_handler(char* arg, char *dup, int *pos, int *i);
 #endif
