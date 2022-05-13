@@ -16,7 +16,7 @@ void	ft_set_hdoc(t_lst *lst)
 		{
 			tmp += 2;
 			ft_set_strpntr(&tmp, &lst->str_aux, &lst->str_line, 2);
-			ft_clear_str(tmp, lst);
+//			ft_clear_str(tmp, lst);
 		}
 		lst->herename = ft_eofcatch(&lst->here_num, &lst->str_line);
 		// en este punto debemos de abrir el heredoc
@@ -74,4 +74,29 @@ void	ft_hdc_prepareln(t_lst *lst)
 	while (*tmp == '*' && *tmp != '\0')
 		*tmp++ = ' ';
 	lst->str_line = lst->str_save;
+}
+
+int	heredoc_opener(char *file)
+{
+	char	*line;
+	int		fd;
+
+	fd = open("/tmp/heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	if (fd < 0)
+		return (-1);
+	write(1, "> ", 2);
+	get_next_line(0, &line);
+	while (!line || ft_strncmp(line, file, ft_strlen(line)))
+	{
+		ft_putstr_fd(line, fd);
+		write(fd, "\n", 1);
+		free(line);
+		line = NULL;
+		write(1, "> ", 2);
+		get_next_line(0, &line);
+	}
+	free(line);
+	close(fd);
+	fd = open("/tmp/heredoc", O_RDONLY);
+	return (fd);
 }
