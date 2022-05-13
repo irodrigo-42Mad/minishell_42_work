@@ -6,7 +6,7 @@
 /*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/12 20:37:38 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/13 11:14:12 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,12 @@ char *q_mark_det(char* arg, char *dup, int *pos, int *i)
 	char *tmp;
 	char *err_n;
 
-	if (!(g_ms->err_n))
-	 	g_ms->err_n = 0;
 	err_n = ft_itoa(g_ms->err_n);
 	length = ft_strlen(err_n);
 	tmp = malloc(sizeof(char) * (ft_strlen(arg) - 1 + length));
 	tmp = aux_cpy(tmp, dup, *pos);
 	dup = ft_strcat(tmp, err_n);
-	dup[(ft_strlen(arg) - 3 + length)] = '\0';
-	(*pos) = ft_strlen(dup);
+	(*pos) = ft_strlen(dup) -1;
 	(*i) = (*i) + length;
 	return(dup);
 }
