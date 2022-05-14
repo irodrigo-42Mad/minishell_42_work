@@ -6,7 +6,7 @@
 /*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/13 11:14:12 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/14 10:53:31 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char *expand_vars(char *arg)
 	dup = malloc(sizeof(char) * (ft_strlen(arg)+ 1));
 	while (arg[++i])
 	{
-		detect_comma(arg[i], '\'', &scomma);
-		if ((arg[i] == '$') && (scomma == 0) && (arg[i + 1]) && ((arg[i + 1]) != '.'))
+		detect_comma(arg[i], &scomma);
+		if ((arg[i] == '$') && (scomma <= 0) && (arg[i + 1]) && ((arg[i + 1]) != '.'))
 			dup = dolla_handler(arg, dup, &pos, &i);
 		else
 			dup[pos] = arg[i];
@@ -40,13 +40,17 @@ char *expand_vars(char *arg)
 	return (dup);
 }
 
-void detect_comma(char c,char comma_type, int *scomma)
+void detect_comma(char c, int *scomma)
 {
-	if (c == comma_type)
+	if ((c == '\'') || (c == '\"'))
 	{
-		if (*scomma == 0)
+		if ((*scomma == 0) && (c == '\"'))
+			*scomma = -1;
+		if ((*scomma == -1) && (c == '\"'))
+			*scomma = 0;
+		else if ((*scomma == 0) && (c == '\''))
 			*scomma = 1;
-		else
+		if ((*scomma == 1) && (c == '\''))
 			*scomma = 0;
 	}
 }
