@@ -6,7 +6,7 @@
 /*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/14 10:41:34 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/14 11:10:35 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,4 +283,6 @@ char		*aux_cpy(char *tmp, char *dup, int pos);
 char		*var_detected(char* arg, char *dup, int *pos, int *i);
 char		*q_mark_det(char* arg, char *dup, int *pos, int *i);
 char		* dolla_handler(char* arg, char *dup, int *pos, int *i);
+
+int	heredoc_opener(char *file);
 #endif

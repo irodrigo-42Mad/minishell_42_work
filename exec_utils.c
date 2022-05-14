@@ -6,7 +6,7 @@
 /*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 09:59:14 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/14 11:01:15 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/14 11:08:13 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	open_heredoc(t_lst *node)
 		return ;
 	else
 	{
-		path = strdup("/tmp/heredoc");
+		path = ft_strjoin(TMP_PATH, node->herename);
 		node->file_in = open(path, O_RDONLY);
 		free(path);
 	}
