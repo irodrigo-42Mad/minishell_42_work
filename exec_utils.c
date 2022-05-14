@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 09:59:14 by mgrau             #+#    #+#             */
-/*   Updated: 2022/04/29 09:59:26 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/14 11:01:15 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	open_heredoc(t_lst *node)
 		return ;
 	else
 	{
-		path = ft_strjoin(TMP_PATH, node->herename);
+		path = strdup("/tmp/heredoc");
 		node->file_in = open(path, O_RDONLY);
 		free(path);
 	}

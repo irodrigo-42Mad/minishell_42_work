@@ -20,7 +20,7 @@ void	ft_set_hdoc(t_lst *lst)
 		}
 		lst->herename = ft_eofcatch(&lst->here_num, &lst->str_line);
 		// en este punto debemos de abrir el heredoc
-		//open_heredoc(eof, lst);
+		open_heredoc(lst->herename);
 	}
 	if (lst->file_in != FD_IN)
 		close(lst->file_in);
@@ -88,6 +88,7 @@ int	heredoc_opener(char *file)
 	get_next_line(0, &line);
 	while (!line || ft_strncmp(line, file, ft_strlen(line)))
 	{
+		line = expand_vars(line);
 		ft_putstr_fd(line, fd);
 		write(fd, "\n", 1);
 		free(line);
@@ -97,6 +98,5 @@ int	heredoc_opener(char *file)
 	}
 	free(line);
 	close(fd);
-	fd = open("/tmp/heredoc", O_RDONLY);
-	return (fd);
+	return (0);
 }
