@@ -88,7 +88,8 @@ int	heredoc_opener(char *file)
 	get_next_line(0, &line);
 	while (!line || ft_strncmp(line, file, ft_strlen(line)))
 	{
-		line = expand_vars(line);
+		if (!((file[0] =='\'') || (file[0] =='\"')))
+			line = expand_vars(line);
 		ft_putstr_fd(line, fd);
 		write(fd, "\n", 1);
 		free(line);

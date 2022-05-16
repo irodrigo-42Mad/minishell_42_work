@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:45:04 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 09:18:41 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/16 11:26:10 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_clean_instr(void)
 		g_ms->instr->exe_state = 0;
 		free(g_ms->instr->str_line);
 		free(g_ms->instr->str_aux);
-		free(g_ms->instr->str_save);
+		//free(g_ms->instr->str_save);
 		free(g_ms->instr->str_aux_save);
 		ft_bzero(g_ms->instr, sizeof(t_lst));
 		free (g_ms->instr);

@@ -6,14 +6,14 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 09:05:13 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/16 09:05:17 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/16 10:11:36 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft/libft.h"
 
-const size_t	ft_extract_content(int flg, char *str, size_t pos)
+size_t	ft_extract_content(int flg, char *str, size_t pos)
 {
 	size_t	last;
 	char	quote;
@@ -36,7 +36,7 @@ const size_t	ft_extract_content(int flg, char *str, size_t pos)
 	return (last);
 }
 
-const size_t	ft_set_cmd(char *origin, char *piece, size_t pos, size_t len)
+size_t	ft_set_cmd(char *origin, char *piece, size_t pos, size_t len)
 {
 	size_t	act_len;
 	size_t	mi_pos;

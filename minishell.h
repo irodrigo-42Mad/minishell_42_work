@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 09:54:02 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/16 10:59:59 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,4 +273,5 @@ char		*q_mark_det(char *arg, char *dup, int *pos, int *i);
 char		*dolla_handler(char *arg, char *dup, int *pos, int *i);
 int			heredoc_opener(char *file);
 void		node_to_zero(t_lst *aux);
+void		ft_clear_str(char *str, t_lst *lst);
 #endif
