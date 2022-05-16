@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adv_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:22:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/06 17:10:50 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:02:40 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 //tenemos que trabajar sobre las redirecciones a ver cual es el problema
 
 //tenemos que trabajar en la forma en la que tomamos los elementos entre "" para funcionar
-
 
 void	ft_check_redir(t_lst *lst)
 {
@@ -33,9 +32,9 @@ void	ft_check_redir(t_lst *lst)
 			if (lst->str_cmd[pos + 1] == '>')
 			//if (*(st_aux + 1) == '>')
 			{
-				pos+= 2;
+				pos += 2;
 				st_aux = ft_calloc((ft_strlen(lst->str_cmd) - pos) + 1,
-						 sizeof(char));
+						sizeof(char));
 				ft_strnlcpy(st_aux, lst->str_cmd, pos,
 					(ft_strlen(lst->str_cmd) - pos));
 				//st_aux += 2;
@@ -44,19 +43,19 @@ void	ft_check_redir(t_lst *lst)
 			}
 			else
 			{
-			 	if (lst->str_cmd[pos + 1] == '>')
+				if (lst->str_cmd[pos + 1] == '>')
 				{
 					pos++;
 					st_aux = ft_calloc((ft_strlen(lst->str_cmd) - pos) + 1,
-						 sizeof(char));
+							sizeof(char));
 					ft_redir(&st_aux, lst, FD_OUT, UNIQUE);
 				}
 				else
 				{
-					size_t mlen;
+					size_t	mlen;
 					mlen = (ft_strlen(lst->str_cmd) - pos) + 1;
 					st_aux = ft_calloc((ft_strlen(lst->str_cmd) - pos) + 1,
-						 sizeof(char));
+							sizeof(char));
 					ft_strnlcpy(st_aux, lst->str_cmd, pos,
 						(ft_strlen(lst->str_cmd) - pos));
 					ft_redir(&st_aux, lst, FD_OUT, UNIQUE);
@@ -104,7 +103,7 @@ void	ft_redirections(void)
 	{
 		if (elm->exe_state == SUCCESS)
 		{
-			if(elm->type == 1)
+			if (elm->type == 1)
 			{
 				ft_check_redir(elm);
 			//ft_clean_hdoc_elm(elm);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_comma.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:23:06 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/14 10:54:43 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:22:26 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*dquotes(char *str, int *q_err)
 {
-	//char	*aux;
 	int		len;
 
 	str++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sigint_acts.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:52:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/07 14:18:34 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:39:07 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_sigint_ctrlc(int signal)
 	rl_redisplay();
 	ft_updt_err(1);
 }
-// catch value with true
+/* catch value with true */
 
 void	ft_sigint_ctrld(int signal)
 {

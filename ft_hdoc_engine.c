@@ -20,7 +20,7 @@ void	ft_set_hdoc(t_lst *lst)
 		}
 		lst->herename = ft_eofcatch(&lst->here_num, &lst->str_line);
 		// en este punto debemos de abrir el heredoc
-		open_heredoc(lst->herename);
+		heredoc_opener(lst->herename);
 	}
 	if (lst->file_in != FD_IN)
 		close(lst->file_in);

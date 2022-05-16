@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nodeparse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/10 14:41:23 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:37:05 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	ft_strchlen(char *str, char car)
 
 void	ft_setnewpos(t_ms *s, size_t len)
 {
-	if(s->str[len + 1] == '|')
+	if (s->str[len + 1] == '|')
 	{
 		*s->str = *s->str + (len + 1);
 		*s->pars_cmd = *s->pars_cmd + (len + 1);
@@ -62,7 +62,7 @@ t_lst	*ft_newinst(char *cmd, int *i)
 	elm->next = NULL;
 	return (elm);
 }
-
+/*
 // t_lst	*ft_newinst(t_ms *s, int *i)
 // {
 // 	t_lst	*elm;
@@ -95,6 +95,7 @@ t_lst	*ft_newinst(char *cmd, int *i)
 // 	elm->next = NULL;
 // 	return (elm);
 // }
+*/
 
 /*
 	process->hdoc_name = NULL;
@@ -108,12 +109,7 @@ t_lst	*ft_newinst(char *cmd, int *i)
 	return (process);
 */
 
-
-
-
-
-
-
+/*
 // t_nod	*create_pnode(char **aux, char **str, int *n_proc)
 // {
 // 	t_nod	*process;
@@ -136,12 +132,14 @@ t_lst	*ft_newinst(char *cmd, int *i)
 // 	pointer_mover(aux, str, len);
 // 	return (process);
 // }
+*/
 
-
-
+/*
 // 1.- contar todos aquellos pipes que hay en el comando para separar menos aquellos entre "" o ''
 // 2.- guardarlos en una variable local que se utiliza como elemento strtok
 // 3.- con ello crear la lista de comandos
+*/
+
 void	ft_prepare_command(void)
 {
 	t_lst	*aux;
@@ -168,8 +166,8 @@ void	ft_prepare_command(void)
 
 void ft_setlst_type(t_lst *aux)
 {
-	size_t pos;
-	size_t len;
+	size_t	pos;
+	size_t	len;
 
 	pos = 0;
 	len = ft_strlen (aux->str_cmd);
@@ -197,8 +195,8 @@ void ft_setlst_type(t_lst *aux)
 
 void ft_set_paramlst(t_lst *aux)
 {
-	size_t pos;
-	size_t len;
+	size_t	pos;
+	size_t	len;
 
 	pos = 0;
 	len = ft_strlen (aux->str_cmd);
@@ -219,7 +217,6 @@ void ft_set_paramlst(t_lst *aux)
 			aux->type = 2;
 		pos++;
 	}
-
 	if (aux->type != 1 && aux->type != 2)
 		aux->str_args = ft_split(aux->str_cmd, ' ');
 	if (aux->type == 2)
@@ -231,9 +228,6 @@ void ft_set_paramlst(t_lst *aux)
 	//2 si no hay redirecciones separar args
 	//3 guardar nodo
 }
-
-
-
 /*
 ** Code in revision process
 

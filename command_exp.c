@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_exp.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 09:05:13 by mgrau             #+#    #+#             */
+/*   Updated: 2022/05/16 09:05:17 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "libft/libft.h"
 
@@ -52,7 +64,7 @@ const size_t	ft_set_cmd(char *origin, char *piece, size_t pos, size_t len)
 		//printf ("ORIGIN: %s\n", origin);
 		//printf ("PIECE: %s\n", piece);
 		*/
-
+/*
 int	main(void)
 {
 	char	*aux;
@@ -89,3 +101,4 @@ int	main(void)
 		}
 	}
 }
+*/

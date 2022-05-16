@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_initial_redirection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:52:59 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/14 11:05:23 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:27:39 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static int	ft_notvalid(int *sh_err, char **str)
 	return (0);
 }
 
-// tengo que revisar si es necesario pasar la struct del shell
+/* tengo que revisar si es necesario pasar la struct del shell*/
+
 char	*ft_redir_right(int *sh_err, char *str)
 {
 	str++;

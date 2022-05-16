@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_auxfn.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 09:06:30 by mgrau             #+#    #+#             */
+/*   Updated: 2022/05/16 09:13:08 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*
 ** function creating for freeing matrixes
-*/
+*/	
 void	free_matrix(char **matrix)
 {
 	int	i;
-	int ln;
+	int	ln;
 
 	i = 0;
 	if (!matrix)
@@ -29,9 +41,9 @@ void	free_matrix(char **matrix)
 	}
 }
 
-void free_vars (t_sh_var *elm)
+void	free_vars(t_sh_var *elm)
 {
-	t_sh_var *aux;
+	t_sh_var	*aux;
 
 	if (!elm)
 		return ;
@@ -54,10 +66,10 @@ void free_vars (t_sh_var *elm)
 	}
 }
 
-void free_nodes (t_lst *elm)
+void	free_nodes(t_lst *elm)
 {
-	t_lst *aux;
-	t_lst *act;
+	t_lst	*aux;
+	t_lst	*act;
 
 	if (!elm)
 		return ;
@@ -68,19 +80,7 @@ void free_nodes (t_lst *elm)
 		while (act)
 		{
 			act = aux;
-			if(!aux->herename)
-				ft_bzero(aux->herename, ft_strlen(aux->herename));
-			if(!aux->str_cmd)
-				ft_bzero(aux->str_cmd, ft_strlen(aux->str_cmd));
-			if(!aux->str_line)
-				ft_bzero(aux->str_line, ft_strlen(aux->str_line));
-			if(!aux->str_aux)
-				ft_bzero(aux->str_aux, ft_strlen(aux->str_aux));
-			if(!aux->str_save)
-				ft_bzero(aux->str_save, ft_strlen(aux->str_save));
-			if(!aux->str_aux_save)
-				ft_bzero(aux->str_aux_save, ft_strlen(aux->str_aux_save));
-
+			node_to_zero(aux);
 			aux->next = NULL;
 			free(aux);
 			aux = NULL;
@@ -88,4 +88,20 @@ void free_nodes (t_lst *elm)
 		free(elm);
 		elm = NULL;
 	}
+}
+
+void	node_to_zero(t_lst *aux)
+{
+	if (!aux->herename)
+		ft_bzero(aux->herename, ft_strlen(aux->herename));
+	if (!aux->str_cmd)
+		ft_bzero(aux->str_cmd, ft_strlen(aux->str_cmd));
+	if (!aux->str_line)
+		ft_bzero(aux->str_line, ft_strlen(aux->str_line));
+	if (!aux->str_aux)
+		ft_bzero(aux->str_aux, ft_strlen(aux->str_aux));
+	if (!aux->str_save)
+		ft_bzero(aux->str_save, ft_strlen(aux->str_save));
+	if (!aux->str_aux_save)
+		ft_bzero(aux->str_aux_save, ft_strlen(aux->str_aux_save));
 }

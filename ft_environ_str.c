@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_environ_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 10:00:25 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/06 12:47:55 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:23:51 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_set_lenv(char *str, int line)
 {
 	int	x;
-	int ini_len;
+	int	ini_len;
 
 	x = ft_str_bash_len(str, SUCCESS);
 	ini_len = x;
@@ -56,6 +56,7 @@ char	*ft_set_new_len(char *str, int ln, int *pos)
 	str += ln_no_expand;
 	free(v_name);
 	free(v_value);
-	// esto hay que revisarlo posible leak si da, añadir la posición en el return
 	return (str);
 }
+	/* esto hay que revisarlo posible leak si da, añadir la posición en el return
+	*/

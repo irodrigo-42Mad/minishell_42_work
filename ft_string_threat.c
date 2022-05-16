@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string_threat.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:02:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/10 13:49:02 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:43:21 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_val_envname(int status, char initial)
+int	ft_val_envname(int status, char initial)
 {
 	if (status == STATE_Q_OK)
 	{
@@ -34,11 +34,13 @@ int	ft_valid_envcore(char a)
 	return (0);
 }
 
-void ft_vname_expand(t_lst *lst, char **file, char **data, int *len)
+/* //añadir variable y nodo  ambiguous_redirect_error(var_name, node);*/
+
+void	ft_vname_expand(t_lst *lst, char **file, char **data, int *len)
 {
-	char *temp;
-	char *v_name;
-	char *v_val;
+	char	*temp;
+	char	*v_name;
+	char	*v_val;
 
 	v_name = ft_getname(*data + 1);
 	v_val = ft_getvalue(v_name, NOT_EXPRT);
@@ -46,7 +48,7 @@ void ft_vname_expand(t_lst *lst, char **file, char **data, int *len)
 	{
 		temp = ft_strnstr(v_val, " ", ft_getmax_ln(v_val, " "));
 		if (temp != NULL)
-			printf ("error variable existente"); //añadir variable y nodo  ambiguous_redirect_error(var_name, node);
+			printf ("error variable existente");
 	}
 	if (lst->exe_state == SUCCESS)
 		ft_expand_vars(v_val, data, file, len);
@@ -54,9 +56,9 @@ void ft_vname_expand(t_lst *lst, char **file, char **data, int *len)
 	free (v_val);
 }
 
-void ft_expand_vars(char *v_val, char **data, char **file, int *ln)
+void	ft_expand_vars(char *v_val, char **data, char **file, int *ln)
 {
-	size_t x;
+	size_t	x;
 
 	x = 0;
 	*(*(data)++) = ' ';
@@ -179,14 +181,14 @@ void	ft_set_strpntr(char **tmp, char **empty, char **final, size_t pos)
 	{
 		while (--new_pos > 0)
 		{
-			if(new_pos <= pos)
+			if (new_pos <= pos)
 				**final = ' ';
 			*final += 1;
 		}
 	}
 	while (--n_pos2 > 0)
 	{
-		if(n_pos2 <= pos)
+		if (n_pos2 <= pos)
 			**empty = ' ';
 		*empty += 1;
 	}

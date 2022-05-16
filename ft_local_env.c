@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_local_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:47:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/11 12:15:51 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:30:58 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	ft_replace_local_enval(t_sh_var *nod, char *v_name, char *val)
 	free(nod->v_val);
 	nod->v_val = val;
 }
-// falla al añadir un nodo la segunda ocasión
+/* falla al añadir un nodo la segunda ocasión */
+
 void	ft_add_local_env(char *car, char *err)
 {
 	t_sh_var	*nod;
@@ -61,13 +62,18 @@ void	ft_add_local_env(char *car, char *err)
 	if (!nod)
 	{
 		nod = ft_set_envch_val(car, err);
-		//FALLA EN ESTE PUNTO
 		if (aux)
 			(*aux) = nod;
 		else
 			g_ms->sh_envar = nod;
 	}
 }
+/*		//FALLA EN ESTE PUNTO
+		if (aux)
+			(*aux) = nod;
+		else
+			g_ms->sh_envar = nod;
+*/
 
 void	ft_get_errstatus(int state)
 {

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean_obj.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:45:04 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/08 15:22:18 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:18:41 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_clean_instr()
+void	ft_clean_instr(void)
 {
-	t_lst *tmp;
+	t_lst	*tmp;
 
 	if (g_ms->instr == NULL)
-    	return ;
+		return ;
 	tmp = g_ms->instr;
 	while (g_ms->instr != NULL)
 	{
@@ -32,7 +32,7 @@ void ft_clean_instr()
 		free(g_ms->instr->str_save);
 		free(g_ms->instr->str_aux_save);
 		ft_bzero(g_ms->instr, sizeof(t_lst));
-   		free (g_ms->instr);
+		free (g_ms->instr);
 		g_ms->instr = tmp;
 	}
 	free (tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:43:22 by mgrau             #+#    #+#             */
-/*   Updated: 2022/03/11 14:35:48 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 10:05:43 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	main(int argc, char **argv, char **env)
 			ft_pre_clean();
 	  	}
 	}
-	ft_pre_clean(g_ms);
+	ft_pre_clean();
 	free (g_ms);
 
 

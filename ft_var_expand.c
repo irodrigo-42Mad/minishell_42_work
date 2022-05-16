@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/14 10:53:31 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/16 09:48:33 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 expands $ variable into the one at our env list
 $? is implemented  not on norme, ill go ahead and clean it up later*/
 
-char *expand_vars(char *arg)
+char	*expand_vars(char *arg)
 {
-	int i;
-	int pos;
-	int scomma;
-	char * dup;
+	int		i;
+	int		pos;
+	int		scomma;
+	char	*dup;
 
 	i = -1;
 	pos = 0;
@@ -30,7 +30,8 @@ char *expand_vars(char *arg)
 	while (arg[++i])
 	{
 		detect_comma(arg[i], &scomma);
-		if ((arg[i] == '$') && (scomma <= 0) && (arg[i + 1]) && ((arg[i + 1]) != '.'))
+		if ((arg[i] == '$') && (scomma <= 0) && \
+		(arg[i + 1]) && ((arg[i + 1]) != '.'))
 			dup = dolla_handler(arg, dup, &pos, &i);
 		else
 			dup[pos] = arg[i];
@@ -40,7 +41,7 @@ char *expand_vars(char *arg)
 	return (dup);
 }
 
-void detect_comma(char c, int *scomma)
+void	detect_comma(char c, int *scomma)
 {
 	if ((c == '\'') || (c == '\"'))
 	{
@@ -55,9 +56,9 @@ void detect_comma(char c, int *scomma)
 	}
 }
 
-char *aux_cpy(char *tmp,char *dup, int pos)
+char	*aux_cpy(char *tmp, char *dup, int pos)
 {
-	int cpy;
+	int	cpy;
 
 	cpy = 0;
 	while (cpy < pos)
@@ -68,19 +69,18 @@ char *aux_cpy(char *tmp,char *dup, int pos)
 	tmp[cpy] = '\0';
 	cpy = 0;
 	free(dup);
-	return(tmp);
+	return (tmp);
 }
 
-char *var_detected(char* arg, char *dup, int *pos, int *i)
+char	*var_detected(char *arg, char *dup, int *pos, int *i)
 {
-	int y;
-	int envl;
-	int length;
-	char *tmp;
+	int		y;
+	int		envl;
+	int		length;
+	char	*tmp;
 
 	y = 0;
 	length = ft_strlen(arg);
-//	printf("length is :%i\n", length);
 	while (g_ms->sh_env[y])
 	{
 		envl = ft_strlen(def_name(g_ms->sh_env[y]));
@@ -98,15 +98,14 @@ char *var_detected(char* arg, char *dup, int *pos, int *i)
 		else if (!(g_ms->sh_env[++y]))
 				(*i)++;
 	}
-	return(dup);
+	return (dup);
 }
 
-//no funciona bien he de revisarlo
-char *q_mark_det(char* arg, char *dup, int *pos, int *i)
+char	*q_mark_det(char *arg, char *dup, int *pos, int *i)
 {
-	int length;
-	char *tmp;
-	char *err_n;
+	int		length;
+	char	*tmp;
+	char	*err_n;
 
 	err_n = ft_itoa(g_ms->err_n);
 	length = ft_strlen(err_n);
@@ -115,19 +114,19 @@ char *q_mark_det(char* arg, char *dup, int *pos, int *i)
 	dup = ft_strcat(tmp, err_n);
 	(*pos) = ft_strlen(dup) -1;
 	(*i) = (*i) + length;
-	return(dup);
+	return (dup);
 }
 
-char * dolla_handler(char* arg, char *dup, int *pos, int *i)
+char	*dolla_handler(char *arg, char *dup, int *pos, int *i)
 {
-	if (arg[(*i) + 1] == 63) 
+	if (arg[(*i) + 1] == 63)
 		dup = q_mark_det(arg, dup, pos, i);
 	else if (ft_isdigit(arg[(*i) + 1]))
 	{
-		*i = (*i)+ 2;
+		*i = (*i) + 2;
 		dup[*pos] = arg[*i];
 	}
 	else
 		dup = var_detected(arg, dup, pos, i);
-	return(dup);
+	return (dup);
 }

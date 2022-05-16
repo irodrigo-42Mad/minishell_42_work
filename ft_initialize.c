@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_initialize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 12:53:50 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/11 12:55:58 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:29:20 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*ft_set_new_shlvl(char *str)
 	int		shlvl;
 	char	*str_shlvl;
 	char	*tmp_num;
-
 
 	shlvl = (ft_atoi(str + 6) + 1);
 	tmp_num = ft_itoa(shlvl);
@@ -56,11 +55,15 @@ char	**ft_set_shell_env(int ch, char **env)
 			out[i] = ft_strdup(env[i]);
 		i++;
 	}
-	out[i] = NULL; // ojo con esto
+	out[i] = NULL;
 	if (ch == SUCCESS)
 	{
-//		add_shell_level(&out);
-//		add_pwd(&out);
 	}
 	return (out);
 }
+
+/*
+//out[i] = NULL;  ojo con esto
+//		add_shell_level(&out);
+//		add_pwd(&out);
+*/

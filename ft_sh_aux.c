@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sh_aux.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:41:41 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/07 15:13:22 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:38:50 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_getmax_ln(const char *str1, const char *str2)
 		return (len2);
 }
 
-void free_ptrs(char *one, char *two, char *three)
+void	free_ptrs(char *one, char *two, char *three)
 {
 	if (one)
 	{
@@ -46,8 +46,8 @@ void free_ptrs(char *one, char *two, char *three)
 
 int	ft_check_spc(char *str)
 {
-	int pos;
-	int len;
+	int	pos;
+	int	len;
 
 	len = ft_strlen(str);
 	pos = 0;
@@ -57,6 +57,4 @@ int	ft_check_spc(char *str)
 		return (1);
 	else
 		return (0);
-
-
 }

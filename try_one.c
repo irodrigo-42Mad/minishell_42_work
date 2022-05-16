@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   try_one.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 09:58:45 by mgrau             #+#    #+#             */
+/*   Updated: 2022/05/16 09:59:25 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "libft/libft.h"
 
@@ -37,6 +49,7 @@ const size_t	ft_set_end(char *str, int pos)
 	return (last);
 }
 
+/*
 int	main(void)
 {
 	char	*aux;
@@ -46,7 +59,8 @@ int	main(void)
 	size_t	end;
 	size_t	begin;
 
-	aux = "cat >> \'amigo \"como\" estamos\' <> cosa > \"vamos a hacer redirecciones\"";
+	aux = "cat >> \'amigo \"como\" estamos\' <> cosa 
+	> \"vamos a hacer redirecciones\"";
 	len = ft_strlen(aux);
 	pos = 0;
 	while (pos < len)
@@ -81,3 +95,4 @@ int	main(void)
 	}
 	return (0);
 }
+*/
