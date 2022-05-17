@@ -6,7 +6,7 @@
 /*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/17 09:24:39 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/17 09:55:12 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 /*Given a cmd line like: echo "this $HOME"
 expands $ variable into the one at our env list
 $? is implemented  not on norme, ill go ahead and clean it up later*/
-int var_length(char *arg, int *i);
-char *alloc_expand(char *arg,char *dup);
+int		var_length(char *arg, int *i);
+char	*alloc_expand(char *arg, char *dup);
 
-char *expand_vars(char *arg)
+char	*expand_vars(char *arg)
 {
-	int pos;
-	int scomma;
-	char *dup;
-	int i;
+	int		pos;
+	int		scomma;
+	char	*dup;
+	int		i;
 
 	i = 0;
 	pos = 0;
@@ -33,7 +33,8 @@ char *expand_vars(char *arg)
 	while (arg[i])
 	{
 		detect_comma(arg[i], &scomma);
-		if ((arg[i] == '$') && (scomma <= 0) && (arg[i + 1]) && (arg[i + 1] != '.'))
+		if ((arg[i] == '$') && (scomma <= 0) && \
+		(arg[i + 1]) && (arg[i + 1] != '.'))
 			dup = dolla_handler(arg, dup, &pos, &i);
 		else
 		{
@@ -46,22 +47,24 @@ char *expand_vars(char *arg)
 	dup[pos] = '\0';
 	return (dup);
 }
-char *alloc_expand(char *arg,char *dup)
+
+char	*alloc_expand(char *arg, char *dup)
 {
-	int i;
-	int length;
-	int scomma;
-	char *tmp;
+	int		i;
+	int		length;
+	int		scomma;
+	char	*tmp;
 
 	i = 0;
 	length = 0;
 	scomma = 0;
-	while(arg[i])
+	while (arg[i])
 	{
 		detect_comma(*arg, &scomma);
-		if ((arg[i] == '$') && (scomma <= 0) && (arg[i + 1]) && (arg[i + 1] != '.'))
+		if ((arg[i] == '$') && (scomma <= 0) && \
+		(arg[i + 1]) && (arg[i + 1] != '.'))
 		{
-			if (*(arg + 1) == 63) 
+			if (*(arg + 1) == 63)
 			{
 				i = i + 2;
 				tmp = ft_itoa(g_ms->err_n);
@@ -79,18 +82,16 @@ char *alloc_expand(char *arg,char *dup)
 			length++;
 		}
 	}
-	printf("length is %i\n", length + 1);
 	dup = malloc(sizeof(char *) * length);
 	return (dup);
 }
 
-int var_length(char *arg, int *i)
+int	var_length(char *arg, int *i)
 {
-
-	int y;
-	int envl;
-	int length;
-	char *tmp;
+	int		y;
+	int		envl;
+	int		length;
+	char	*tmp;
 
 	length = 0;
 	y = 0;
@@ -109,15 +110,14 @@ int var_length(char *arg, int *i)
 		}
 		else if (!(g_ms->sh_env[++y]))
 		{
-			while( arg[*i] && (!(ft_isspace(arg[*i]))))
+			while (arg[*i] && (!(ft_isspace(arg[*i]))))
 				(*i)++;
 		}
 	}
 	return (length);
 }
 
-
-void detect_comma(char c, int *scomma)
+void	detect_comma(char c, int *scomma)
 {
 	if ((c == '\'') || (c == '\"'))
 	{
@@ -132,31 +132,13 @@ void detect_comma(char c, int *scomma)
 	}
 }
 
-char *aux_cpy(char *tmp,char *dup, int pos)
+char	*var_detected(char *arg, char *dup, int *pos, int *i)
 {
-	int cpy;
-
-	cpy = 0;
-	while (cpy < pos)
-	{
-		tmp[cpy] = dup[cpy];
-		cpy++;
-	}
-	tmp[cpy] = '\0';
-	cpy = 0;
-	free(dup);
-	return(tmp);
-}
-
-char *var_detected(char* arg, char *dup, int *pos, int *i)
-{
-	int y;
-	int envl;
-	char *tmp;
+	int		y;
+	int		envl;
+	char	*tmp;
 
 	y = 0;
-//	true_arg_len(arg);
-//	printf("length is :%i\n", length);
 	while (g_ms->sh_env[y])
 	{
 		tmp = def_name(g_ms->sh_env[y]);
@@ -171,40 +153,39 @@ char *var_detected(char* arg, char *dup, int *pos, int *i)
 			free(tmp);
 			(*pos) = ft_strlen(dup) - 1;
 			*i = (*i) + envl;
-			return(dup);
+			return (dup);
 		}
 		else if (!(g_ms->sh_env[++y]))
 		{
-			while( arg[*i] && (!(ft_isspace(arg[*i]))))
+			while (arg[*i] && (!(ft_isspace(arg[*i]))))
 				(*i)++;
 			if ((arg[*i] == '\0'))
 			{
 				(*i)--;
 				(*pos)--;
-				return(dup);
+				return (dup);
 			}
 			dup[*pos] = arg[*i];
 			dup[*pos + 1] = '\0';
 		}
 	}
-	return(dup);
+	return (dup);
 }
 
-//no funciona bien he de revisarlo
-char *q_mark_det(char *dup, int *pos, int *i)
+char	*q_mark_det(char *dup, int *pos, int *i)
 {
-	char *err_n;
+	char	*err_n;
 
 	err_n = ft_itoa(g_ms->err_n);
 	dup = ft_strcat(dup, err_n);
 	(*pos) = ft_strlen(dup) -1;
 	(*i) = (*i) + ft_strlen(err_n);
-	return(dup);
+	return (dup);
 }
 
-char * dolla_handler(char* arg, char *dup, int *pos, int *i)
+char	*dolla_handler(char	*arg, char *dup, int *pos, int *i)
 {
-	if (arg[(*i) + 1] == 63) 
+	if (arg[(*i) + 1] == 63)
 		dup = q_mark_det(dup, pos, i);
 	else if (ft_isdigit(arg[(*i) + 1]))
 	{
@@ -214,5 +195,5 @@ char * dolla_handler(char* arg, char *dup, int *pos, int *i)
 	}
 	else
 		dup = var_detected(arg, dup, pos, i);
-	return(dup);
+	return (dup);
 }
