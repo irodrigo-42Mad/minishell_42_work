@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/17 09:55:12 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/17 10:35:56 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ expands $ variable into the one at our env list
 $? is implemented  not on norme, ill go ahead and clean it up later*/
 int		var_length(char *arg, int *i);
 char	*alloc_expand(char *arg, char *dup);
+void	add_one(char *arg, char *dup, int i, int pos);
+int		var_n_length(int length, int *i);
+void	one_more2(int *a, int *b);
+void	add_one_to_up(char *arg, char *dup, int i, int pos);
+int		envl_calc(int y);
+char	*no_var_found(char *arg, char *dup, int *pos, int *i);
 
 char	*expand_vars(char *arg)
 {
@@ -37,99 +43,12 @@ char	*expand_vars(char *arg)
 		(arg[i + 1]) && (arg[i + 1] != '.'))
 			dup = dolla_handler(arg, dup, &pos, &i);
 		else
-		{
-			dup[pos] = arg[i];
-			dup[pos + 1] = '\0';
-		}
+			add_one_to_up(arg, dup, i, pos);
 		pos++;
 		i++;
 	}
 	dup[pos] = '\0';
 	return (dup);
-}
-
-char	*alloc_expand(char *arg, char *dup)
-{
-	int		i;
-	int		length;
-	int		scomma;
-	char	*tmp;
-
-	i = 0;
-	length = 0;
-	scomma = 0;
-	while (arg[i])
-	{
-		detect_comma(*arg, &scomma);
-		if ((arg[i] == '$') && (scomma <= 0) && \
-		(arg[i + 1]) && (arg[i + 1] != '.'))
-		{
-			if (*(arg + 1) == 63)
-			{
-				i = i + 2;
-				tmp = ft_itoa(g_ms->err_n);
-				length = length + ft_strlen(tmp);
-				free(tmp);
-			}
-			else if (ft_isdigit(*(arg + 1)))
-				i = i + 2;
-			else
-				length = length + var_length(arg, &i);
-		}
-		else
-		{
-			i++;
-			length++;
-		}
-	}
-	dup = malloc(sizeof(char *) * length);
-	return (dup);
-}
-
-int	var_length(char *arg, int *i)
-{
-	int		y;
-	int		envl;
-	int		length;
-	char	*tmp;
-
-	length = 0;
-	y = 0;
-	while (g_ms->sh_env[y])
-	{
-		tmp = def_name(g_ms->sh_env[y]);
-		envl = ft_strlen(tmp);
-		free (tmp);
-		if (ft_strncmp((arg + ((*i) + 1)), \
-		g_ms->sh_env[y], \
-		envl) == 0)
-		{
-			length = ft_strlen(g_ms->sh_env[y]) - (envl + 1);
-			*i = (*i) + envl - 1;
-			return (length);
-		}
-		else if (!(g_ms->sh_env[++y]))
-		{
-			while (arg[*i] && (!(ft_isspace(arg[*i]))))
-				(*i)++;
-		}
-	}
-	return (length);
-}
-
-void	detect_comma(char c, int *scomma)
-{
-	if ((c == '\'') || (c == '\"'))
-	{
-		if ((*scomma == 0) && (c == '\"'))
-			*scomma = -1;
-		if ((*scomma == -1) && (c == '\"'))
-			*scomma = 0;
-		else if ((*scomma == 0) && (c == '\''))
-			*scomma = 1;
-		if ((*scomma == 1) && (c == '\''))
-			*scomma = 0;
-	}
 }
 
 char	*var_detected(char *arg, char *dup, int *pos, int *i)
@@ -141,9 +60,7 @@ char	*var_detected(char *arg, char *dup, int *pos, int *i)
 	y = 0;
 	while (g_ms->sh_env[y])
 	{
-		tmp = def_name(g_ms->sh_env[y]);
-		envl = ft_strlen(tmp);
-		free(tmp);
+		envl = envl_calc(y);
 		if (ft_strncmp((arg + (*i) + 1), \
 		g_ms->sh_env[y], \
 		envl) == 0)
@@ -156,18 +73,7 @@ char	*var_detected(char *arg, char *dup, int *pos, int *i)
 			return (dup);
 		}
 		else if (!(g_ms->sh_env[++y]))
-		{
-			while (arg[*i] && (!(ft_isspace(arg[*i]))))
-				(*i)++;
-			if ((arg[*i] == '\0'))
-			{
-				(*i)--;
-				(*pos)--;
-				return (dup);
-			}
-			dup[*pos] = arg[*i];
-			dup[*pos + 1] = '\0';
-		}
+			return (no_var_found(arg, dup, pos, i));
 	}
 	return (dup);
 }
