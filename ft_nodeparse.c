@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 09:32:53 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:09:02 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,52 +197,39 @@ void ft_setlst_type(t_lst *aux)
 
 void ft_set_paramlst(t_lst *aux)
 {
-	size_t	pos;
-	size_t	len;
+ size_t pos;
+ size_t len;
 
-	pos = 0;
-	len = ft_strlen (aux->str_cmd);
-	while (pos < len && aux->type == 0)
-	{
-		if (aux->str_cmd[pos] == '>' || aux->str_cmd[pos] == '<')
-		{
-			if (aux->str_cmd[pos + 1] == '<')
-				aux->type = 3;
-			if (aux->str_cmd[pos + 1] == '>')
-				aux->type = 4;
-		}
-		else
-		{
-			aux->type = 1;
-		}
-		if (aux->str_cmd[pos] == '\"' || aux->str_cmd[pos] == '\'')
-			aux->type = 2;
-		pos++;
-	}
-	if (aux->type != 1 && aux->type != 2)
-		aux->str_args = ft_split(aux->str_cmd, ' ');
-	if (aux->type == 2)
-		ft_quote_cmd(aux->str_cmd);
-	// pa quitar despues
-	aux->str_args = ft_split(aux->str_cmd, ' ');
-	//1 indicar si tenemos redirecciones
-	//2 si no hay redirecciones separar args
-	//3 guardar nodo
+ pos = 0;
+ len = ft_strlen (aux->str_cmd);
+ while (pos < len && aux->type == 0)
+ {
+  if (aux->str_cmd[pos] == '>' || aux->str_cmd[pos] == '<')
+  {
+   if (aux->str_cmd[pos + 1] == '<')
+    aux->type = 3;
+   if (aux->str_cmd[pos + 1] == '>')
+    aux->type = 4;
+  }
+  else
+  {
+   aux->type = 1;
+  }
+  if (aux->str_cmd[pos] == '\"' || aux->str_cmd[pos] == '\'')
+   aux->type = 2;
+  pos++;
+ }
+
+ //if (aux->type != 1 && aux->type != 2)
+ // aux->str_args = ft_split(aux->str_cmd, ' ');
+ //if (aux->type == 2)
+ // ft_quote_cmd(aux->str_cmd);
+
+
+ // pa quitar despues
+ // aux->str_args = ft_split(aux->str_cmd, ' ');
+
+ //1 indicar si tenemos redirecciones
+ //2 si no hay redirecciones separar args
+ //3 guardar nodo
 }
-/*
-** Code in revision process
-
-**	// g_shell->parse_rl = g_shell->rl_tofree;
-**	// g_shell->rl_aux = g_shell->rl;
-**	// p_nd = create_pnode(&g_shell->parse_rl
-**		&g_shell->rl_aux, &g_shell->n_proc);
-**	// g_shell->p_lst = p_nd;
-**	// while (*g_shell->parse_rl)
-**	// {
-**	// 	p_nd->next = create_pnode(&g_shell->parse_rl,
-**	// 			&g_shell->rl_aux, &g_shell->n_proc);
-**	// 	p_nd = p_nd->next;
-**	// }
-**	// free(g_shell->rl_tofree);
-**	// free(g_shell->rl);
-*/

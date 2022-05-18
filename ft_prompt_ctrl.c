@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt_ctrl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:52:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/17 19:57:49 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/18 09:48:21 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void	ft_create_prompt (void)
 	char	*tmp;
 	size_t	len;
 
-	if (g_ms->err_n == 0)
+	len = 0;
+	//if (g_ms->err_n == 0)
 	//{
 		//write(2, "\n", 1);
-		len = ft_strlen(ANSI_GREEN);
+	//	len = ft_strlen(ANSI_GREEN);
 	//}
-	else
-		len = ft_strlen(ANSI_RED);
+	//else
+	//	len = ft_strlen(ANSI_RED);
 	//write(2, "\n", 1);
 	aux = getcwd(NULL, 0);
 	len += (ft_strlen(aux) + ft_strlen(ANSI_CYAN) + 5);
@@ -66,10 +67,10 @@ void	ft_create_prompt (void)
 	tmp = ft_calloc(len, sizeof(char));
 	tmp = ft_strcat(tmp, ANSI_CYAN);
 	tmp = ft_strcat(tmp, aux);
-	if (g_ms->err_n == 0)
-		tmp = ft_strcat(tmp, ANSI_GREEN);
-	else
-		tmp = ft_strcat(tmp, ANSI_RED);
+	//if (g_ms->err_n == 0)
+	//	tmp = ft_strcat(tmp, ANSI_GREEN);
+	//else
+	//	tmp = ft_strcat(tmp, ANSI_RED);
 	tmp = ft_strcat(tmp, " > ");
 	tmp = ft_strcat(tmp, ANSI_RESET);
 	free(aux);
