@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 09:37:05 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/16 13:48:07 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,8 @@ void	ft_prepare_command(void)
 		{
 			aux = ft_newinst(str[i], &i);
 			ft_setlst_type(aux);
-			//ft_set_paramlst(aux);// por aqui andamos
+			aux->str_cmd = expand_vars(aux->str_cmd);
+			ft_set_paramlst(aux);// por aqui andamos
 			ft_lstcmdadd_back(&g_ms->instr, aux);
 			g_ms->prcs_n++;
 			i++;
@@ -223,7 +224,6 @@ void ft_set_paramlst(t_lst *aux)
 		ft_quote_cmd(aux->str_cmd);
 	// pa quitar despues
 	aux->str_args = ft_split(aux->str_cmd, ' ');
-
 	//1 indicar si tenemos redirecciones
 	//2 si no hay redirecciones separar args
 	//3 guardar nodo

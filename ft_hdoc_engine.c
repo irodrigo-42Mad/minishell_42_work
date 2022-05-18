@@ -101,3 +101,12 @@ int	heredoc_opener(char *file)
 	close(fd);
 	return (0);
 }
+/* signal main
+  while (1)
+  {
+   line = readline("$> ");
+   if (!line || !ft_strncmp(line, eof, ft_maxlen(line, eof)))
+    exit(0);
+   else
+    write_line_on_hdoc(line, node->fdi);
+  }*/

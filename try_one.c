@@ -6,14 +6,14 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 09:58:45 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/16 09:59:25 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/17 11:32:41 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft/libft.h"
 
-const size_t	ft_set_quote_pos(int flg, char *str, size_t pos)
+size_t	ft_set_quote_pos(int flg, char *str, size_t pos)
 {
 	size_t	last;
 	char	quote;
@@ -36,7 +36,7 @@ const size_t	ft_set_quote_pos(int flg, char *str, size_t pos)
 	return (last);
 }
 
-const size_t	ft_set_end(char *str, int pos)
+size_t	ft_set_end(char *str, int pos)
 {
 	size_t	last;
 
@@ -50,17 +50,14 @@ const size_t	ft_set_end(char *str, int pos)
 }
 
 /*
-int	main(void)
+int	try_one(char* aux)
 {
-	char	*aux;
 	char	*file;
 	size_t	pos;
 	size_t	len;
 	size_t	end;
 	size_t	begin;
 
-	aux = "cat >> \'amigo \"como\" estamos\' <> cosa 
-	> \"vamos a hacer redirecciones\"";
 	len = ft_strlen(aux);
 	pos = 0;
 	while (pos < len)
@@ -70,19 +67,23 @@ int	main(void)
 			if (aux[pos + 1] == '>')
 			{
 				pos += 3;
-				if (aux[pos] == '\"' || aux[pos] == '\'')
+
+				***
+				if (lst->str_line[pos] == '\"' || lst->str_line[pos] == '\'')
 				{
 					begin = ++pos;
-					if (aux[pos - 1] == '\'')
-						end = ft_set_quote_pos(1, aux, pos);
+					if (lst->str_line[pos - 1] == '\'')
+						end = ft_set_quote_pos(1, lst->str_line, pos);
 					else
-						end = ft_set_quote_pos(2, aux, pos);
+						end = ft_set_quote_pos(2, lst->str_line, pos);
 				}
 				else
 				{
 					begin = pos;
 					end = ft_set_end(aux, pos);
 				}
+				***
+
 				file = (char *) malloc(sizeof(char) * (end + 1));
 				ft_strnlcpy(file, aux, begin -1, (end + 1));
 				// en este momento se hace la expansión de variables de entorno
@@ -94,5 +95,4 @@ int	main(void)
 		pos++;
 	}
 	return (0);
-}
-*/
+}*/

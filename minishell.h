@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 10:59:59 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/17 12:04:47 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,9 +269,24 @@ char		*expand_vars(char *arg);
 void		detect_comma(char c, int *scomma);
 char		*aux_cpy(char *tmp, char *dup, int pos);
 char		*var_detected(char *arg, char *dup, int *pos, int *i);
-char		*q_mark_det(char *arg, char *dup, int *pos, int *i);
+char		*q_mark_det(char *dup, int *pos, int *i);
 char		*dolla_handler(char *arg, char *dup, int *pos, int *i);
 int			heredoc_opener(char *file);
 void		node_to_zero(t_lst *aux);
 void		ft_clear_str(char *str, t_lst *lst);
+void		ft_clean_hdoc_pos(t_lst *elm);
+int			var_length(char *arg, int *i);
+char		*alloc_expand(char *arg, char *dup);
+void		add_one(char *arg, char *dup, int i, int pos);
+int			var_n_length(int length, int *i);
+void		one_more2(int *a, int *b);
+void		add_one_to_up(char *arg, char *dup, int i, int pos);
+int			envl_calc(int y);
+char		*no_var_found(char *arg, char *dup, int *pos, int *i);
+int			ft_dircheck(char *file);
+void		ft_indirection(char *file, t_lst *lst);
+void		ft_control_out_mode(char *file, t_lst *lst, int mode);
+size_t		ft_set_end(char *str, int pos);
+size_t		ft_set_quote_pos(int flg, char *str, size_t pos);
+int			ft_element_error(char *str, int err_n);
 #endif
