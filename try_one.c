@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   try_one.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 09:58:45 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/16 09:59:25 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/17 12:59:28 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft/libft.h"
 
-const size_t	ft_set_quote_pos(int flg, char *str, size_t pos)
+size_t	ft_set_quote_pos(int flg, char *str, size_t pos)
 {
 	size_t	last;
 	char	quote;
@@ -36,7 +36,7 @@ const size_t	ft_set_quote_pos(int flg, char *str, size_t pos)
 	return (last);
 }
 
-const size_t	ft_set_end(char *str, int pos)
+size_t	ft_set_end(char *str, int pos)
 {
 	size_t	last;
 

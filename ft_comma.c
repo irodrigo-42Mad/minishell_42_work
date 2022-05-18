@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_comma.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:23:06 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 09:22:26 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/17 13:00:45 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*dquotes(char *str, int *q_err)
 {
-	int		len;
+//	int		len;
 
 	str++;
-	len = ft_strlen(str);
+//	len = ft_strlen(str);
 	while (*str != '\"' && *str)
 		*str++ = ' ';
 	if (!*str)

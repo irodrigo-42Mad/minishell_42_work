@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt_ctrl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:52:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/11 14:31:22 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/17 19:57:49 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_create_prompt (void)
 	tmp = ft_strcat(tmp, ANSI_RESET);
 	free(aux);
 	aux = NULL;
+	free(g_ms->prompt);
 	g_ms->prompt = tmp;
 }
 /*

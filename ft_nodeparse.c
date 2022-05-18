@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nodeparse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 09:37:05 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/17 21:09:46 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,11 +154,12 @@ void	ft_prepare_command(void)
 		{
 			aux = ft_newinst(str[i], &i);
 			ft_setlst_type(aux);
-			//ft_set_paramlst(aux);// por aqui andamos
+			ft_set_paramlst(aux);// por aqui andamos
 			ft_lstcmdadd_back(&g_ms->instr, aux);
 			g_ms->prcs_n++;
 			i++;
 		}
+		free(str);
 	}
 	else
 		return (ft_msg(Q_ERR_05, 2));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean_obj.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:45:04 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 11:26:10 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/17 20:05:21 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_clean_instr(void)
 		free(g_ms->instr->str_aux);
 		//free(g_ms->instr->str_save);
 		free(g_ms->instr->str_aux_save);
+		free_matrix(g_ms->instr->str_args);
 		ft_bzero(g_ms->instr, sizeof(t_lst));
 		free (g_ms->instr);
 		g_ms->instr = tmp;
