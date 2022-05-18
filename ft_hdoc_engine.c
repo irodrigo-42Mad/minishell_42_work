@@ -86,7 +86,7 @@ int	heredoc_opener(char *file)
 		return (-1);
 	write(1, "> ", 2);
 	get_next_line(0, &line);
-	while (!line || ft_strncmp(line, file, ft_strlen(line)))
+	while (!line || ft_strncmp(line, file, ft_strlen(file) != 0))
 	{
 		if (!((file[0] =='\'') || (file[0] =='\"')))
 			line = expand_vars(line);
