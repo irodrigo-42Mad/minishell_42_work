@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adv_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:22:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 09:02:40 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/17 13:00:23 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	ft_check_redir(t_lst *lst)
 				}
 				else
 				{
-					size_t	mlen;
-					mlen = (ft_strlen(lst->str_cmd) - pos) + 1;
+					//size_t	mlen;
+					//mlen = (ft_strlen(lst->str_cmd) - pos) + 1;
 					st_aux = ft_calloc((ft_strlen(lst->str_cmd) - pos) + 1,
 							sizeof(char));
 					ft_strnlcpy(st_aux, lst->str_cmd, pos,

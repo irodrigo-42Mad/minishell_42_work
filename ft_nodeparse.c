@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 13:48:07 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 09:32:53 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ void	ft_prepare_command(void)
 			g_ms->prcs_n++;
 			i++;
 		}
+		free(str);
 	}
 	else
 		return (ft_msg(Q_ERR_05, 2));

@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 09:21:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/16 13:18:35 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 09:32:19 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_pre_clean(void)
 	g_ms->prompt = NULL;
 	ft_clean_instr();
 	g_ms->prcs_n = 0;
+	free(g_ms->pars_cmd);
 	g_ms->pars_cmd = NULL;
 	free (g_ms->str);
 	g_ms->str = NULL;

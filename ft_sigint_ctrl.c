@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sigint_ctrl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:20:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/02/07 14:19:59 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:01:22 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "sys/wait.h"
 
 void	ft_state_hdoc(void)
 {
