@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:47:45 by mgrau             #+#    #+#             */
-/*   Updated: 2022/04/29 11:51:18 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 13:59:15 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_cd(char *str)
 	}
 	else
 		s = ft_strdup("HOME UNSET");
-	if (chdir(s) == -1)
+	if ((chdir(s) == -1) || (i[0] == -1) || (i[1] == -1))
 		cd_error(s);
 	else
 	{
