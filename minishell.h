@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 09:33:53 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 10:27:47 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,4 +289,5 @@ void		ft_control_out_mode(char *file, t_lst *lst, int mode);
 size_t		ft_set_end(char *str, int pos);
 size_t		ft_set_quote_pos(int flg, char *str, size_t pos);
 int			ft_element_error(char *str, int err_n);
+char 		*ft_prepare_aux(char *aux);
 #endif
