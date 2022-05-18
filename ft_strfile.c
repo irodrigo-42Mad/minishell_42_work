@@ -78,6 +78,48 @@ void ft_rebuild_str(t_lst *lst)
 
 // este procedimiento montará los comandos para ejecutar
 
+char *ltrim(char *s)
+{
+while(isspace(*s)) 
+		s++;
+    return s;
+}
+
+char *rtrim(char *s)
+{
+    char* back = s + strlen(s);
+    while(isspace(*--back));
+    *(back+1) = '\0';
+    return s;
+}
+
+char *trim(char *s)
+{
+	int i;
+	int y;
+	char *tmp;
+	char *dest;
+
+	i = 0;
+	y = 0;
+	tmp = malloc(sizeof(char) * ft_strlen(s) + 1);
+	while(s[i])
+	{
+		while (isspace(s[i]) && s[i]) 
+			i++;
+		while ((!(isspace(s[i]))) && s[i])
+		{
+			tmp[y] = s[i];
+			i++;
+			y++;
+		}
+		tmp[y++] = s[i];
+	}
+	dest = ft_strdup(tmp);
+	free(tmp);
+	return (dest); 
+}
+
 void ft_restore_str_command(void)
 {
  t_lst *aux;
@@ -86,6 +128,7 @@ void ft_restore_str_command(void)
  char *element;
  int  pos;
  int  i_pr;
+ char *tmp;
 
  aux = g_ms->instr;
  while (aux)
@@ -94,29 +137,36 @@ void ft_restore_str_command(void)
   // preparamos el comando
   aux->str_args = ft_split(ft_prepare_aux(aux->str_cmd), '|');
   pos = 0;
-  while (aux->str_args[++i_pr])
-  {
-   //printf ("str_line: %s\n",aux->str_line);
-   // rellenamos los elementos del comando
-   // sumamos uno al contador
-   len = ft_strlen(aux->str_args[i_pr]);
-    element = (char *) malloc (sizeof(char) * (len + 1));
-    ft_strnlcpy(element, aux->str_line, pos - 1 , len + 1);
-    if (precise_cmp(aux->str_args[i_pr], element, len))
-    pos += ++len;
-    else
-    {
-     end = len;
-     ft_strnlcpy(aux->str_args[i_pr], element, pos, end);
-     if (aux->str_args[i_pr][ft_strlen(aux->str_args[i_pr]) - 1] == '\"'
-     || aux->str_args[i_pr][ft_strlen(aux->str_args[i_pr]) - 1] == '\'')
-      aux->str_args[i_pr][ft_strlen(aux->str_args[i_pr]) - 1] = '\0';
-     pos += ++len;
-   }
-   free (element);
-   i_pr++;
-  }
-  aux = aux->next;
+	tmp = trim(aux->str_line);
+	//tmp = expand_vars
+	free(aux->str_line);
+	aux->str_line = tmp;
+//	printf("aux->str_line : %s\n",aux->str_line);
+	while (aux->str_args[++i_pr])
+	{
+		// rellenamos los elementos del comando
+		// sumamos uno al contador
+		len = ft_strlen(aux->str_args[i_pr]);
+		element = (char *) malloc (sizeof(char) * (len + 1));
+		ft_strnlcpy(element, aux->str_line, pos - 1 , len + 1);
+//		printf("element : %s\n",element);
+//		printf("aux->str_args[i_pr]: %s\n",aux->str_args[i_pr]);
+		if (precise_cmp(aux->str_args[i_pr], element, len))
+			pos += ++len;
+		else
+		{
+			end = len;
+			ft_strnlcpy(aux->str_args[i_pr], element, -1, end + 1);
+//			printf("aux->str_args[i_pr]: %s\n",aux->str_args[i_pr]);
+//			if (aux->str_args[i_pr][ft_strlen(aux->str_args[i_pr]) - 1] == '\"'
+//			|| aux->str_args[i_pr][ft_strlen(aux->str_args[i_pr]) - 1] == '\'')
+//			aux->str_args[i_pr][ft_strlen(aux->str_args[i_pr]) - 1] = '\0';
+			pos += ++len;
+		}
+		aux->str_args[i_pr] = expand_vars(aux->str_args[i_pr]);
+		free (element);
+	}
+	aux = aux->next;
  }
 
 

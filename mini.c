@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:43:22 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/18 14:20:58 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 15:34:24 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	main(int argc, char **argv, char **env)
 				ft_heredoc(); // heredoc me deja el primer nombre
 				// montar cada comando y separar argumentos
 				ft_redirections(); // revisando las redirecciones
-				///ft_restore_str_command();
+				ft_restore_str_command();
 	 			start_executer();
 			}
 			ft_pre_clean();

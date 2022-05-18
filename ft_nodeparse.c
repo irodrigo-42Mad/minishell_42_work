@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nodeparse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 14:20:51 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 19:57:23 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void ft_set_paramlst(t_lst *aux)
 
 
  // pa quitar despues
-  aux->str_args = ft_split(aux->str_cmd, ' ');
+//aux->str_args = ft_split(aux->str_cmd, ' ');
 
  //1 indicar si tenemos redirecciones
  //2 si no hay redirecciones separar args

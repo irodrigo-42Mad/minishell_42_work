@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fillstr_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:06:50 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/18 10:27:35 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 18:04:04 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char *ft_prepare_aux(char *aux)
  flg = 0;
  pos = -1;
  len = (int)ft_strlen(aux);
- while (++pos < (len - 1) && aux[pos])
+ while (++pos < (len) && aux[pos])
  {
   if (aux[pos] == '\"' || aux[pos] == '\'')
   {
