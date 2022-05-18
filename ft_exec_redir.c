@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 11:46:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 09:38:43 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 13:32:23 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ void ft_control_out_mode(char *file, t_lst *lst, int mode)
   return ;
  if (mode == APPEND)
  {
-  if(!access(file, W_OK))
+  if(access(file, W_OK) != 0)
    lst->file_out = open(file, O_RDWR| O_APPEND);
   else
    lst->file_out = open(file, O_RDWR| O_CREAT, S_IRWXU);
  }
  else if (mode == TRUNCATE)
  {
-  if (!access(file, R_OK))
+  if (access(file, R_OK) != 0)
    unlink(file);
   lst->file_out = open(file, O_RDWR| O_CREAT, S_IRWXU);
  }
@@ -93,7 +93,7 @@ void ft_indirection(char *file, t_lst *lst)
  //fd = check_for_hdoc_priority(lst->str_line);
  if (!ft_dircheck(file))
  {
-  if (lst->herename)
+  //if (lst->herename)
    // si es el último heredoc, debemos llenar el archivo con el contenido de este
    // de forma correcta.
   // unlink_one_heredoc(&(node->hdoc_name));
@@ -101,7 +101,7 @@ void ft_indirection(char *file, t_lst *lst)
 
   // el hdoc estará ya creado, lo que es necesario es ajustarlo correctamente
   // en el los ficheros en los que tiene que aparecer
-  if (!access(file, R_OK))
+  if (access(file, R_OK) != 0)
    ft_write_file_err(lst, file);
   lst->file_in = open(file, O_RDONLY);
   if (lst->file_in == -1)

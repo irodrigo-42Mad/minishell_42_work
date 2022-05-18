@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 09:58:45 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/18 09:33:59 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 12:20:33 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ size_t	ft_set_end(char *str, int pos)
 	size_t	last;
 
 	last = 0;
-	while (str[pos] != ' ')
+	while ((str[pos] != ' ') && (str[pos]))
 	{
 		pos++;
 		last++;

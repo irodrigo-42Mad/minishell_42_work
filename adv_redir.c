@@ -6,98 +6,91 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:22:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 09:39:23 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/18 13:34:56 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char *get_filename(t_lst *lst, size_t *last_pos)
+{
+	size_t	end;
+	size_t	begin;
+	size_t pos;
+	char	*st_aux;
+
+	pos = *last_pos;
+	while (ft_isspace(lst->str_aux[pos]))
+		pos++;
+	if (lst->str_line[pos] == '\"' || lst->str_line[pos] == '\'')
+	{
+		begin = ++pos;
+		if (lst->str_line[pos - 1] == '\'')
+			end = ft_set_quote_pos(1, lst->str_aux, pos);
+		else
+			end = ft_set_quote_pos(2, lst->str_aux, pos);
+	}
+	else
+	{
+		begin = pos;
+		end = ft_set_end(lst->str_aux, pos);
+	}
+	st_aux = (char *) malloc(sizeof(char) * (end + 1));
+	ft_strnlcpy(st_aux, lst->str_aux, begin -1, (end + 1));
+	printf("%s\n", st_aux);
+	*last_pos = pos;
+	return(st_aux);
+}
+
+void set_redirection(t_lst *lst, size_t *pos, int type)
+{
+	char	*st_aux;
+	
+	if (type == 1)
+	{
+		(*pos) += 2;
+		st_aux = get_filename(lst, pos);
+		ft_control_out_mode(st_aux,lst,APPEND);
+	}
+	else if (type == 2)
+	{
+		(*pos)++;
+		st_aux = get_filename(lst, pos);
+		ft_control_out_mode(st_aux,lst,TRUNCATE);
+	}
+	else
+	{
+		(*pos)++;
+		st_aux = get_filename(lst, pos);
+		ft_indirection(st_aux, lst);
+	}
+	free(st_aux);
+}
+
 void ft_check_redir(t_lst *lst)
 {
- char *st_aux;
- size_t pos;
+	size_t	pos;
 
- pos = 0;
- while (lst->exe_state == SUCCESS && lst->str_aux[pos] != '\0')
- {
-  if (lst->str_aux[pos] == '>' || lst->str_aux[pos] == '<')
-  {
-   if (lst->str_aux[pos + 1] == '>')
-   {
-    pos+= 2;
-    //realizar una cadena que tome la posicion del caracter
-    // necesario para tomar el nombre de la redireccion
-    //
-
-    st_aux = ft_calloc((ft_strlen(lst->str_aux) - pos) + 1,
-       sizeof(char));
-    // aqui se obtiene el nombre del fichero de salida
-    // si está entre "" obtendremos nombre igual
-
-
-    if (lst->str_aux[pos] != '\"')
-     ft_strnlcpy(st_aux, lst->str_aux, pos,
-      (ft_strlen(lst->str_aux) - pos));
-    else
-     ft_strnlcpy(st_aux, lst->str_line, pos,
-      (ft_strlen(lst->str_aux) - pos));
-
-//pos = ft_take_fname(lst, pos,)
-    ft_control_out_mode(st_aux,lst,APPEND);
-
-    //st_aux += 2;
-    //ft_redir(,lst,FD_OUT, MULTIPLE);
-    //ft_redir(&st_aux, lst, FD_OUT, MULTIPLE);
-   }
-   else
-   {
-     if (lst->str_aux[pos + 1] == '>')
-    {
-     pos++;
-     st_aux = ft_calloc((ft_strlen(lst->str_aux) - pos) + 1,
-       sizeof(char));
-
-     // tomar el nombre del fichero
-
-//pos = ft_take_fname(lst, pos,)
-      ft_control_out_mode(st_aux, lst, TRUNCATE);
-     //ft_redir(&st_aux, lst, FD_OUT, UNIQUE);
-    }
-    else
-    {
-     //pos = ft_take_fname(lst, pos,)
-
-
-
-     size_t mlen;
-     mlen = (ft_strlen(lst->str_aux) - pos) + 1;
-     st_aux = ft_calloc((ft_strlen(lst->str_aux) - pos) + 1,
-       sizeof(char));
-     pos+= 2;
-
-     //ft_strnlcpy(st_aux, lst->str_aux, pos,
-     // (ft_strlen(lst->str_aux) - pos));
-    if (lst->str_aux[pos] != '\"')
-     ft_strnlcpy(st_aux, lst->str_aux, pos,
-      (ft_strlen(lst->str_aux) - pos));
-    else
-     ft_strnlcpy(st_aux, lst->str_line, pos,
-      (ft_strlen(lst->str_aux) - pos));
-
-     ft_indirection(st_aux, lst);
-     //ft_redir(&st_aux, lst, FD_OUT, UNIQUE);
-
-    }
-   //  if (*st_aux++ == '>')
-   //   ft_redir(&st_aux, lst, FD_OUT, UNIQUE);
-   //  else
-   //   ft_redir(&st_aux, lst, FD_IN, UNIQUE);
-   }
-  }
-  else
-   pos++;
- }
+	pos = 0;
+	while (lst->exe_state == SUCCESS && lst->str_aux[pos] != '\0')
+	{
+		if (lst->str_aux[pos] == '>')
+		{
+			if (lst->str_aux[pos + 1] == '>')
+				set_redirection(lst, &pos, 1);
+			else
+				set_redirection(lst, &pos, 2);
+		}
+		else if (lst->str_aux[pos] == '<')
+		{
+			if (lst->str_aux[pos + 1] != '<')
+				set_redirection(lst, &pos, 3);
+		}
+		else
+			pos++;
+	}
 }
+
 // revisar que tenemos que hacer con las redirecciones.
 
 
