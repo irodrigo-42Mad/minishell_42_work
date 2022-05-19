@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irodrigo <irodrigo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 10:45:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/03/04 13:06:06 by irodrigo         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:36:32 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strcat(char *dest, char *src);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t				ft_strnlcpy(char *dst, const char *src, size_t begin, size_t len);
+size_t				ft_strnlcpy(char *dst, const char *src, \
+					size_t begin, size_t len);
 char				*ft_strnstr(const char *haystack, const char *needle, \
 					size_t len);
 unsigned int		ft_strcharcpy(char *dest, char *src, char until, \

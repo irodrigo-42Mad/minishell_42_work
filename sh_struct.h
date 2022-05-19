@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 09:56:38 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/16 09:57:49 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 18:34:37 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_lst{
 	pid_t			node_pid;
 
 	size_t			aux_ln;
-	char			*herename;	// pending to activate heredoc structure
-	int				herequotes;	// set 0 !quotes, 1 squotes  2 dquotess
+	char			*herename;
+	int				herequotes;
 	int				here_num;
 	char			*str_cmd;
 	char			**str_args;
@@ -80,7 +80,6 @@ typedef struct s_ms
 	char		*prompt;
 	char		*str;
 	char		*pars_cmd;
-	// **** trabajando por aqui ****
 	char		*to_clean;
 	char		*lastcmd;
 	char		*flag;

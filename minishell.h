@@ -6,7 +6,7 @@
 /*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/19 18:30:21 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/19 18:32:23 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,9 +289,9 @@ void		ft_control_out_mode(char *file, t_lst *lst, int mode);
 size_t		ft_set_end(char *str, int pos);
 size_t		ft_set_quote_pos(int flg, char *str, size_t pos);
 int			ft_element_error(char *str, int err_n);
-char 		*ft_prepare_aux(char *aux);
-char *		get_filename(t_lst *lst, size_t *last_pos);
-void 		set_redirection(t_lst *lst, size_t *pos, int type);
+char		*ft_prepare_aux(char *aux);
+char		*get_filename(t_lst *lst, size_t *last_pos);
+void		set_redirection(t_lst *lst, size_t *pos, int type);
 char		*space_in(char *s, int pos);
 char		*add_space(char *s);
 void		prepare_strline(t_lst	*aux);

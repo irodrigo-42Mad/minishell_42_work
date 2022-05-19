@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 18:56:22 by eimaz-va          #+#    #+#             */
-/*   Updated: 2021/04/21 18:22:18 by eimaz-va         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:36:12 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*ft_strcpy(char *dst, const char *src)
 char	*ft_strdup(const char *s1)
 {
 	char	*c;
-	// cambiar el malloc por un calloc
+
 	c = (char *)malloc(ft_strlen(s1) + 1);
 	if (!c)
 		return (0);
