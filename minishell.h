@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/19 14:14:14 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 18:30:21 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,4 +298,6 @@ void		prepare_strline(t_lst	*aux);
 void		reconstruction(t_lst	*aux);
 void		add_flag(size_t *pos, int *flg, int t);
 char		*second_comma(char *s, int i, int *com);
+char		*malloc_zstart(char *dup, int length);
+void		disaster(void);
 #endif
