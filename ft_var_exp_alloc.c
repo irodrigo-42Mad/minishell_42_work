@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_exp_alloc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:35:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 10:30:17 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 18:11:57 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ char	*alloc_expand(char *arg, char *dup)
 		else
 			one_more2(&length, &i);
 	}
-	dup = malloc(sizeof(char *) * (length + 1));
-	dup[0] = '\0'; 
+	return (malloc_zstart(dup, length + 1));
+}
+
+char	*malloc_zstart(char *dup, int length)
+{
+	dup = malloc(sizeof(char *) * (length));
+	dup[0] = '\0';
 	return (dup);
 }
 
@@ -63,8 +68,8 @@ int	var_length(char *arg, int *i)
 		}
 		else if (!(g_ms->sh_env[++y]))
 		{
-			(*i)++;
-			while (arg[*i] && (!(ft_isspace(arg[*i]))) && (arg[*i] != '$') && (arg[*i] != '\'') && (arg[*i] != '\"'))
+			while (arg[(*i)++] && (!(ft_isspace(arg[*i]))) && (arg[*i] != '$') \
+			&& (arg[*i] != '\'') && (arg[*i] != '\"'))
 				(*i)++;
 		}
 	}

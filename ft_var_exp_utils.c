@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_exp_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:33:07 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 11:43:06 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 18:15:22 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,11 @@ int	envl_calc(int y)
 
 char	*no_var_found(char *arg, char *dup, int *pos, int *i)
 {
-	//	printf("arg[i]1 = %c\n", arg[*i]);
 	(*i)++;
-	//printf("arg[i]2 = %c\n", arg[*i]);
-	while (arg[*i] && (!(ft_isspace(arg[*i]))) && (arg[*i] != '$') && (arg[*i] != '\'') && (arg[*i] != '\"'))
+	while (arg[*i] && (!(ft_isspace(arg[*i]))) \
+	&& (arg[*i] != '$') && (arg[*i] != '\'') && (arg[*i] != '\"'))
 	{
 		(*i)++;
-
 	}
 	if (arg[*i] == '\0')
 	{
@@ -70,8 +68,6 @@ char	*no_var_found(char *arg, char *dup, int *pos, int *i)
 	else if ((arg[*i] == '\'') || (arg[*i] == '\"'))
 	{	
 		(*pos)--;
-	//	dup[*pos] = arg[*i];
-		//dup[*pos + 1] = '\0';
 		return (dup);
 	}
 	dup[*pos] = arg[*i];
