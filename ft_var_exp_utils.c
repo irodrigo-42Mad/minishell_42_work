@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:33:07 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/17 10:36:38 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 11:43:06 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,30 @@ int	envl_calc(int y)
 
 char	*no_var_found(char *arg, char *dup, int *pos, int *i)
 {
-	while (arg[*i] && (!(ft_isspace(arg[*i]))))
+	//	printf("arg[i]1 = %c\n", arg[*i]);
+	(*i)++;
+	//printf("arg[i]2 = %c\n", arg[*i]);
+	while (arg[*i] && (!(ft_isspace(arg[*i]))) && (arg[*i] != '$') && (arg[*i] != '\'') && (arg[*i] != '\"'))
+	{
 		(*i)++;
+
+	}
 	if (arg[*i] == '\0')
 	{
 		(*i)--;
 		(*pos)--;
+		return (dup);
+	}
+	else if (arg[*i] == '$')
+	{
+		(*i)--;
+		return (dup);
+	}
+	else if ((arg[*i] == '\'') || (arg[*i] == '\"'))
+	{	
+		(*pos)--;
+	//	dup[*pos] = arg[*i];
+		//dup[*pos + 1] = '\0';
 		return (dup);
 	}
 	dup[*pos] = arg[*i];

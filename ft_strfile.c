@@ -1,4 +1,6 @@
 #include "minishell.h"
+char *space_in(char *s, int pos);
+char *add_space(char *s);
 
 void  ft_clear_str(char *str, t_lst *lst)
 {
@@ -134,6 +136,8 @@ void ft_restore_str_command(void)
  while (aux)
  {
   i_pr = -1;
+  
+  aux->str_cmd = add_space(aux->str_cmd);
   // preparamos el comando
   aux->str_args = ft_split(ft_prepare_aux(aux->str_cmd), '|');
   pos = 0;
@@ -141,7 +145,8 @@ void ft_restore_str_command(void)
 	//tmp = expand_vars
 	free(aux->str_line);
 	aux->str_line = tmp;
-//	printf("aux->str_line : %s\n",aux->str_line);
+	aux->str_line = add_space(aux->str_line);
+	//printf("aux->str_line : %s\n",aux->str_line);
 	while (aux->str_args[++i_pr])
 	{
 		// rellenamos los elementos del comando
@@ -167,8 +172,7 @@ void ft_restore_str_command(void)
 		free (element);
 	}
 	aux = aux->next;
- }
-
+}
 
 
   //printf ("str_aux: %s\n", aux->str_aux);
@@ -200,4 +204,57 @@ void ft_restore_str_command(void)
  // printf ("Hola, estoy montando la cadena\n");
  // return ;
 
+}
+
+char *add_space(char *s)
+{
+	int i;
+	int com[2];
+
+	i = 0;
+	com[0] = 0;
+	com[1] = 0;
+	while(s[i])
+	{
+		if ((s[i] == '\'') && (com[0] == 0))
+			com[0] = 1;
+		else if ((s[i] == '\"') && (com[1] == 0))
+			com[1] = 1;
+		else if ((s[i] == '\'') && (com[0] == 1))
+		{
+			if (((!(ft_isspace(s[i + 1])))) && (com[1] == 0))
+				s = space_in(s,i + 1);
+			com[0] = 0;
+		}
+		else if ((s[i] == '\"') && (com[1] == 1))
+		{
+			if (((!(ft_isspace(s[i + 1])))) && (com[0] == 0))
+				s = space_in(s,i + 1);
+			com[1] = 0;
+		}
+		i++;
+	}
+	return(s);
+}
+
+char *space_in(char *s, int pos)
+{
+	int i;
+	int y;
+	char *tmp;
+
+	tmp = malloc(sizeof(char) * (ft_strlen(s) + 2));
+	i = 0;
+	y = 0;
+	while (s[i])
+	{
+		if (i == pos)
+			tmp[y++] = ' ';
+		tmp[y] = s[i];
+		y++;
+		i++;
+	}
+	tmp[y] = '\0';
+	free(s);
+	return(tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:35:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/17 10:36:42 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 10:30:17 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	*alloc_expand(char *arg, char *dup)
 		else
 			one_more2(&length, &i);
 	}
-	dup = malloc(sizeof(char *) * length);
+	dup = malloc(sizeof(char *) * (length + 1));
+	dup[0] = '\0'; 
 	return (dup);
 }
 
@@ -62,7 +63,8 @@ int	var_length(char *arg, int *i)
 		}
 		else if (!(g_ms->sh_env[++y]))
 		{
-			while (arg[*i] && (!(ft_isspace(arg[*i]))))
+			(*i)++;
+			while (arg[*i] && (!(ft_isspace(arg[*i]))) && (arg[*i] != '$') && (arg[*i] != '\'') && (arg[*i] != '\"'))
 				(*i)++;
 		}
 	}
@@ -75,11 +77,11 @@ void	detect_comma(char c, int *scomma)
 	{
 		if ((*scomma == 0) && (c == '\"'))
 			*scomma = -1;
-		if ((*scomma == -1) && (c == '\"'))
+		else if ((*scomma == -1) && (c == '\"'))
 			*scomma = 0;
-		else if ((*scomma == 0) && (c == '\''))
+		if ((*scomma == 0) && (c == '\''))
 			*scomma = 1;
-		if ((*scomma == 1) && (c == '\''))
+		else if ((*scomma == 1) && (c == '\''))
 			*scomma = 0;
 	}
 }

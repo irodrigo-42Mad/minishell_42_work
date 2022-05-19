@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:22:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 13:34:56 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 12:42:12 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char *get_filename(t_lst *lst, size_t *last_pos)
 	}
 	st_aux = (char *) malloc(sizeof(char) * (end + 1));
 	ft_strnlcpy(st_aux, lst->str_aux, begin -1, (end + 1));
-	printf("%s\n", st_aux);
 	*last_pos = pos;
 	return(st_aux);
 }
