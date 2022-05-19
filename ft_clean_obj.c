@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean_obj.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:45:04 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/17 20:05:21 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/19 13:08:27 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
+			//free(g_ms->instr->str_save);?
+*/
 void	ft_clean_instr(void)
 {
 	t_lst	*tmp;
@@ -29,7 +31,6 @@ void	ft_clean_instr(void)
 		g_ms->instr->exe_state = 0;
 		free(g_ms->instr->str_line);
 		free(g_ms->instr->str_aux);
-		//free(g_ms->instr->str_save);
 		free(g_ms->instr->str_aux_save);
 		free_matrix(g_ms->instr->str_args);
 		ft_bzero(g_ms->instr, sizeof(t_lst));

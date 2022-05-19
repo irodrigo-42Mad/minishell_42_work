@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:46:00 by mgrau             #+#    #+#             */
-/*   Updated: 2022/04/29 11:46:47 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 14:20:27 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,10 @@ void	close_all_fds(t_lst *node)
 		close(node->file_out);
 		node->file_out = 1;
 	}
+}
+
+void	add_flag(size_t *pos, int *flg, int t)
+{
+		(*flg) = t;
+		(*pos)++;
 }

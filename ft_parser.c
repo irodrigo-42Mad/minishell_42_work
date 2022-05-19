@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:14:50 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 20:07:51 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/19 13:24:25 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,31 @@ int	ft_parser(void)
 		return (1);
 	}
 	return (0);
+}
+
+size_t	ft_strchlen(char *str, char car)
+{
+	size_t	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == car)
+			return (i);
+	}
+	return (i);
+}
+
+void	ft_setnewpos(t_ms *s, size_t len)
+{
+	if (s->str[len + 1] == '|')
+	{
+		*s->str = *s->str + (len + 1);
+		*s->pars_cmd = *s->pars_cmd + (len + 1);
+	}
+	else
+	{
+		*s->str = *s->str + len;
+		*s->pars_cmd = *s->pars_cmd + len;
+	}
 }

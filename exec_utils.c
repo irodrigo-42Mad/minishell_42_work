@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 09:59:14 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/16 13:42:12 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 13:06:50 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ size_t	ft_matrixlen(char **matrix)
 	return (len);
 }
 
+/*
+free(g_ms->instr->str_save) ?
+*/
+
 void	ft_execve_free(void)
 {
 	t_lst	*tmp;
@@ -83,7 +87,6 @@ void	ft_execve_free(void)
 		free(g_ms->instr->str_cmd);
 		free(g_ms->instr->str_line);
 		free(g_ms->instr->str_aux);
-		//free(g_ms->instr->str_save);
 		free(g_ms->instr->str_aux_save);
 		free_matrix(g_ms->instr->str_args);
 		free (g_ms->instr);

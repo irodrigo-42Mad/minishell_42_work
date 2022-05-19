@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:43:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/17 12:04:22 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 13:21:57 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	ft_msg_complex(char *str, char *mgs, int output)
 	ft_msg(mgs, 2);
 }
 
-int ft_element_error(char *str, int err_n)
+int	ft_element_error(char *str, int err_n)
 {
- ft_msg(GN_MSG_02, 2);
- write(2, str, ft_strlen(str));
- ft_msg(T_ERR_07, 2);
- ft_updt_err(err_n);
- return (err_n);
+	ft_msg(GN_MSG_02, 2);
+	write(2, str, ft_strlen(str));
+	ft_msg(T_ERR_07, 2);
+	ft_updt_err(err_n);
+	return (err_n);
 }

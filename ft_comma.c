@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_comma.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:23:06 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/17 13:00:45 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/19 13:11:10 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 char	*dquotes(char *str, int *q_err)
 {
-//	int		len;
-
 	str++;
-//	len = ft_strlen(str);
 	while (*str != '\"' && *str)
 		*str++ = ' ';
 	if (!*str)
@@ -54,8 +51,6 @@ char	*squotes(char *str, int *q_err)
  ** final value
  **      ls -l
 */
-
-// TODO revisar count
 
 int	ft_quotes_threat(int *err, char **str)
 {

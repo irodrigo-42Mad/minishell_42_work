@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 13:38:26 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 14:14:14 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,4 +292,10 @@ int			ft_element_error(char *str, int err_n);
 char 		*ft_prepare_aux(char *aux);
 char *		get_filename(t_lst *lst, size_t *last_pos);
 void 		set_redirection(t_lst *lst, size_t *pos, int type);
+char		*space_in(char *s, int pos);
+char		*add_space(char *s);
+void		prepare_strline(t_lst	*aux);
+void		reconstruction(t_lst	*aux);
+void		add_flag(size_t *pos, int *flg, int t);
+char		*second_comma(char *s, int i, int *com);
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_hdoc_engine.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/19 13:20:03 by mgrau             #+#    #+#             */
+/*   Updated: 2022/05/19 13:20:26 by mgrau            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_set_hdoc(t_lst *lst)
@@ -10,7 +22,7 @@ void	ft_set_hdoc(t_lst *lst)
 	while (*tmp != '\0')
 	{
 		tmp = ft_strnstr(tmp, "<<", ft_strlen(tmp));
-		if (tmp == NULL)  // no heredoc in the string
+		if (tmp == NULL)
 			break ;
 		else
 		{
@@ -19,7 +31,6 @@ void	ft_set_hdoc(t_lst *lst)
 			ft_clear_str(tmp, lst);
 		}
 		lst->herename = ft_eofcatch(&lst->here_num, &lst->str_line);
-		// en este punto debemos de abrir el heredoc
 		heredoc_opener(lst->herename);
 	}
 	if (lst->file_in != FD_IN)
@@ -88,7 +99,7 @@ int	heredoc_opener(char *file)
 	get_next_line(0, &line);
 	while (!line || ft_strncmp(line, file, ft_strlen(file) != 0))
 	{
-		if (!((file[0] =='\'') || (file[0] =='\"')))
+		if (!((file[0] == '\'') || (file[0] == '\"')))
 			line = expand_vars(line);
 		ft_putstr_fd(line, fd);
 		write(fd, "\n", 1);

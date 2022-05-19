@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 09:21:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/18 09:32:19 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 13:10:28 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ void	ft_pre_clean(void)
 	// ft_bzero(g_ms, sizeof(t_ms));
 */
 
-void ft_clean_hdoc_pos(t_lst *elm)
+void	ft_clean_hdoc_pos(t_lst *elm)
 {
- char *aux;
+	char	*aux;
 
- aux = elm->str_aux;
- while (*aux)
- {
-  if (*aux == '\\')
-   *aux = ' ';
-  aux++;
- }
- elm->str_line = elm->str_save;
- free(elm->str_aux_save);
- elm->str_aux_save = NULL;
+	aux = elm->str_aux;
+	while (*aux)
+	{
+		if (*aux == '\\')
+			*aux = ' ';
+		aux++;
+	}
+	elm->str_line = elm->str_save;
+	free(elm->str_aux_save);
+	elm->str_aux_save = NULL;
 }

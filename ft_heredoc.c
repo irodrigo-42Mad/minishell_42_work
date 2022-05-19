@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:54:51 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/18 10:35:42 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 13:20:58 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,20 @@
 
 void	ft_heredoc(void)
 {
- 	t_lst	*lst;
- 	char	*tmp;
- 	int		x;
+	t_lst	*lst;
+	char	*tmp;
+	int		x;
 
- 	x = g_ms->prcs_n;
- 	lst = g_ms->instr;
- 	while (x-- > 0)
- 	{
- 		ft_set_hdoc(lst);
-		//revisando la funcionalidad de set_hdoc
+	x = g_ms->prcs_n;
+	lst = g_ms->instr;
+	while (x-- > 0)
+	{
+		ft_set_hdoc(lst);
 		ft_rebuild_str(lst);
- 	//	rebuild_aux_strings(lst);
- 		lst = lst->next;
-		//i--;
- 	}
- 	tmp = set_hdocfname(NOT_EXIST);
- 	free(tmp);
+		lst = lst->next;
+	}
+	tmp = set_hdocfname(NOT_EXIST);
+	free(tmp);
 }
 
 char	*set_hdocfname(int exist)
