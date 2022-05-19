@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strfile.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:32:42 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 14:19:46 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 19:05:42 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// faltaba freee
+//	void ft_rebuild_str(t_lst *lst)
+//	{
+//		ft_bzero(lst->str_aux, ft_strlen(lst->str_aux));
+//		// de momento no hace falta este fragmento de código,
+//		// se puede eliminar sin problema
+//			
+//		//ft_bzero(lst->str_line, ft_strlen(lst->str_line));
+//		//lst->str_line = ft_strdup(lst->str_save);
+//		lst->str_aux = ft_strdup(lst->str_save);
+//		ft_mute_aux(lst->str_aux, lst->str_cmd);
+//		lst->str_aux_save = ft_strdup(lst->str_aux);
+//	}
 
 void	ft_clear_str(char *str, t_lst *lst)
 {

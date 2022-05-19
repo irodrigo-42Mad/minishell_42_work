@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nodeparse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/19 13:24:10 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/19 19:28:10 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ t_lst	*ft_newinst(char *cmd, int *i)
 	elm->next = NULL;
 	return (elm);
 }
+
+// i should probably do
+//char *s
+			//s = expand_vars(aux->str_cmd);
+			//free(aux->str_cmd);
+			//aux->str_cmd = s;
 
 void	ft_prepare_command(void)
 {
