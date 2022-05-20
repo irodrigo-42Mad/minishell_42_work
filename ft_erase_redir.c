@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_erase_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:08:01 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/20 14:53:58 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 18:15:24 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ char	*expand_vars2(char *arg)
 	while (arg[i])
 	{
 		d_comma(arg[i], &scomma);
-		if ((arg[i] == '$') && (scomma <= 0) && \
-		(arg[i + 1]) && (arg[i + 1] != '.'))
+		if (check_for_dolla(arg[i], arg[i + 1], scomma))
 			dup = dolla_handler(arg, dup, &pos, &i);
 		else
 			add_one_to_up(arg, dup, i, pos);
@@ -106,8 +105,7 @@ char	*alloc_expand2(char *arg, char *dup)
 	while (arg[i])
 	{
 		d_comma(*arg, &scomma);
-		if ((arg[i] == '$') && (scomma <= 0) && \
-		(arg[i + 1]) && (arg[i + 1] != '.'))
+		if (check_for_dolla(arg[i], arg[i + 1], scomma))
 		{
 			if (*(arg + 1) == 63)
 				length = var_n_length(length, &i);

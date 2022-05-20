@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 14:54:04 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 18:22:16 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ char	*expand_vars(char *arg)
 	while (arg[i])
 	{
 		detect_comma(arg[i], &scomma);
-		if ((arg[i] == '$') && (scomma <= 0) && \
-		(arg[i + 1]) && (arg[i + 1] != '.'))
+		if (check_for_dolla(arg[i], arg[i + 1], scomma))
 			dup = dolla_handler(arg, dup, &pos, &i);
 		else
 			add_one_to_up(arg, dup, i, pos);
@@ -104,4 +103,14 @@ char	*dolla_handler(char	*arg, char *dup, int *pos, int *i)
 	else
 		dup = var_detected(arg, dup, pos, i);
 	return (dup);
+}
+
+int	check_for_dolla(char c, char d, int scomma)
+{
+	if ((c == '$') && (scomma <= 0) && \
+	(d) && ((d != '.') && \
+	(d != ' ') && (d != '\"') \
+	&& (d != '\'')))
+		return (1);
+	return (0);
 }
