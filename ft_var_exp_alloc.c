@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_exp_alloc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:35:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 18:11:57 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/20 07:57:25 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	var_length(char *arg, int *i)
 		}
 		else if (!(g_ms->sh_env[++y]))
 		{
-			while (arg[(*i)++] && (!(ft_isspace(arg[*i]))) && (arg[*i] != '$') \
+			(*i)++;
+			while (arg[*i] && (!(ft_isspace(arg[*i]))) && (arg[*i] != '$') \
 			&& (arg[*i] != '\'') && (arg[*i] != '\"'))
 				(*i)++;
 		}
