@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/19 12:38:03 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 10:39:21 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,52 @@ char	*dolla_handler(char	*arg, char *dup, int *pos, int *i)
 	else
 		dup = var_detected(arg, dup, pos, i);
 	return (dup);
+}
+
+char	*erase_redir(char *arg)
+{
+	int		pos;
+	int		scomma;
+	char	*dup;
+	int		i;
+
+	i = 0;
+	pos = ft_strlen(arg);
+	scomma = 0;
+	dup = NULL;
+	dup = malloc(sizeof(char) * (ft_strlen(arg) + 1));
+	while (arg[i])
+	{
+		d_comma(arg[i], &scomma);
+		if (((arg[i] == '<') || (arg[i] == '>')) && (scomma == 0))
+		{
+			pos = i;
+			break;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < pos)
+	{
+		dup[i] = arg[i];
+		i++;
+	}
+	dup[i] = '\0';
+	free(arg);
+	return (dup);
+}
+
+void	d_comma(char c, int *scomma)
+{
+	if ((c == '\'') || (c == '\"'))
+	{
+		if ((*scomma == 0) && (c == '\"'))
+			*scomma = 2;
+		else if ((*scomma == 2) && (c == '\"'))
+			*scomma = 0;
+		if ((*scomma == 0) && (c == '\''))
+			*scomma = 1;
+		else if ((*scomma == 1) && (c == '\''))
+			*scomma = 0;
+	}
 }

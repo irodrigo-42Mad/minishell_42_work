@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 07:25:56 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 10:32:05 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,4 +302,6 @@ char		*malloc_zstart(char *dup, int length);
 void		disaster(void);
 char		*trim(char *s);
 void		ft_mute_aux(char *str, char *str2);
+void	d_comma(char c, int *scomma);
+char	*erase_redir(char *arg);
 #endif

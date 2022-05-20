@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 07:52:41 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 08:03:27 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ t_lst	*ft_newinst(char *cmd, int *i)
 	elm->next = NULL;
 	return (elm);
 }
-
-// i should probably do
-//char *s
-			//s = expand_vars(aux->str_cmd);
-			//free(aux->str_cmd);
-			//aux->str_cmd = s;
 
 void	ft_prepare_command(void)
 {

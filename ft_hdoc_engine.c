@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:20:03 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 13:20:26 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 11:16:45 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	heredoc_opener(char *file)
 		return (-1);
 	write(1, "> ", 2);
 	get_next_line(0, &line);
-	while (!line || ft_strncmp(line, file, ft_strlen(file) != 0))
+	while (!line || !(precise_cmp(line, file, ft_strlen(file))))
 	{
 		if (!((file[0] == '\'') || (file[0] == '\"')))
 			line = expand_vars(line);

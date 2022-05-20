@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:32:42 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/20 07:48:05 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 11:01:16 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	ft_restore_str_command(void)
 	while (aux)
 	{
 		aux->str_cmd = add_space(aux->str_cmd);
+		aux->str_cmd = erase_redir(aux->str_cmd);
 		aux->str_args = ft_split(ft_prepare_aux(aux->str_cmd), '|');
 		prepare_strline(aux);
 		reconstruction(aux);
@@ -123,6 +124,7 @@ void	reconstruction(t_lst *aux)
 	int		i_pr;
 	int		len;
 	int		pos;
+	char	*tmp;
 
 	pos = 0;
 	i_pr = -1;
@@ -138,7 +140,9 @@ void	reconstruction(t_lst *aux)
 			ft_strnlcpy(aux->str_args[i_pr], element, -1, len + 1);
 			pos += ++len;
 		}
-		aux->str_args[i_pr] = expand_vars(aux->str_args[i_pr]);
+		tmp = expand_vars(aux->str_args[i_pr]);
+		free(aux->str_args[i_pr]);
+		aux->str_args[i_pr] = tmp;
 		free (element);
 	}
 }

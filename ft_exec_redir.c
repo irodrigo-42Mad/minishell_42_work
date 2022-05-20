@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 11:46:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/19 13:14:30 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 10:55:31 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	ft_control_out_mode(char *file, t_lst *lst, int mode)
 		return ;
 	if (mode == APPEND)
 	{
-		if (access(file, W_OK) != 0)
+		if (access(file, W_OK) == 0)
 			lst->file_out = open(file, O_RDWR | O_APPEND);
 		else
 			lst->file_out = open(file, O_RDWR | O_CREAT, S_IRWXU);
 	}
 	else if (mode == TRUNCATE)
 	{
-		if (access(file, R_OK) != 0)
+		if (access(file, R_OK) == 0)
 			unlink(file);
 		lst->file_out = open(file, O_RDWR | O_CREAT, S_IRWXU);
 	}
