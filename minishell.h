@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/19 18:32:23 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/20 07:25:56 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,4 +300,6 @@ void		add_flag(size_t *pos, int *flg, int t);
 char		*second_comma(char *s, int i, int *com);
 char		*malloc_zstart(char *dup, int length);
 void		disaster(void);
+char		*trim(char *s);
+void		ft_mute_aux(char *str, char *str2);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:18:38 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 14:20:13 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 07:46:41 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*add_space(char *s)
 		else if ((s[i] == '\"') && (com[1] == 0))
 			com[1] = 1;
 		else
-			second_comma(s, i, com);
+			s = second_comma(s, i, com);
 	}
 	return (s);
 }
