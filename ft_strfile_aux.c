@@ -6,13 +6,12 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:18:38 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/20 10:30:35 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 14:52:11 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-	//free(lst->str_aux);
 void	ft_rebuild_str(t_lst *lst)
 {
 	ft_bzero(lst->str_aux, ft_strlen(lst->str_aux));
@@ -30,6 +29,9 @@ void	prepare_strline(t_lst	*aux)
 	aux->str_line = tmp;
 	aux->str_line = add_space(aux->str_line);
 	aux->str_line = erase_redir(aux->str_line);
+	tmp = expand_vars2(aux->str_line);
+	free(aux->str_line);
+	aux->str_line = tmp;
 }
 
 char	*add_space(char *s)

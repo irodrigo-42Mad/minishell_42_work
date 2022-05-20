@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:35:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/20 07:57:25 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 12:42:12 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,19 @@ int	var_length(char *arg, int *i)
 		else if (!(g_ms->sh_env[++y]))
 		{
 			(*i)++;
-			while (arg[*i] && (!(ft_isspace(arg[*i]))) && (arg[*i] != '$') \
-			&& (arg[*i] != '\'') && (arg[*i] != '\"'))
+			while (check_for_exp(arg[*i]))
 				(*i)++;
 		}
 	}
 	return (length);
+}
+
+int	check_for_exp(char c)
+{
+	if (c && (!(ft_isspace(c))) && (c != '$') \
+		&& (c != '\'') && (c != '\"'))
+		return (1);
+	return (0);
 }
 
 void	detect_comma(char c, int *scomma)

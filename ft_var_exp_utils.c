@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_exp_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:33:07 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 18:15:22 by hatman           ###   ########.fr       */
+/*   Updated: 2022/05/20 11:53:02 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*no_var_found(char *arg, char *dup, int *pos, int *i)
 	{
 		(*i)++;
 	}
-	if (arg[*i] == '\0')
+	if ((arg[*i] == '\0') || (arg[*i] == '\'') || (arg[*i] == '\"'))
 	{
 		(*i)--;
 		(*pos)--;
@@ -63,11 +63,6 @@ char	*no_var_found(char *arg, char *dup, int *pos, int *i)
 	else if (arg[*i] == '$')
 	{
 		(*i)--;
-		return (dup);
-	}
-	else if ((arg[*i] == '\'') || (arg[*i] == '\"'))
-	{	
-		(*pos)--;
 		return (dup);
 	}
 	dup[*pos] = arg[*i];

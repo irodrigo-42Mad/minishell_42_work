@@ -6,12 +6,11 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:22:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 10:38:08 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 11:55:38 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-void ft_clean_stredir(t_lst *lst, char *st_aux, size_t pos);
 
 char	*get_filename(t_lst *lst, size_t *last_pos)
 {
@@ -64,7 +63,6 @@ void	set_redirection(t_lst *lst, size_t *pos, int type)
 		st_aux = get_filename(lst, pos);
 		ft_indirection(st_aux, lst);
 	}
-//	ft_clean_stredir(lst, st_aux, *pos);
 	free(st_aux);
 }
 
@@ -121,41 +119,4 @@ void	ft_redirections(void)
 		}
 		elm = elm->next;
 	}
-}
-
-void ft_clean_stredir(t_lst *lst, char *st_aux, size_t pos)
-{
-	size_t i;
-	size_t len;
-
-
-	//printf("st_aux: %s    pos %d\n\n\n", st_aux, pos);
-	//printf ("line antes: %s\n", lst->str_line);
-	//printf ("aux antes : %s\n", lst->str_aux);
-	i = 0;
-	len = (ft_strlen(st_aux) + pos);
-	while (i < pos && !(lst->str_aux[i] == '>' || lst->str_aux[i] == '<'))
-	{
-	//while ((lst->str_aux[i] == ' ' || lst->str_aux[i] == '\\') && i < len)
-		//if (lst->str_aux[i] == '>' || lst->str_aux[i] == '<')
-		//	break ;
-		i++;
-	}
-	//aqui me encuentro justo antes de la primera redireccion
-	while (i < len)
-	{
-		if (lst->str_aux[i] == '>' || lst->str_aux[i] == '<')
-		{
-			lst->str_aux[i] = '\\';
-			lst->str_line[i] = '\\';
-		}
-		else
-		{
-			lst->str_aux[i] = ' ';
-			lst->str_line[i] = ' ';
-		}
-		i++;
-	}
-	//printf ("line despues: %s\n",lst->str_line);
-	//printf ("aux despues : %s\n", lst->str_aux);
 }

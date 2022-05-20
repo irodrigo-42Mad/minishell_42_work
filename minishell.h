@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 10:32:05 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/20 14:51:03 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,11 @@ char		*malloc_zstart(char *dup, int length);
 void		disaster(void);
 char		*trim(char *s);
 void		ft_mute_aux(char *str, char *str2);
-void	d_comma(char c, int *scomma);
-char	*erase_redir(char *arg);
+void		d_comma(char c, int *scomma);
+char		*erase_redir(char *arg);
+char		*littlecpy(char *dup, char *arg, int pos);
+void		prep_strcmd(t_lst *aux);
+int			check_for_exp(char c);
+char		*expand_vars2(char *arg);
+char		*alloc_expand2(char *arg, char *dup);
 #endif
