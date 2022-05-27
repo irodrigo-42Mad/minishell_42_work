@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/27 12:57:19 by mgrau            ###   ########.fr       */
+=======
+/*   Updated: 2022/05/20 18:21:39 by hatman           ###   ########.fr       */
+>>>>>>> f3a8d378f5f7a436aa9e9c1d71a63608b180303d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,5 +314,9 @@ void		prep_strcmd(t_lst *aux);
 int			check_for_exp(char c);
 char		*expand_vars2(char *arg);
 char		*alloc_expand2(char *arg, char *dup);
+<<<<<<< HEAD
 void		pre_disaster(void);
+=======
+int			check_for_dolla(char c, char d, int scomma);
+>>>>>>> f3a8d378f5f7a436aa9e9c1d71a63608b180303d
 #endif

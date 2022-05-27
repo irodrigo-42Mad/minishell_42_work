@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_exp_alloc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:35:27 by mgrau             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/27 09:46:19 by mgrau            ###   ########.fr       */
+=======
+/*   Updated: 2022/05/20 18:14:36 by hatman           ###   ########.fr       */
+>>>>>>> f3a8d378f5f7a436aa9e9c1d71a63608b180303d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +28,7 @@ char	*alloc_expand(char *arg, char *dup)
 	while (arg[i])
 	{
 		detect_comma(*arg, &scomma);
-		if ((arg[i] == '$') && (scomma <= 0) && \
-		(arg[i + 1]) && (arg[i + 1] != '.'))
+		if (check_for_dolla(arg[i], arg[i + 1], scomma))
 		{
 			if ((arg[i + 1]) == 63)
 				length = var_n_length(length, &i);
