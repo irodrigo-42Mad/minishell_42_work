@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 14:51:03 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/27 12:57:19 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@
 # define READING		0
 # define H_DOC_CMD		1
 # define EXECUTING		2
+# define SIG			3
 
 // redirection control
 # define UNIQUE			1
@@ -182,7 +183,7 @@ void		ft_sigint_ctrlc(int signal);
 void		ft_sigint_ctrld(int signal);
 void		ft_sigint_ctrlc_child(int signal);
 void		ft_stop_all_process(int signal);
-void		ft_state_hdoc(void);
+void		ft_state_hdoc(int signal);
 
 // printing functions
 // file ft_msg_prn.c
@@ -269,7 +270,7 @@ char		*expand_vars(char *arg);
 void		detect_comma(char c, int *scomma);
 char		*aux_cpy(char *tmp, char *dup, int pos);
 char		*var_detected(char *arg, char *dup, int *pos, int *i);
-char		*q_mark_det(char *dup, int *pos, int *i);
+char		*q_mark_det(char *dup, int *pos, int *i, char *arg);
 char		*dolla_handler(char *arg, char *dup, int *pos, int *i);
 int			heredoc_opener(char *file);
 void		node_to_zero(t_lst *aux);
@@ -309,4 +310,5 @@ void		prep_strcmd(t_lst *aux);
 int			check_for_exp(char c);
 char		*expand_vars2(char *arg);
 char		*alloc_expand2(char *arg, char *dup);
+void		pre_disaster(void);
 #endif

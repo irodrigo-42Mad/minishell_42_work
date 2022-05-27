@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 14:54:04 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/27 09:46:13 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,6 @@
 /*Given a cmd line like: echo "this $HOME"
 expands $ variable into the one at our env list
 $? is implemented  not on norme, ill go ahead and clean it up later*/
-int		var_length(char *arg, int *i);
-char	*alloc_expand(char *arg, char *dup);
-void	add_one(char *arg, char *dup, int i, int pos);
-int		var_n_length(int length, int *i);
-void	one_more2(int *a, int *b);
-void	add_one_to_up(char *arg, char *dup, int i, int pos);
-int		envl_calc(int y);
-char	*no_var_found(char *arg, char *dup, int *pos, int *i);
 
 char	*expand_vars(char *arg)
 {
@@ -78,21 +70,30 @@ char	*var_detected(char *arg, char *dup, int *pos, int *i)
 	return (dup);
 }
 
-char	*q_mark_det(char *dup, int *pos, int *i)
+char	*q_mark_det(char *dup, int *pos, int *i, char *arg)
 {
 	char	*err_n;
 
 	err_n = ft_itoa(g_ms->err_n);
 	dup = ft_strcat(dup, err_n);
-	(*pos) = ft_strlen(dup) -1;
+	(*pos) = ft_strlen(dup) - 1;
 	(*i) = (*i) + ft_strlen(err_n);
+	dup[*pos + 1] = '\0';
+	if (ft_strlen(err_n) > 1)
+	{	
+		(*i)--;
+		if (arg[*i] == '\0')
+		{
+			(*i)--;
+		}
+	}
 	return (dup);
 }
 
 char	*dolla_handler(char	*arg, char *dup, int *pos, int *i)
 {
 	if (arg[(*i) + 1] == 63)
-		dup = q_mark_det(dup, pos, i);
+		dup = q_mark_det(dup, pos, i, arg);
 	else if (ft_isdigit(arg[(*i) + 1]))
 	{
 		(*i)++;

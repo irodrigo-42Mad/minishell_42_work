@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 09:32:48 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/16 12:41:37 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/27 13:45:52 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	start_executer(void)
 		launch_several_process(node, i);
 		wait_childs();
 	}
-	g_ms->sh_pid = 0;
 	g_ms->state = READING;
 }
 

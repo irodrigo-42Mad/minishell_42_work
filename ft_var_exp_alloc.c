@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:35:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/20 12:42:12 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/27 09:46:19 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ char	*alloc_expand(char *arg, char *dup)
 		if ((arg[i] == '$') && (scomma <= 0) && \
 		(arg[i + 1]) && (arg[i + 1] != '.'))
 		{
-			if (*(arg + 1) == 63)
+			if ((arg[i + 1]) == 63)
 				length = var_n_length(length, &i);
-			else if (ft_isdigit(*(arg + 1)))
+			else if (ft_isdigit(arg[i + 1]))
 				i = i + 2;
 			else
 				length = length + var_length(arg, &i);

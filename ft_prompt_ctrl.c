@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:52:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/19 13:25:16 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/24 14:37:02 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_create_prompt(void)
 	aux = NULL;
 	free(g_ms->prompt);
 	g_ms->prompt = tmp;
+	g_ms->state = READING;
 }
 /*
 char	*ft_create_prompt(void)

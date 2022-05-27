@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:24:31 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/16 12:40:12 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/27 09:55:25 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ void	wait_childs(void)
 	while (tmp)
 	{
 		state = 0;
+		g_ms->sh_pid = tmp->node_pid;
+		ft_set_signal();
 		waitpid(tmp->node_pid, &state, 0);
 		if (tmp->next == NULL)
 			ft_get_errstatus(state);

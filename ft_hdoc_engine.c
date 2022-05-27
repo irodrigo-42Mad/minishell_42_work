@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:20:03 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/20 11:16:45 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/27 13:45:21 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ int	heredoc_opener(char *file)
 	int		fd;
 
 	fd = open(ft_strjoin(TMP_PATH, file), O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	if (fd < 0)
+	g_ms->state = H_DOC_CMD;
+	ft_set_signal();
+	if ((fd < 0) || (!(g_ms->state == H_DOC_CMD)))
 		return (-1);
-	write(1, "> ", 2);
-	get_next_line(0, &line);
-	while (!line || !(precise_cmp(line, file, ft_strlen(file))))
+	line = readline("> ");
+	while ((line && !(precise_cmp(line, file, ft_strlen(file)))) \
+	&& (g_ms->state == H_DOC_CMD))
 	{
 		if (!((file[0] == '\'') || (file[0] == '\"')))
 			line = expand_vars(line);
@@ -105,8 +107,7 @@ int	heredoc_opener(char *file)
 		write(fd, "\n", 1);
 		free(line);
 		line = NULL;
-		write(1, "> ", 2);
-		get_next_line(0, &line);
+		line = readline("> ");
 	}
 	free(line);
 	close(fd);
