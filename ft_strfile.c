@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:32:42 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/20 14:47:31 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/31 12:04:04 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ void	ft_restore_str_command(void)
 	aux = g_ms->instr;
 	while (aux)
 	{
-		aux->str_cmd = add_space(aux->str_cmd);
-		aux->str_cmd = erase_redir(aux->str_cmd);
-		aux->str_args = ft_split(ft_prepare_aux(aux->str_cmd), '|');
+		//aux->str_cmd = add_space(aux->str_cmd);
+		aux->str_line = erase_redir(aux->str_line);
+		aux->str_args = ft_split(ft_prepare_aux(aux->str_line), 11);
 		prepare_strline(aux);
 		reconstruction(aux);
 		aux = aux->next;
@@ -120,9 +120,9 @@ void	ft_restore_str_command(void)
 
 void	reconstruction(t_lst *aux)
 {
-	char	*element;
+//	char	*element;
 	int		i_pr;
-	int		len;
+//	int		len;
 	int		pos;
 	char	*tmp;
 
@@ -130,19 +130,23 @@ void	reconstruction(t_lst *aux)
 	i_pr = -1;
 	while (aux->str_args[++i_pr])
 	{
-		len = ft_strlen(aux->str_args[i_pr]);
-		element = (char *) malloc (sizeof(char) * (len + 1));
-		ft_strnlcpy(element, aux->str_line, pos - 1, len + 1);
-		if (precise_cmp(aux->str_args[i_pr], element, len))
-			pos += ++len;
-		else
-		{
-			ft_strnlcpy(aux->str_args[i_pr], element, -1, len + 1);
-			pos += ++len;
-		}
+//		printf("str_args[i] is : %s\n", aux->str_args[i_pr]);
+//		printf("str_line is : %s\n", aux->str_line);
+	//	len = ft_strlen(aux->str_args[i_pr]);
+	//	element = (char *) malloc (sizeof(char) * (len + 1));
+	//	ft_strnlcpy(element, aux->str_line, pos - 1, len + 1);
+	//	if (precise_cmp(aux->str_args[i_pr], element, len))
+	//		pos += ++len;
+	//	else
+		//{
+	//		ft_strnlcpy(aux->str_args[i_pr], element, -1, len + 1);
+	//		pos += ++len;
+//		}
 		tmp = expand_vars(aux->str_args[i_pr]);
+//		printf("tmp is : %s\n", tmp);
+		tmp = remove_comma(tmp);
 		free(aux->str_args[i_pr]);
 		aux->str_args[i_pr] = tmp;
-		free (element);
+	//	free (element);
 	}
 }

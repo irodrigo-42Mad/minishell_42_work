@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:47:45 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/18 13:59:15 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/31 12:17:30 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ char	*check_pwd(char *str, int opwd, int home)
 	{
 		free(s);
 		s = ft_strdup(g_ms->sh_env[opwd] + 7);
+		ft_putstr_fd(s, 1);
+		ft_putstr_fd("\n", 1);
 	}
 	else
 	{
 		free(s);
 		s = ft_strdup(str);
 	}
-	ft_putstr_fd(str, 1);
-	ft_putstr_fd("\n", 1);
 	ft_updt_err(0);
 	return (s);
 }

@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:52:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/27 10:19:48 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/05/31 12:15:22 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_sigint_ctrlc_child(int signal)
 {
 	(void)signal;
 	kill(g_ms->sh_pid, SIGINT);
-	ft_msg(" Quit: 3\n", 1);
+	ft_msg(" Quit: 3", 1);
 	g_ms->flag = FAIL;
 	ft_updt_err(131);
 }
