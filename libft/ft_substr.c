@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eimaz-va <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:03:47 by eimaz-va          #+#    #+#             */
-/*   Updated: 2021/04/21 23:11:14 by eimaz-va         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:35:00 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!nueva)
 		return (NULL);
 	if (!s || (ft_strlen(s) < start))
+	{
+		free(nueva);
 		return (ft_strdup(""));
+	}
 	i = 0;
 	if (ft_strlen(s) > start)
 	{

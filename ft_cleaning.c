@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cleaning.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 09:21:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 13:10:28 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/02 17:48:53 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_clean_hdoc_pos(t_lst *elm)
 			*aux = ' ';
 		aux++;
 	}
+	free(elm->str_line);
 	elm->str_line = elm->str_save;
 	free(elm->str_aux_save);
 	elm->str_aux_save = NULL;

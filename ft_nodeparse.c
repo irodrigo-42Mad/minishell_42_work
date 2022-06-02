@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nodeparse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:19:27 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 14:54:29 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/02 17:43:14 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	prep_strcmd(t_lst *aux)
 {
 	char	*s;
 
-	aux->str_cmd = expand_vars(aux->str_cmd);
+	//aux->str_cmd = expand_vars(aux->str_cmd);
 	s = expand_vars(aux->str_cmd);
 	free(aux->str_cmd);
 	aux->str_cmd = s;

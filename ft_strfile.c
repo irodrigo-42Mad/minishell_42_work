@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strfile.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:32:42 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/31 12:04:04 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/02 17:40:48 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ft_restore_str_command(void)
 		//aux->str_cmd = add_space(aux->str_cmd);
 		aux->str_line = erase_redir(aux->str_line);
 		aux->str_args = ft_split(ft_prepare_aux(aux->str_line), 11);
-		prepare_strline(aux);
+		//prepare_strline(aux);
 		reconstruction(aux);
 		aux = aux->next;
 	}
@@ -123,10 +123,10 @@ void	reconstruction(t_lst *aux)
 //	char	*element;
 	int		i_pr;
 //	int		len;
-	int		pos;
+//	int		pos;
 	char	*tmp;
 
-	pos = 0;
+//	pos = 0;
 	i_pr = -1;
 	while (aux->str_args[++i_pr])
 	{
