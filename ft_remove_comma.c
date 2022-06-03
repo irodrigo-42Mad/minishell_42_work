@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 08:59:06 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/31 09:26:26 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/03 09:52:57 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*remove_comma(char *tmp)
 {
-	int i;
-	int y;
-	int scomma;
-	char *dest;
+	int		i;
+	int		y;
+	int		scomma;
+	char	*dest;
 
 	i = 0;
 	y = 0;
@@ -25,7 +25,7 @@ char	*remove_comma(char *tmp)
 	dest = malloc(sizeof(char) * (ft_strlen(tmp) + 1));
 	while (tmp[i])
 	{
-		if(!(r_comma(tmp[i], &scomma, &i)))
+		if (!(r_comma(tmp[i], &scomma, &i)))
 		{
 			dest[y] = tmp[i];
 			i++;
@@ -36,7 +36,7 @@ char	*remove_comma(char *tmp)
 	}
 	dest[y] = '\0';
 	free(tmp);
-	return(dest);
+	return (dest);
 }
 
 int	r_comma(char c, int *scomma, int *i)
@@ -44,29 +44,20 @@ int	r_comma(char c, int *scomma, int *i)
 	if ((c == '\'') || (c == '\"'))
 	{
 		if ((*scomma == 0) && (c == '\"'))
-		{
-			*scomma = 2;
-			(*i)++;
-			return(1);
-		}
+			return (add_for_comma(scomma, i, 2));
 		else if ((*scomma == 2) && (c == '\"'))
-		{
-			*scomma = 0;
-			(*i)++;
-			return(1);
-		}
+			return (add_for_comma(scomma, i, 0));
 		if ((*scomma == 0) && (c == '\''))
-		{
-			*scomma = 1;
-			(*i)++;
-			return(1);
-		}
+			return (add_for_comma(scomma, i, 1));
 		else if ((*scomma == 1) && (c == '\''))
-		{
-			*scomma = 0;
-			(*i)++;
-			return(1);
-		}
+			return (add_for_comma(scomma, i, 0));
 	}
-	return(0);
+	return (0);
+}
+
+int	add_for_comma(int *scomma, int *i, int add)
+{
+	*scomma = add;
+	(*i)++;
+	return (1);
 }

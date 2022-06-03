@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/06/03 07:47:35 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/03 10:51:54 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,7 +313,13 @@ char		*alloc_expand2(char *arg, char *dup);
 void		pre_disaster(void);
 int			check_for_dolla(char c, char d, int scomma);
 char		*remove_comma(char *tmp);
-int		r_comma(char c, int *scomma, int *i);
-char	*one_erase_redir(char *arg);
-char	*one_littlecpy(char *dup, char *arg, int start, int end);
+int			r_comma(char c, int *scomma, int *i);
+char		*one_erase_redir(char *arg);
+char		*one_littlecpy(char *dup, char *arg, int start, int end);
+int			add_for_comma(int *scomma, int *i, int add);
+void		hdoc_strings(t_lst *lst);
+void		hdoc_parse(t_lst *lst, char *tmp, int *begin, int *quotes);
+void		get_herename(t_lst *lst, char *tmp, int *begin, int *quotes);
+void		look_for_begin(char *tmp, int *begin, int *quotes);
+void		one_erase_logic(char *arg, int *i, int *pos, int *end);
 #endif
