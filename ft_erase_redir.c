@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_erase_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:08:01 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/20 18:15:24 by hatman           ###   ########.fr       */
+/*   Updated: 2022/06/03 08:33:40 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,67 @@ char	*alloc_expand2(char *arg, char *dup)
 			one_more2(&length, &i);
 	}
 	return (malloc_zstart(dup, length + 1));
+}
+
+char	*one_erase_redir(char *arg)
+{
+	int		pos;
+	int		scomma;
+	char	*dup;
+	int		i;
+	int		end;
+
+	i = 0;
+	pos = ft_strlen(arg);
+	end = ft_strlen(arg);
+	scomma = 0;
+	dup = NULL;
+	dup = malloc(sizeof(char) * (ft_strlen(arg) + 1));
+	while (arg[i])
+	{
+		d_comma(arg[i], &scomma);
+		if (((arg[i] == '<') || (arg[i] == '>')) && (scomma == 0))
+		{
+			pos = i;
+			i++;
+			if ((arg[i] == '<') || (arg[i] == '>'))
+				i++;
+			while(ft_isspace(arg[i]))
+				i++;
+			while ((arg[i]) && ((arg[i] != '<') && (arg[i] != '>')) && (!(ft_isspace(arg[i]))))
+			{
+				i++;
+				end = i;
+			}
+			break ;
+		}
+		i++;
+	}
+	return (one_littlecpy(dup, arg, pos, end));
+}
+
+char	*one_littlecpy(char *dup, char *arg, int start, int end)
+{
+	int	i;
+	int y;
+
+	i = 0;
+	y = 0;
+	while (i < start)
+	{
+		dup[y] = arg[i];
+		i++;
+		y++;
+	}
+	while (i < end)
+		i++;
+	while (i < (int)ft_strlen(arg))
+	{
+		dup[y] = arg[i];
+		i++;
+		y++;
+	}
+	dup[y] = '\0';
+	free(arg);
+	return (dup);
 }

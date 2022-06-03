@@ -6,12 +6,12 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:20:03 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/27 13:45:21 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/03 08:48:05 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 void	ft_set_hdoc(t_lst *lst)
 {
 	char	*tmp;
@@ -37,6 +37,69 @@ void	ft_set_hdoc(t_lst *lst)
 		close(lst->file_in);
 	lst->file_in = 0;
 	ft_hdc_prepareln(lst);
+}*/
+
+void	ft_set_hdoc(t_lst *lst)
+{
+	char	*tmp;
+	int		quotes;
+	int		begin;
+	int		len;
+	lst->str_aux = ft_strdup(lst->str_cmd);
+	lst->str_save = ft_strdup(lst->str_line);
+	lst->str_aux_save = ft_strdup(lst->str_line);
+	tmp = lst->str_save;
+	quotes = 0;
+	begin = 0;
+	while (tmp[begin] != '\0')
+	{
+		begin = ft_strlen(lst->str_aux) - ft_strlen(ft_strnstr(tmp, "<<", ft_strlen(tmp)));
+		if ((ft_strnstr(tmp, "<<", ft_strlen(tmp)) == NULL))
+			break ;
+		else
+		{
+			while (tmp[begin] == '<')
+				begin++;
+			while (ft_isspace(tmp[begin]))
+				begin++;
+			lst->herename = (char *) malloc(sizeof (char) * ((ft_strlen(tmp) - begin) + 1));
+			len = 0;
+			while (tmp[begin])
+			{
+				if (quotes == 0 && ft_isspace(tmp[begin]))
+					break ;
+				if (quotes == 0)
+				{
+					d_comma(tmp[begin], &quotes);
+					if (quotes > 0)
+						begin++;
+				}
+				else
+				{
+					d_comma(tmp[begin], &quotes);
+					if (quotes == 0)
+						begin++;
+				}
+				if (tmp[begin] != '\0')
+				{
+					lst->herename[len] = tmp[begin];
+					begin++;
+					len++;
+				}
+			}
+			lst->herename[len] = '\0';
+			// revisar aqui
+			//ft_set_strpntr(&tmp, &lst->str_aux, &lst->str_line, 2);
+			// hay que limpiar la cadena para quitar los elementos de heredoc que se han realizado
+			//ft_clear_str(tmp, lst); // puede fallar aqui....
+			lst->str_save = one_erase_redir(lst->str_save);
+			lst->str_aux = one_erase_redir(lst->str_aux);
+			tmp = lst->str_save;
+		}
+		//lst->herename = ft_eofcatch(&lst->here_num, &lst->str_line);
+		heredoc_opener(lst->herename);
+		//hacer free de herename
+	}
 }
 
 char	*ft_eofcatch(int *hd_num, char **dat_line)
