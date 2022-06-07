@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:35:27 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/30 10:02:44 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 11:13:20 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	var_length(char *arg, int *i)
 		envl) == 0)
 		{
 			length = ft_strlen(g_ms->sh_env[y]) - (envl + 1);
-			*i = (*i) + envl - 1;
+			*i = (*i) + envl;
 			return (length);
 		}
 		else if (!(g_ms->sh_env[++y]))

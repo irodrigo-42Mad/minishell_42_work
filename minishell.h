@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/06/03 10:51:54 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 11:07:46 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,4 +322,5 @@ void		hdoc_parse(t_lst *lst, char *tmp, int *begin, int *quotes);
 void		get_herename(t_lst *lst, char *tmp, int *begin, int *quotes);
 void		look_for_begin(char *tmp, int *begin, int *quotes);
 void		one_erase_logic(char *arg, int *i, int *pos, int *end);
+void		ft_export_logic(char **argv, int *i);
 #endif

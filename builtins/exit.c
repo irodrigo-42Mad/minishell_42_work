@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:52:37 by mgrau             #+#    #+#             */
-/*   Updated: 2022/04/29 11:53:01 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 11:13:44 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,10 @@ void	ft_exit_error(char *str, int type)
 		ft_msg(T_ERR_04, 2);
 		ft_updt_err(1);
 	}
+}
+
+void	export_error(char *name)
+{
+	free(name);
+	ft_updt_err(1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:53:22 by mgrau             #+#    #+#             */
-/*   Updated: 2022/06/06 12:42:56 by hatman           ###   ########.fr       */
+/*   Updated: 2022/06/07 11:13:36 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,36 @@
 void	ft_export(char **argv)
 {
 	int		i;
-	int		arg_type;
-	char	*value;
-	char	*name;
 
 	i = 0;
 	ft_updt_err(0);
 	if (!argv[1] || argv[1][0] == '\0')
 		print_env();
 	else
+	{
 		while (argv[++i])
-		{
-			arg_type = parse_arg(argv[i]);
-			name = def_name(argv[i]);
-			if (arg_type != NOTDEF && arg_type != EXP_ERR)
-				value = ft_strdup(argv[i] + ft_strlen(name) + 1);
-			if (arg_type == DEFINED)
-				ft_add_envglob(name, value, DEFINED);
-			else if (arg_type == REDEFINED)
-				overwrite_env_value(name, value);
-			else if (arg_type == NOTDEF)
-				free(name);
-			else
-				export_error(name);
-		}
+			ft_export_logic(argv, &i);
+	}
 }
 
-void	export_error(char *name)
+void	ft_export_logic(char **argv, int *i)
 {
-	free(name);
-	ft_updt_err(1);
+	int		arg_type;
+	char	*value;
+	char	*name;
+
+	arg_type = parse_arg(argv[(*i)]);
+	name = def_name(argv[(*i)]);
+	if (arg_type != NOTDEF && arg_type != EXP_ERR)
+		value = ft_strdup(argv[(*i)] + ft_strlen(name) + 1);
+	if (arg_type == DEFINED)
+		ft_add_envglob(name, value, DEFINED);
+	else if (arg_type == REDEFINED)
+		overwrite_env_value(name, value);
+	else if (arg_type == NOTDEF)
+		free(name);
+	else
+		export_error(name);
 }
 
 int	parse_arg(char *arg)
