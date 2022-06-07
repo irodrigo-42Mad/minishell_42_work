@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remove_comma.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 08:59:06 by mgrau             #+#    #+#             */
-/*   Updated: 2022/06/03 09:52:57 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 17:20:21 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*remove_comma(char *tmp)
 	dest = malloc(sizeof(char) * (ft_strlen(tmp) + 1));
 	while (tmp[i])
 	{
-		if (!(r_comma(tmp[i], &scomma, &i)))
+		if (!(r_comma(tmp[i], &scomma, &i, tmp[i + 1])))
 		{
 			dest[y] = tmp[i];
 			i++;
@@ -39,7 +39,7 @@ char	*remove_comma(char *tmp)
 	return (dest);
 }
 
-int	r_comma(char c, int *scomma, int *i)
+int	r_comma(char c, int *scomma, int *i, char d)
 {
 	if ((c == '\'') || (c == '\"'))
 	{
@@ -52,6 +52,9 @@ int	r_comma(char c, int *scomma, int *i)
 		else if ((*scomma == 1) && (c == '\''))
 			return (add_for_comma(scomma, i, 0));
 	}
+	else if ((*scomma == 0) && (c == '$') && \
+	((!(ft_isspace(d) || (d == '\0')))))
+		return (add_for_comma(scomma, i, 0));
 	return (0);
 }
 
