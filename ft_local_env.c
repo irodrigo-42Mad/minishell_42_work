@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:47:05 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 09:30:58 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 11:28:40 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,6 @@ void	ft_add_local_env(char *car, char *err)
 			g_ms->sh_envar = nod;
 	}
 }
-/*		//FALLA EN ESTE PUNTO
-		if (aux)
-			(*aux) = nod;
-		else
-			g_ms->sh_envar = nod;
-*/
 
 void	ft_get_errstatus(int state)
 {

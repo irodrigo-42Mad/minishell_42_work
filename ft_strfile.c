@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:32:42 by mgrau             #+#    #+#             */
-/*   Updated: 2022/06/03 09:40:14 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 11:20:17 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ char	*trim(char *s)
 	tmp = malloc(sizeof(char) * ft_strlen(s) + 1);
 	while (s[i])
 	{
-		while (isspace(s[i]) && s[i])
+		while (ft_isspace(s[i]) && s[i])
 			i++;
-		while ((!(isspace(s[i]))) && s[i])
+		while ((!(ft_isspace(s[i]))) && s[i])
 		{
 			tmp[y] = s[i];
 			i++;

@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 10:00:25 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/16 09:23:51 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 11:27:49 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,3 @@ char	*ft_set_new_len(char *str, int ln, int *pos)
 	free(v_value);
 	return (str);
 }
-	/* esto hay que revisarlo posible leak si da, añadir la posición en el return
-	*/

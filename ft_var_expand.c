@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/06/06 12:30:19 by hatman           ###   ########.fr       */
+/*   Created: 2022/06/07 11:30:14 by mgrau             #+#    #+#             */
+/*   Updated: 2022/06/07 11:30:31 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*Given a cmd line like: echo "this $HOME"
-expands $ variable into the one at our env list
-$? is implemented  not on norme, ill go ahead and clean it up later*/
 
 char	*expand_vars(char *arg)
 {
