@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:32:24 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/30 10:02:37 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/06 12:30:19 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	*q_mark_det(char *dup, int *pos, int *i, char *arg)
 			(*i)--;
 		}
 	}
+	free(err_n);
 	return (dup);
 }
 

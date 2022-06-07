@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strfile_aux.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hatman <hatman@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:18:38 by mgrau             #+#    #+#             */
-/*   Updated: 2022/06/03 09:39:28 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/06 10:48:53 by hatman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_rebuild_str(t_lst *lst)
 	free(lst->str_aux);
 	lst->str_aux = ft_strdup(lst->str_save);
 	ft_mute_aux(lst->str_aux, lst->str_cmd);
+	free(lst->str_aux_save);
 	lst->str_aux_save = ft_strdup(lst->str_aux);
 }
 
