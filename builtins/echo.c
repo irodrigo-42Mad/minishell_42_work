@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:51:58 by mgrau             #+#    #+#             */
-/*   Updated: 2022/04/29 11:52:00 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/14 07:37:36 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_echo(char **arg)
 		ft_updt_err(0);
 		return ;
 	}
-	while (arg[++i] && !ft_strncmp(arg[i], "-n", ft_getmax_ln(arg[i], "-n")))
+	while (arg[++i] && (is_n(arg[i])))
 		newline = 0;
 	while (arg[i])
 	{
@@ -47,4 +47,22 @@ void	ft_echo(char **arg)
 	if (newline == 1)
 		ft_putstr_fd("\n", FD_OUT);
 	ft_updt_err(0);
+}
+
+int	is_n(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str && (str[0] == '-'))
+	{
+		i++;
+		while ((str[i] == 'n') || (str[i] == 32))
+		{
+			i++;
+			if (str[i] == '\0')
+				return (1);
+		}
+	}
+	return (0);
 }

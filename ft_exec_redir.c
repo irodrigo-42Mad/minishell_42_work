@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 11:46:12 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 10:55:31 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 13:36:38 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_dircheck(char *file)
 	if (rst_dir)
 	{
 		closedir(rst_dir);
+		g_ms->state = SIG;
 		return (ft_element_error(file, -126));
 	}
 	return (0);
@@ -51,7 +52,7 @@ void	ft_control_out_mode(char *file, t_lst *lst, int mode)
 
 void	ft_indirection(char *file, t_lst *lst)
 {
-	if (!ft_dircheck(file))
+	if (ft_dircheck(file) >= 0)
 	{
 		if (access(file, R_OK) != 0)
 			ft_write_file_err(lst, file);

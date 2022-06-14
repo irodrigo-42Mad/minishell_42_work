@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:24:10 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/17 12:05:43 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 13:40:04 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define T_ERR_04	"too many arguments\n"
 # define T_ERR_05	"error in dup2"
 # define T_ERR_06	"error in execve"
-# define T_ERR_07	"error in exec redir"
+# define T_ERR_07	" error in exec redir\n"
 
 // other msg shell constants
 

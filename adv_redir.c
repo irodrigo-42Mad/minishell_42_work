@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:22:45 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/05/20 11:55:38 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 13:10:30 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_filename(t_lst *lst, size_t *last_pos)
 		end = ft_set_end(lst->str_aux, pos);
 	}
 	st_aux = (char *) malloc(sizeof(char) * (end + 1));
-	ft_strnlcpy(st_aux, lst->str_aux, begin -1, (end + 1));
+	ft_strnlcpy(st_aux, lst->str_line, begin -1, (end + 1));
 	*last_pos = pos;
 	return (st_aux);
 }

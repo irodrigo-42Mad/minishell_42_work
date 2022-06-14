@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:43:22 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/27 12:58:44 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/07 13:36:52 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	disaster(void)
 		{
 			ft_redirections();
 			ft_restore_str_command();
-			start_executer();
+			if (g_ms->state != SIG)
+				start_executer();
 		}
 	}
 	ft_pre_clean();

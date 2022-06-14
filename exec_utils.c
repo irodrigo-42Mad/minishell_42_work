@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 09:59:14 by mgrau             #+#    #+#             */
-/*   Updated: 2022/05/19 13:06:50 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/08 10:07:58 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	ft_execve_free(void)
 	free (tmp);
 	free(g_ms->prompt);
 	free (g_ms->str);
+	free(g_ms->pars_cmd);
 	tmp = NULL;
 }
