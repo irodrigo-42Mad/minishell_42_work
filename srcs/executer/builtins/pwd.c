@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:58:14 by mgrau             #+#    #+#             */
-/*   Updated: 2022/06/14 08:33:58 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/21 12:52:51 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_pwd(void)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+	pwd = ft_getvalue("PWD", NOT_EXPRT);
 	ft_putstr_fd(pwd, 1);
 	ft_putstr_fd("\n", 1);
 	free(pwd);

@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:47:45 by mgrau             #+#    #+#             */
-/*   Updated: 2022/06/14 08:33:26 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/21 12:51:40 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	cd_env(int i[2])
 	new_oldpwd = ft_strdup(g_ms->sh_env[i[0]] + 4);
 	free(g_ms->sh_env[i[0]]);
 	tmp = getcwd(NULL, 0);
+	if (tmp == NULL)
+		tmp = ft_getvalue("PWD", NOT_EXPRT);
 	g_ms->sh_env[i[0]] = ft_strjoin("PWD=", tmp);
 	free(tmp);
 	if (i[1] == -1)
