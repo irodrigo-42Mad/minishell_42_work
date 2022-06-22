@@ -6,7 +6,7 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:30:23 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/06/14 09:10:50 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/22 08:18:53 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,4 +323,7 @@ void		look_for_begin(char *tmp, int *begin, int *quotes);
 void		one_erase_logic(char *arg, int *i, int *pos, int *end);
 void		ft_export_logic(char **argv, int *i);
 int			is_n(char *str);
+char		**ft_set_defaults(void);
+char		*ft_put_shell_level(char *out);
+char		**ft_put_pwd(char **env);
 #endif

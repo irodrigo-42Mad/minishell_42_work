@@ -6,14 +6,11 @@
 /*   By: mgrau <mgrau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 12:53:50 by irodrigo          #+#    #+#             */
-/*   Updated: 2022/06/17 11:44:51 by mgrau            ###   ########.fr       */
+/*   Updated: 2022/06/22 08:21:07 by mgrau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-char  **ft_set_defaults(char **out);
-char *ft_put_shell_level(char *out);
-char **ft_put_pwd(char **env);
 
 void	ft_initialize(int m_argc, char **m_env)
 {
@@ -54,7 +51,8 @@ char	**ft_set_shell_env(int ch, char **env)
 		i = 0;
 		while (env[i])
 		{
-			if (!ft_strncmp(env[i], "SHLVL=", ft_strlen("SHLVL=")) && ch == SUCCESS)
+			if (!ft_strncmp(env[i], "SHLVL=", ft_strlen("SHLVL=")) \
+			&& ch == SUCCESS)
 				out[i] = ft_set_new_shlvl(env[i]);
 			else
 				out[i] = ft_strdup(env[i]);
@@ -63,53 +61,50 @@ char	**ft_set_shell_env(int ch, char **env)
 		out[i] = NULL;
 	}
 	else
-	{
- 		 out = (char **) malloc (sizeof(char *) * 3);
-		 out = ft_set_defaults(out);
-		 printf("env[0] = 1%s1\n", out[0]);
-	}
+		out = ft_set_defaults();
 	return (out);
 }
 
-
-char	**ft_set_defaults(char **out)
+char	**ft_set_defaults(void)
 {
-	char    *path;
+	char	*path;
+	char	**out;
+
+	out = (char **) malloc(sizeof(char *) * 3);
 	out[0] = ft_strdup("SHLVL=1");
-  //out = ft_put_pwd(out);
-  //out[1] = ft_strdup("PWD=./");
 	path = getcwd(NULL, 0);
-    out[1] = ft_strjoin("PWD=", path);
+	out[1] = ft_strjoin("PWD=", path);
 	out[2] = NULL;
-    free(path);
-	return(out);
+	free(path);
+	return (out);
 }
 
 char	**ft_put_pwd(char **env)
 {
-    char    *path;
-    char    **aux;
-    int     i;
-    i = 0;
-    aux = env;
-    while (aux[i])
-    {
-        if (!ft_strncmp(aux[i], "PWD=", ft_strlen("PWD=")))
-            return (env);
-        i++;
-    }
-    aux = malloc(sizeof(char *) * (ft_matrixlen(env) + 2));
-    i = 0;
-    while ((env)[i])
-    {
-        aux[i] = ft_strdup((env)[i]);
-        i++;
-    }
-    path = getcwd(NULL, 0);
-    aux[i++] = ft_strjoin("PWD=", path);
-    aux[i] = NULL;
-    free_matrix(env);
-    return(aux);
+	char	*path;
+	char	**aux;
+	int		i;
+
+	i = 0;
+	aux = env;
+	while (aux[i])
+	{
+		if (!ft_strncmp(aux[i], "PWD=", ft_strlen("PWD=")))
+			return (env);
+		i++;
+	}
+	aux = malloc(sizeof(char *) * (ft_matrixlen(env) + 2));
+	i = 0;
+	while ((env)[i])
+	{
+		aux[i] = ft_strdup((env)[i]);
+		i++;
+	}
+	path = getcwd(NULL, 0);
+	aux[i++] = ft_strjoin("PWD=", path);
+	aux[i] = NULL;
+	free_matrix(env);
+	return (aux);
 }
 
 /*
